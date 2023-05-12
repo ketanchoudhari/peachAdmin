@@ -18,3 +18,11 @@
 .pagination{
     margin-top: 10px;
 }
+a.btn.buttons-pdf {
+    
+    float: left;
+}
+a.btn.buttons-excel {
+    
+    float: left;
+}

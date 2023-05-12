@@ -8,6 +8,8 @@ import {  RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BankingLogComponent } from './banking/banking-log/banking-log.component';
+import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 const routes: Routes = [
@@ -52,6 +54,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ModalModule,
+    FormsModule,
+    BsDatepickerModule.forRoot(),
     RouterModule.forChild(routes)
   ],
   exports:[RouterModule]

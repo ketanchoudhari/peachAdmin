@@ -13,6 +13,10 @@ import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {
+    path:'login',
+    component:LoginComponent
+  },
+  {
     path: '',
     component: MainComponent,
     children: [
@@ -37,6 +41,10 @@ const routes: Routes = [
       {
         path: 'report',
         loadChildren: () => import('./report/report.module').then((m) => m.ReportModule),
+      },
+      {
+        path: 'management',
+        loadChildren: () => import('./management/management.module').then((m) => m.ManagementModule),
       },
 
     ]
