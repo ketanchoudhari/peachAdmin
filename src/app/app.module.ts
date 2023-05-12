@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
     AddaccountComponent,
     ChangePasswordComponent,
     SecurityAuthComponent,
-   
+
     MainComponent,
   ],
   imports: [
@@ -39,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6319,12 +6319,12 @@ img.rrotate {
 #col-md-3{
     margin-top: 23px;
     padding: 0 0 0 0;
-    margin-left: -63px;
+    margin-left: -2.1em;
   }
   #col-md-2{
     margin-top:23px;
     padding-left:0;
-    
+
   }
   .btn-report{
     margin-left: 6px;
@@ -6409,17 +6409,17 @@ img.rrotate {
     justify-content: space-between;
     border-bottom: 1px solid black;
   }
-  
+
   .tab {
     cursor: pointer;
     padding: 10px;
   }
-  
+
   .tab.active {
     background-color: gray;
     color: white;
   }
-  
+
   .tab-content {
     margin-top: 20px;
   }
