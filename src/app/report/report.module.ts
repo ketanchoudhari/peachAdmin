@@ -46,6 +46,30 @@ const routes: Routes = [
     path:'pl-sncasino',
     component:SnCasinoComponent
   },
+  {
+    path:'pl-slotcasino',
+    component:SlotcasinoComponent
+  },
+  {
+    path:'pl-betgames',
+    component:BetgamesComponent
+  },
+  {
+    path:'pl-pokerlog',
+    component:PokerComponent
+  },
+  {
+    path:'pl-awccasino',
+    component:AwcComponent
+  },
+  {
+    path:'loginlogout',
+    component:LogInoutComponent
+  },
+  {
+    path:'new-accounts',
+    component:RecentAccountComponent
+  }
 ];
 
 @NgModule({
