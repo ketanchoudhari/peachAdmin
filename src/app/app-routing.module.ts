@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path:'login',
+    path:'',
     component:LoginComponent
   },
   {
@@ -48,6 +48,14 @@ const routes: Routes = [
         path: 'management',
         loadChildren: () => import('./management/management.module').then((m) => m.ManagementModule),
       },
+      {
+        path:'messages',
+        loadChildren:() => import('./messages/messages.module').then((m) => m.MessagesModule ),
+      },
+      {
+        path:'stakesettings',
+        loadChildren:() => import('./stakesettings/stakesettings.module').then((m) => m.StakesettingsModule ),
+      }
 
     ]
   

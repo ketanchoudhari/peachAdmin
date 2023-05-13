@@ -10,6 +10,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgbAlertModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { RacesComponent } from './races/races.component';
+import { SportsComponent } from './sports/sports.component';
 
 const routes: Routes = [
   {
@@ -27,6 +30,15 @@ const routes: Routes = [
   {
     path:'risk-management',
     component:RiskManagementComponent,
+  },
+  {
+    path:'race',
+    component:RacesComponent,
+
+  },
+  {
+    path:'sports',
+    component:SportsComponent,
   }
 ]
 
@@ -35,7 +47,9 @@ const routes: Routes = [
     MmComponent,
     BetListComponent,
     BetListLiveComponent,
-    RiskManagementComponent
+    RiskManagementComponent,
+    RacesComponent,
+    SportsComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +61,7 @@ const routes: Routes = [
     NgbTimepickerModule,
     ModalModule,
     FormsModule,
+    NgxPaginationModule
   ],
   exports:[RouterModule]
 })
