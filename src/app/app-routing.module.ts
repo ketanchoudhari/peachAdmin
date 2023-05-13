@@ -10,6 +10,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { SecurityAuthComponent } from './security-auth/security-auth.component';
 import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'active-running-users', component: RunningMarketComponent },
       { path: 'market-anaylish', component: MarketanaylsisComponent },
       { path: 'sidebar', component: SidebarComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'add-account', component: AddaccountComponent },
       {
         path: 'change-password',

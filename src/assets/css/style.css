@@ -1136,7 +1136,7 @@ input:checked+.slider {
     text-decoration: none;
     color: #fff;
     border-radius: 3px;
-    margin-right: 3px;
+    margin: 3px;
     text-transform: uppercase;
     display: inline-block;
 }
@@ -1217,9 +1217,9 @@ ul.mtree.transit li.mtree-open>a::after {
     padding: 20px;
 }
 
-.master-balance-detail {
+/* .master-balance-detail {
     display: none;
-}
+} */
 
 .master-balance-detail li {
     color: var(--secondary-color);
@@ -1233,9 +1233,9 @@ ul.mtree.transit li.mtree-open>a::after {
     cursor: pointer;
 }
 
-.fa-arrow-alt-circle-up {
+/* .fa-arrow-alt-circle-up {
     display: none;
-}
+} */
 
 .add-account {
     background-color: #f9f9f9;
@@ -6428,6 +6428,7 @@ img.rrotate {
 }
 .sec-hedding{
     display: flex;
+    margin-top: 10px;
 
 }
 .headding-btn{

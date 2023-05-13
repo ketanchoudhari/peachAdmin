@@ -168,8 +168,12 @@ a:not([href]):not([tabindex]) {
 }
 
 a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover {
-    color: white;
+    /* color: white; */
+    cursor: pointer;
     text-decoration: none
+}
+a:hover{
+    cursor: pointer;
 }
 
 a:not([href]):not([tabindex]):focus {
