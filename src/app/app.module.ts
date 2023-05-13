@@ -34,6 +34,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
     MainComponent,
   ],
+
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
