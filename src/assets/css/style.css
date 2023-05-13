@@ -1032,7 +1032,7 @@ input+.slider span:last-child {
 
 .listing-grid {
     background-color: #f9f9f9;
-    padding: 10px;
+    padding: 0px;
     margin: 0;
 }
 
@@ -1370,7 +1370,7 @@ ul.mtree.transit li.mtree-open>a::after {
 }
 
 .main-container {
-    padding-top: 10px;
+    padding-top: 0px; /*to reduce the height of top div of label*/
 }
 
 .back {
@@ -6438,4 +6438,13 @@ img.rrotate {
 }
 #ngbNav{
     margin-left: 10px;
+}
+.col-md-5{
+
+}
+@media (min-width: 768px){
+.col-bt-1 {
+    flex: 0 0 21.666667%;
+    max-width: 19.666667%;
+}
 }

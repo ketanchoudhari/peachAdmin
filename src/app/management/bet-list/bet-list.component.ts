@@ -11,6 +11,8 @@ export class BetListComponent {
   selecttotime: Date;
   time = { hour: 13, minute: 30 };   //for time selection
 	meridian = true;                //for time selection
+  filteredEventList: any = [];   //temperory variable for pagination
+  p: number = 1;  //for pagination
   constructor(){
     this.selectfromdate = new Date(
       new Date(new Date().setDate(new Date().getDate() - 30)).setHours(9, 0, 0)

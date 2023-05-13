@@ -13,7 +13,7 @@ import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {
-    path:'login',
+    path:'',
     component:LoginComponent
   },
   {

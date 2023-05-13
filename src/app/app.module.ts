@@ -16,6 +16,7 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { FormsModule } from '@angular/forms';
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,6 +19,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbAlertModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const routes: Routes = [
@@ -95,7 +96,8 @@ const routes: Routes = [
     NgSelectModule,
     NgbNavModule,
     NgbAlertModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    NgxPaginationModule
   ],
   exports:[RouterModule]
 })
