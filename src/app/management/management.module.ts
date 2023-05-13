@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BetListComponent } from './bet-list/bet-list.component';
 import { BetListLiveComponent } from './bet-list-live/bet-list-live.component';
 import { RiskManagementComponent } from './risk-management/risk-management.component';
+import { RacesComponent } from './races/races.component';
+import { SportsComponent } from './sports/sports.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,15 @@ const routes: Routes = [
   {
     path:'risk-management',
     component:RiskManagementComponent,
+  },
+  {
+    path:'race',
+    component:RacesComponent,
+
+  },
+  {
+    path:'sports',
+    component:SportsComponent,
   }
 ]
 
@@ -30,7 +41,9 @@ const routes: Routes = [
     MmComponent,
     BetListComponent,
     BetListLiveComponent,
-    RiskManagementComponent
+    RiskManagementComponent,
+    RacesComponent,
+    SportsComponent
   ],
   imports: [
     CommonModule,

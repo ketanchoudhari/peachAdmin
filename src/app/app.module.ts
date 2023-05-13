@@ -30,9 +30,10 @@ import { FormsModule } from '@angular/forms';
     AddaccountComponent,
     ChangePasswordComponent,
     SecurityAuthComponent,
-   
     MainComponent,
   ],
+
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
