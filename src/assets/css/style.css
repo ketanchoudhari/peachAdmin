@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400&display=swap');
 
+@import "~ngx-toastr/toastr";
 
 
 @font-face {
