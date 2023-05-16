@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
               // this.commonService.listAllHierarchy();
               // this.commonService.updateBalance();
               setTimeout(() => {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/active-user']);
                 // this.router.navigate([`/home/${res?.result[0]?.userType + 1}`]);
                 this.loadingService.setLoading(false);
               },
