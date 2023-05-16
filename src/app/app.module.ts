@@ -15,9 +15,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeComponent } from './home/home.component';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -32,7 +36,6 @@ import { HomeComponent } from './home/home.component';
     AddaccountComponent,
     ChangePasswordComponent,
     SecurityAuthComponent,
-
     MainComponent,
       HomeComponent,
   ],
@@ -42,12 +45,16 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    NgxPaginationModule
+    HttpClientModule,
+    NgxPaginationModule,
+    ToastrModule.forRoot(),
+
   ],
-  providers: [],
+  providers: [HttpClientModule, CookieService],
   bootstrap: [AppComponent]
 })
 
