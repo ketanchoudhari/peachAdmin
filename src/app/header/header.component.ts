@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
+import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +29,8 @@ export class HeaderComponent {
     // private authService: AuthService,
     // private toastr: ToastrService,
     public commonService: CommonService,
+    private token:TokenService,
+    private router: Router,
 
   ) { }
 
@@ -77,4 +81,8 @@ export class HeaderComponent {
   //   alert("Please Select a user");
   //   return false;
   // }
+  logout(){
+    this.token.delete();
+    this.router.navigateByUrl('/');
+  }
 }

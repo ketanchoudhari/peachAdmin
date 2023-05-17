@@ -108,5 +108,14 @@ export class AuthService {
       this.setCurrentUser;
     });
   }
-  
+  authToken(){
+    let tokens= this.tokenService.get();
+    console.log("token from cookies",tokens)
+    if(tokens!==undefined && tokens !== null){
+     return true
+    }
+    else{
+     return false
+    }
+   }
 }
