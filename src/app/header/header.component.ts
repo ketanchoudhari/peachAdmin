@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Hierarchy } from '../services/types/hierarchy.service';
+import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
-import { CurrentUser } from '../shared/models/current.service';
+import { CurrentUser } from '../shared/models/current-user';
 
 @Component({
   selector: 'app-header',
