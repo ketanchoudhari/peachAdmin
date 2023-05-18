@@ -47,7 +47,7 @@ export class TokenInterceptorService  implements HttpInterceptor   {
             ) {
               this.tokenService.delete();
               if (this.authService.currentAuthState !== false) {
-                this.router.navigateByUrl('/login');
+                this.router.navigateByUrl('/');
                 this.authService.setLoggedIn(false);
                 this.toastr.error(event.body.errorDescription);
               }

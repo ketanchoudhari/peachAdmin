@@ -2,7 +2,19 @@ import { Component } from '@angular/core';
 import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
+<<<<<<< HEAD
 import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
+import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
+=======
+import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
+
+>>>>>>> 3288f93994c730ab46bc64ee22f9dc7fb4afb009
 
 @Component({
   selector: 'app-header',
@@ -17,7 +29,8 @@ export class HeaderComponent {
   isOpen: boolean = false;
   currentUser?: CurrentUser;
   dropdownMenu: any=[];
-  balance: number = 0;
+  userNames: string;
+  currencyCode:string|undefined = environment.currency ;
 
 
   isBalanceLoader = false
@@ -30,19 +43,20 @@ export class HeaderComponent {
     private authService: AuthService,
     // private toastr: ToastrService,
     public commonService: CommonService,
+    private token:TokenService,
+    private router: Router,
+
 
   ) { }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUser;
-    this.authService.currentUser$.subscribe((user) => {
-      if (user) {
-        this.currentUser = user;
-      }
-    });
-    this.commonService.balance$.subscribe((balance) => {
-      this.balance = balance;
-    });
+    
+    // this.currentUser = this.authService.currentUser;
+    // this.authService.currentUser$.subscribe((user) => {
+    //   if (user) {
+    //     this.currentUser = user;
+    //   }
+    // });
     this.dropdownMenu = [
       { routingLink: "teenpatti/teenpatti-twenty",gtype:"teen20", tableId: "-11",tableName: "TP2020",},
       { routingLink: "teenpatti/oneday",gtype:"teen", tableId: "-12", tableName: "TP1Day" },
@@ -62,8 +76,16 @@ export class HeaderComponent {
       { routingLink: "teenpatti/dt1day",gtype:"dt6", tableId: "-7",  tableName: "DT1Day" },
       { routingLink: "teenpatti/dtl2020",gtype:"dtl20", tableId: "-8", tableName: "DTL2020"},
     ];
-
-
+    this.currentUser = this.authService.currentUser;
+    this.authService.currentUser$.subscribe((user) => {
+      if (user) {
+        this.currentUser = user;
+        // this.currencyCode = environment.currency
+        //   ? this.currentUser?.currencyCode
+        //   : environment.currency;
+        this.currencyCode = this.currentUser?.currencyCode;
+      }
+    });
   }
   
 
@@ -85,5 +107,9 @@ export class HeaderComponent {
   //   alert("Please Select a user");
   //   return false;
   // }
+  logout(){
+    this.token.delete();
+    this.router.navigateByUrl('/');
+  }
 }
 
