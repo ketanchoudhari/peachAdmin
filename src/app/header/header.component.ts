@@ -4,6 +4,10 @@ import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-header',
@@ -18,6 +22,8 @@ export class HeaderComponent {
   isOpen: boolean = false;
   currentUser?: CurrentUser;
   dropdownMenu: any=[];
+  userNames: string;
+  currencyCode:string|undefined = environment.currency ;
 
 
 
@@ -31,10 +37,13 @@ export class HeaderComponent {
     public commonService: CommonService,
     private token:TokenService,
     private router: Router,
+    private authService:AuthService
+
 
   ) { }
 
   ngOnInit(): void {
+    
     // this.currentUser = this.authService.currentUser;
     // this.authService.currentUser$.subscribe((user) => {
     //   if (user) {
@@ -60,8 +69,16 @@ export class HeaderComponent {
       { routingLink: "teenpatti/dt1day",gtype:"dt6", tableId: "-7",  tableName: "DT1Day" },
       { routingLink: "teenpatti/dtl2020",gtype:"dtl20", tableId: "-8", tableName: "DTL2020"},
     ];
-
-
+    this.currentUser = this.authService.currentUser;
+    this.authService.currentUser$.subscribe((user) => {
+      if (user) {
+        this.currentUser = user;
+        // this.currencyCode = environment.currency
+        //   ? this.currentUser?.currencyCode
+        //   : environment.currency;
+        this.currencyCode = this.currentUser?.currencyCode;
+      }
+    });
   }
 
   toggleAccDropdrown() {

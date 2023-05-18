@@ -39986,7 +39986,7 @@
             </nav>
             <ul class="user-search list-unstyled">
                 <li class="username">
-                    <span (click)="toggleAccDropdrown()">dmwdemo <i class="fa fa-caret-down"></i></span>
+                    <span (click)="toggleAccDropdrown()">{{currentUser.userName}} <i class="fa fa-caret-down"></i></span>
                     <ul [style.display]="isDropdownOpen ? 'block' : 'none'">
                         <li>
                             <a routerLink="/security-auth"><b>Secure

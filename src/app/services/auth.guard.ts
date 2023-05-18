@@ -18,8 +18,10 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.tokenService.isLoggedIn()) {
-      console.log("Auth Token",this.tokenService.isLoggedIn)
+    // if (this.tokenService.isLoggedIn())
+    if (this.tokenService.get())
+     {
+      // console.log("Auth-Token",this.tokenService.get())
       
       return true;
     } else {

@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+// import { UsersComponent } from './users/users.component';
 
 
 
@@ -38,6 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     SecurityAuthComponent,
     MainComponent,
       HomeComponent,
+      // UsersComponent,
   ],
 
   

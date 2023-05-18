@@ -51,8 +51,8 @@ export class TokenService {
   //   console.log("AUTH_TOKEN",localStorage.getItem(AUTH_TOKEN))
   //   return  localStorage.getItem(AUTH_TOKEN) != (null || undefined);
   // }
-  isLoggedIn() {
-    // console.log("AUTH_TOKEN",this.cookie.get(AUTH_TOKEN))
-    return localStorage.getItem(AUTH_TOKEN) != (null || undefined);
-  }
+  // isLoggedIn() {
+  //   // console.log("AUTH_TOKEN",this.cookie.get(AUTH_TOKEN))
+  //   return this.get() != (null || undefined);
+  // }
 }
