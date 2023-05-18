@@ -2,17 +2,26 @@
 
 
 <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container-fluid" id="userSearchUl">
         <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control me-2" id="searchUserId" placeholder="{{Update?.EnteruserId}}..."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="filterByTerm($event,true)" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" id="searchUserId" type="submit">Search</button>
         </form>
     </div>
 </nav>
 <div class="function-wrap clearfix">
     <dl class="banking-head float-L">
         <dt>Your Balance </dt>
-        <dd id="yourBalance"><span> INR</span> 3,344.50</dd>
+        <dd id="yourBalance"><span> <ng-container *ngIf="showCurrency">
+            <ng-container *ngIf="!fixCurrency">
+                {{ currentUser.currencyCode }}
+              </ng-container>
+              <ng-container *ngIf="fixCurrency">
+                {{ fixCurrency }}
+              </ng-container>
+        </ng-container></span> {{ usersData.balance  }}</dd>
     </dl>
     <ul class="input-list float-R" style="display: none;">
         <li><label>Sort by </label></li>
@@ -24,8 +33,146 @@
     </ul>
 </div>
 
+<div id="totalBox" class="total_box filtertotaldivweb" *ngIf="!isPremiumSite">
+    <dl id="yourBalance" class="total_dl">
+      <dt>Available Balance</dt>
+
+      <dd id="myCreditLimit">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.balance | indianCurrency }}
+      </dd>
+    </dl>
+  
+    <dl id="balanceDownline" class="total_dl">
+      <dt>Balance in Downline</dt>
+      <dd id="myCreditLimit">
+        <ng-container *ngIf="showCurrency">
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+
+        {{ usersData.downlineBalance | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="totalExposureDL" class="total_dl">
+      <dt>Total Exposure</dt>
+      <dd id="totalExposure">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.totalExposure | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="creditLimitDL" class="total_dl">
+      <dt>Credit Reference</dt>
+      <dd id="myCreditLimit">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.creditRef | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="creditGivenOutDL" class="total_dl">
+      <dt>Reference PL</dt>
+      <dd id="totalCreditGivenOut">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ ((usersData.refPL === 0) ? totalRow?.refPL : usersData.refPL) | indianCurrency }}
+      </dd>
+    </dl>
+
+    <dl id="creditAvailBalDL" class="total_dl" style="display: none">
+      <dt>Credit Avail Bal</dt>
+      <dd id="myCreditAvailBal">
+        even 
+      </dd>
+    </dl>
+    <dl id="totalBalanceDL" class="total_dl" style="display: none">
+      <dt>Total Balance</dt>
+      <dd id="totalBalance">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.totalBalance | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="myCurrentPLDL" class="total_dl" style="display: none">
+      <dt>Today P/L with Upline</dt>
+      <dd id="myCurrentPL"> 0.0</dd>
+    </dl>
+    <dl id="availableBalanceDL" class="total_dl" style="display: none">
+      <dt>Total Avail. bal.</dt>
+      <dd id="totalAvailBal">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.totalAvailableBalance | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="masterBalanceDL" class="total_dl" style="display: none">
+      <dt>Balance</dt>
+      <dd id="mastersBalance">
+        <ng-container *ngIf="showCurrency"  >
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        {{ usersData.totalBalance | indianCurrency }}
+      </dd>
+    </dl>
+    <dl id="masterAvailableBalanceDL" class="total_dl" style="display: none">
+      <dt>Available Balance</dt>
+      <dd id="mastersAvailBal">
+      </dd>
+    </dl>
+    <dl id="transferablePLWithUplineDL" class="total_dl" style="display: none">
+      <dt>Transferable P/L with Upline</dt>
+      <dd id="transferablePLWithUpline"> 0.00</dd>
+    </dl>
+  </div>
+
 <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist" *ngIf="showTotalBox">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#banking" type="button"
             role="tab" aria-controls="nav-home" aria-selected="true">Credit Reference
         </button>
@@ -56,7 +203,7 @@
                                             aria-label="Event Type: activate to sort column ascending"
                                             style="width: 15%;">UID
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                        <th class="sorting"  id="myCreditLimit" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                                             aria-label="Event Name: activate to sort column ascending"
                                             style="width: 11%;">
                                             Available Balance </th>
@@ -83,9 +230,7 @@
                                             aria-label="Place Date: activate to sort column ascending"
                                             style="width: 10%;">
                                             Remark </th>
-                                        <!-- <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Match Date: activate to sort column ascending" style="width: 47px;" > All
-                                        </th> -->
+                                      
                                         <th class="full-amount" style="width: 50%;"><a id="allLog" class="btn-send"
                                                 routerLink="banking-log">All</a></th>
                                     </tr>
@@ -135,50 +280,7 @@
                                         <td class="full-amount"><a id="log" class="btn"
                                                 href="#/banking/bankinglog/474397">Log</a></td>
                                     </tr>
-                                    <tr id="order2">
-                                        <td>
-                                            <span class="order" style="margin-right: 5px;">1.</span>
-                                        </td>
-                                        <td>
-                                            <span class="lv_7"></span>
-                                            Demo
-                                        </td>
-                                        <td class="text-right"> 99,000.00 </td>
-                                        <td class="text-right"> 1,095.00 </td>
-                                        <td class="text-right"><span class="red">(0.00)</span></td>
-                                        <!-- <td class="text-right">1.00</td> -->
-                                        <td class="DW-amount"><!---->
-                                            <div class="displayfelx"><input type="radio" formcontrolname="txnType"
-                                                    value="1" style="display: none;"
-                                                    class="ng-untouched ng-pristine ng-valid">
-                                                <input type="radio" formcontrolname="txnType" value="2"
-                                                    style="display: none;" class="ng-untouched ng-pristine ng-valid">
-                                                <ul class="btn_list-DW">
-
-                                                    <li><button type="button" class="btn"> D </button></li>
-                                                    <li><button type="button" class="btn float-L" id="wBtnW_474397"> W
-                                                        </button>
-                                                    </li>
-                                                </ul><!----><!----><span class="plus"
-                                                    style="position: absolute;font-weight: 700;left: 995px;line-height: 29px;font-size:20px;color: rgb(56, 179, 56);">+</span><input
-                                                    name="amount" formcontrolname="amount" type="number" placeholder="0"
-                                                    numberonly="" class="ng-untouched ng-pristine ng-valid"><button
-                                                    type="button" class="btn float-L disable" disabled="" id="full">
-                                                    Full
-                                                </button>
-                                            </div><!---->
-                                        </td>
-                                        <td class="credit-amount">
-                                            <div style="display: inline-flex; align-items: center; float:right"><span
-                                                    style="margin-right: 4px;">1,00,000.00</span></div>
-                                        </td>
-                                        <td id="userReferencePL"><!----><span style="float: right;">95.00 </span><!---->
-                                        </td>
-                                        <td class="border-l"><input formcontrolname="remark" type="text"
-                                                placeholder="Remark" class="ng-untouched ng-pristine ng-valid"></td>
-                                        <td class="full-amount"><a id="log" class="btn"
-                                                href="#/banking/bankinglog/474397">Log</a></td>
-                                    </tr>
+                                 
 
 
                                     <!-- <tr class="odd">

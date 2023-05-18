@@ -14,14 +14,14 @@ export const HIERARCY_LIST = 'hierarcy_list';
 })
 export class CommonService {
 
-  // private _balanceSub = new ReplaySubject<number>(1);
-  // balance$ = this._balanceSub.asObservable();
+  private _balanceSub = new ReplaySubject<number>(1);
+  balance$ = this._balanceSub.asObservable();
 
-  // private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
-  // hierarchyMap$ = this._hierarchyMapSub.asObservable();
+  private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
+  hierarchyMap$ = this._hierarchyMapSub.asObservable();
 
-  // private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
-  // hierarchyList$ = this._hierarchyListSub.asObservable();
+  private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
+  hierarchyList$ = this._hierarchyListSub.asObservable();
 
   // private _allUsersSub = new ReplaySubject<fullHierarchy>(1);
   // _allUsersSub$ = this._allUsersSub.asObservable();
@@ -32,7 +32,7 @@ export class CommonService {
   usermainid: any;
   lastuser: any;
   apis$ = new ReplaySubject<IApis>(1);
-  private apisUrl = (environment.siteName == 'lc247') ? environment.BDapisUrl : environment.apisUrl;
+  private apisUrl = (environment.siteName == 'skyexch') ? environment.BDapisUrl : environment.apisUrl;
   // private isPremiumSite = environment.isPremiumSite;
   hierarchy:any;
   // private isBdlevel = environment.isBdlevel;
@@ -98,6 +98,17 @@ export class CommonService {
    
    getApis() {
     return this.http.get(`${this.apisUrl}`);
+  }
+
+  updateBalance() {
+    this.http
+      .get(`${this.baseUrl}/balance`)
+      .subscribe((res: any)=> {
+        console.log(res,"respocom");
+        if (res && res.errorCode === 0) {
+          this._balanceSub.next(res.result[0].balance);
+        }
+      });
   }
 
   // listHierarchy() {

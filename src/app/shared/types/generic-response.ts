@@ -1,6 +1,6 @@
-export interface GenericResponse<T> {
+export interface GenericResponse<T>{
     errorCode: number;
-    errorDescription:any;
+    errorDescription: any;
     result: T;
   } 
   

@@ -11,6 +11,7 @@ import { LoadingService } from '../services/loading.service';
 import { Router } from '@angular/router';
 import { DomSanitizer, Meta, SafeResourceUrl } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
+import { CommonService } from '../services/models/common.service';
 
 
 @Component({
@@ -40,7 +41,9 @@ export class LoginComponent implements OnInit {
     private loadingService: LoadingService,
     private router: Router,
     private sanitization: DomSanitizer,
-    private meta:Meta
+    private meta:Meta,
+    private commonService: CommonService,
+
 
 
 
@@ -116,7 +119,7 @@ export class LoginComponent implements OnInit {
               // this.commonService.listHierarchy();
               // this.commonService.loadfullHierarchy(this.userdata);
               // this.commonService.listAllHierarchy();
-              // this.commonService.updateBalance();
+              this.commonService.updateBalance();
               setTimeout(() => {
                 this.router.navigate(['/active-user']);
                 // this.router.navigate([`/home/${res?.result[0]?.userType + 1}`]);

@@ -10,6 +10,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BankingLogComponent } from './banking/banking-log/banking-log.component';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DirectivesModule } from '../directives/directives.module';
+import { PipesModule } from "../pipes/pipes.module";
+
+
 
 
 const routes: Routes = [
@@ -43,22 +48,34 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [
-    AccountStatementComponent,
-    AccountSummeryComponent,
-    AccountDetailsComponent,
-    BankingComponent,
-    BankingLogComponent,
-  ],
-
-  imports: [
-    CommonModule,
-    ModalModule,
-    FormsModule,
-    BsDatepickerModule.forRoot(),
-    RouterModule.forChild(routes)
-  ],
-  exports:[RouterModule]
-  
+    declarations: [
+        AccountStatementComponent,
+        AccountSummeryComponent,
+        AccountDetailsComponent,
+        BankingComponent,
+        BankingLogComponent,
+    ],
+    exports: [
+        AccountStatementComponent,
+        AccountSummeryComponent,
+        AccountDetailsComponent,
+        BankingComponent,
+        BankingLogComponent,
+    ],
+    imports: [
+        CommonModule,
+        ModalModule,
+        FormsModule,
+        DirectivesModule,
+        BsDatepickerModule.forRoot(),
+        NgxPaginationModule,
+        RouterModule.forChild(routes),
+        PipesModule,
+      
+        
+    ]
 })
-export class AccountModule { }
+export class AccountModule {
+
+
+ }

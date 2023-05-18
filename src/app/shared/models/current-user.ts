@@ -1,5 +1,5 @@
 export class CurrentUser  {
-  balance!: number;
+  balance: number;
   conversion!: number;
   creditRef!: number;
   cricketFancySharing!: number;

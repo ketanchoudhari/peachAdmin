@@ -39986,8 +39986,14 @@
                 </div>
             </nav>
             <ul class="user-search list-unstyled">
+              <!-- <li (click)="updateBalance()" class="main-wallet no-multi">
+                <a id="topRefresh" style="color: red;" class="a-refresh" style="cursor: pointer"><img
+                    src="assets/images/transparent.gif"></a>
+              </li> -->
                 <li class="username">
                     <span (click)="toggleAccDropdrown()">dmwdemo <i class="fa fa-caret-down"></i></span>
+                    <!-- <span (click)="updateBalance()">{{balance}} <i class="fa fa-caret-down"></i></span> -->
+
                     <ul [style.display]="isDropdownOpen ? 'block' : 'none'">
                         <li>
                             <a routerLink="/security-auth"><b>Secure

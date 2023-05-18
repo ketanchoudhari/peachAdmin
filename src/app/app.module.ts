@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,11 +16,19 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeComponent } from './home/home.component';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { PipesModule } from './pipes/pipes.module';
+import { RemoveSpacePipe } from './pipes/remove-space.pipe';
+import { TitleCasePipe } from '@angular/common';
+import { TokenInterceptorService } from './interceptors/token.interceptor';
+import { GlobalErrorHandler } from './GlobalErrorHandler/GlobalErrorHandler';
+import { EnvService } from './env.service';
+import { DirectivesModule } from './directives/directives.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -37,7 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
     ChangePasswordComponent,
     SecurityAuthComponent,
     MainComponent,
-      HomeComponent,
+    HomeComponent,
   ],
 
   
@@ -45,16 +53,33 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    PipesModule,
+    DirectivesModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxPaginationModule,
     ToastrModule.forRoot(),
 
   ],
-  providers: [HttpClientModule, CookieService],
+  
+  providers: [HttpClientModule, CookieService,
+    // BreadcrumbsService,
+    TitleCasePipe,
+    RemoveSpacePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    { provide: LOCALE_ID, useValue: 'en-IN' },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    // { provide: DEFAULT_CURRENCY_CODE, useValue: 'INR' },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (envService: EnvService) => () => envService.init(),
+      deps: [EnvService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 

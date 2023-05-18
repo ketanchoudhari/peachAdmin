@@ -20,7 +20,39 @@ h1.accdet {
 .text-right {
     text-align: left!important;
 }
+a.page-link {
+    background: #1e2040;
+}
+
 a:not([href]):not([tabindex]) {
+    display: inherit;
     color: black;
     text-decoration: none;
+}
+/* .pages {
+    margin: 25px 0;
+} */
+.pages li {
+    display: inline;
+    list-style: none;
+    line-height: 50px;
+    margin-right: 5px;
+}
+ .pages a.select, .pages a.select{
+    color: white;
+    background: #1e2040;
+    border-radius: 10px;
+}
+.pages a {
+    display: inline;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.375rem 0.75rem;
+}
+.total_all.box {
+    padding: 35px 1px 36px 1px;
+}
+a#getPL {
+    margin-bottom: 8px;
+    margin-left: 21px;
 }

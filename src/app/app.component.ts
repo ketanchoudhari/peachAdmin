@@ -54,6 +54,34 @@ export class AppComponent {
     });
     
   }
+  ngOnInit() {
+    this.commonService.getApis();
+    if (this.auth.checkIsLoggedIn()) {
+      this.commonService.apis$.subscribe((res) => {
+        // console.log(res);
+        // this.commonService.loadfullHierarchy();
+        // this.commonService.listHierarchy();
+        // this.commonService.listAllHierarchy();
+        this.commonService.updateBalance();
+        this.commonService.apis = res;
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
+    // this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
+    //   if (isLoggedIn) {
+    //     this.commonService.hierarchyMap$.subscribe((list) => {
+    //       this.titleService.setTitle(
+    //         this.titleCase.transform(
+    //           list.get(this.auth.currentUser.userType).name
+    //         )
+    //       );
+    //     });
+    //   } else {
+    //     this.titleService.setTitle('Admin');
+    //   }
+    // });
+  }
   
 
   loadStyle(styleName: string) {
@@ -74,3 +102,4 @@ export class AppComponent {
     }
   }
 }
+
