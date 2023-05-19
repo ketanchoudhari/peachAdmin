@@ -21,8 +21,8 @@ export class CurrentUser  {
   soccerSharing!: number;
   tennisSharing!: number;
   token!: string;
-  userId!: number;
-  userName!: string;
+  userId: number;
+  userName: string;
   userStatus!: number;
   userType!: number;
   prepaid!:boolean;

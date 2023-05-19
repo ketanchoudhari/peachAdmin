@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordStrengthValidator } from '../users/user-list/sub/password-strength.validator';
 import { Router } from '@angular/router';
-import { MyAccountService } from '../services/my-account.service';
-import { GenericResponse } from '../shared/types/generic-response';
+import { AuthService } from '../services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
@@ -18,10 +18,11 @@ export class ChangePasswordComponent {
   changePassModalOpen: boolean = false;
 
 
+
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
-    private myAccountService:MyAccountService 
+    private authService:AuthService
 
   ){
 
@@ -45,6 +46,8 @@ export class ChangePasswordComponent {
       },
       { validators: ChangePasswordComponent.confirm }
     );
+    // this.IdUser=this.currentUser.results[0].userId;
+    console.log("currentuer",this.authService.currentUser)
   }
   get c() {
     return this.changePassForm.get('confirm');
@@ -64,12 +67,10 @@ export class ChangePasswordComponent {
     return this.changePassForm;
   }
   changePass() {
-    if (this.changePassForm.valid) {
+    console.log("chagepass button")
       const { confirm, ...result } = this.changePassForm.value;
-      this.myAccountService
-        .changePassword(result)
-        .subscribe((res: any) =>{
-        //  console.log(res);
+      this.authService.changePassword(result).subscribe((res: any) =>{
+         console.log("change password api", res);
           if (res.errorCode === 0) {
             // this.toastr.success('Password changed successfully');
             console.log("password changed successfull")
@@ -82,14 +83,7 @@ export class ChangePasswordComponent {
             // this.toastr.error(res.errorDescription);
           }
         });
-    } else {
-      if (this.f.errors && this.f.errors['isNotMatching']) {
-        // this.toastr.error("Passwords don't match");
-        console.log("passwords don't match ")
-        return;
-      }
-      // this.toastr.error('Invalid Input');
-    }
+
   }
 
 }

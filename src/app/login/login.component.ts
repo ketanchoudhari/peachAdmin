@@ -94,6 +94,7 @@ export class LoginComponent implements OnInit {
             // finalize(() => (this.isInTransit = false))
           )
           .subscribe((res: GenericResponse<CurrentUser[]>) => {
+            // console.log("login id", res.result[0].userId) //getting login id
             this.UsersName =res.result[0].userName
             console.log("username",this.UsersName)
             if (res.errorCode === 0 && res.errorDescription==null) {

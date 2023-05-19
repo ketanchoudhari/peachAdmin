@@ -14,14 +14,14 @@ export const HIERARCY_LIST = 'hierarcy_list';
 })
 export class CommonService {
 
-  // private _balanceSub = new ReplaySubject<number>(1);
-  // balance$ = this._balanceSub.asObservable();
+  private _balanceSub = new ReplaySubject<number>(1);
+  balance$ = this._balanceSub.asObservable();
 
-  // private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
-  // hierarchyMap$ = this._hierarchyMapSub.asObservable();
+  private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
+  hierarchyMap$ = this._hierarchyMapSub.asObservable();
 
-  // private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
-  // hierarchyList$ = this._hierarchyListSub.asObservable();
+  private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
+  hierarchyList$ = this._hierarchyListSub.asObservable();
 
   // private _allUsersSub = new ReplaySubject<fullHierarchy>(1);
   // _allUsersSub$ = this._allUsersSub.asObservable();
@@ -33,51 +33,51 @@ export class CommonService {
   lastuser: any;
   apis$ = new ReplaySubject<IApis>(1);
   private apisUrl = (environment.siteName == 'lc247') ? environment.BDapisUrl : environment.apisUrl;
-  // private isPremiumSite = environment.isPremiumSite;
+  private isPremiumSite = environment.isPremiumSite;
   hierarchy:any;
-  // private isBdlevel = environment.isBdlevel;
-  // private isRental = environment.isRental;
+  private isBdlevel = environment.isBdlevel;
+  private isRental = environment.isRental;
 
-  // vrnlUserType: number;
-  // whitelabelUserType: number;
-  // adminUserType: number;
-  // subAdminUserType: number;
-  // superMasterUserType: number;
-  // masterUserType: number;
-  // agentUserType: number;
-  // clientUserType: number;
+  vrnlUserType: number;
+  whitelabelUserType: number;
+  adminUserType: number;
+  subAdminUserType: number;
+  superMasterUserType: number;
+  masterUserType: number;
+  agentUserType: number;
+  clientUserType: number;
 
-  // BdbetHierarchy = {
-  //   vrnladmin: "vrnladmin",
-  //   whitelabel: "whitelabel",
-  //   admin: "admin",
-  //   subadmin: "senior sub admin",
-  //   supermaster: "sub admin",
-  //   master: "super",
-  //   agent: "master",
-  //   client: "user",
-  // }
+  BdbetHierarchy = {
+    vrnladmin: "vrnladmin",
+    whitelabel: "whitelabel",
+    admin: "admin",
+    subadmin: "senior sub admin",
+    supermaster: "sub admin",
+    master: "super",
+    agent: "master",
+    client: "user",
+  }
   
-  // sharingHierarchy = {
-  //   vrnladmin: "vrnladmin",
-  //   whitelabel: "mother panel",
-  //   admin: "whitelabel",
-  //   subadmin: "admin",
-  //   supermaster: "sub admin",
-  //   master: "super master",
-  //   agent: "master",
-  //   client: "user",
-  // }
-  // defaultHierarchy = {
-  //   vrnladmin: "vrnladmin",
-  //   whitelabel: "whitelabel",
-  //   admin: "admin",
-  //   subadmin: "subadmin",
-  //   supermaster: "supermaster",
-  //   master: "master",
-  //   agent: "agent",
-  //   client: "client",
-  // }
+  sharingHierarchy = {
+    vrnladmin: "vrnladmin",
+    whitelabel: "mother panel",
+    admin: "whitelabel",
+    subadmin: "admin",
+    supermaster: "sub admin",
+    master: "super master",
+    agent: "master",
+    client: "user",
+  }
+  defaultHierarchy = {
+    vrnladmin: "vrnladmin",
+    whitelabel: "whitelabel",
+    admin: "admin",
+    subadmin: "subadmin",
+    supermaster: "supermaster",
+    master: "master",
+    agent: "agent",
+    client: "client",
+  }
   constructor(
 
     private http: HttpClient, private router: Router,

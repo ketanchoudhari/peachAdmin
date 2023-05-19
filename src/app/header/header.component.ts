@@ -70,6 +70,7 @@ export class HeaderComponent {
       { routingLink: "teenpatti/dtl2020",gtype:"dtl20", tableId: "-8", tableName: "DTL2020"},
     ];
     this.currentUser = this.authService.currentUser;
+    // console.log("user name", this.currentUser.userName)
     this.authService.currentUser$.subscribe((user) => {
       if (user) {
         this.currentUser = user;

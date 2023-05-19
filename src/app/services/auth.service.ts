@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
 import { CurrentUser } from '../shared/models/current-user';
-
+import { IChangePass } from '../change-password/shared/change-pass';
 
 export const CURRENT_USER = 'current_user';
 export const SHARING = 'sharing';
@@ -15,6 +15,7 @@ export const SHARING = 'sharing';
   providedIn: 'root'
 })
 export class AuthService {
+
   private baseUrl: string;
   private isPremiumSite = environment.isPremiumSite;
   currentAuthState = true;
@@ -44,16 +45,17 @@ export class AuthService {
     
 
   ) {
+
     
     commonService.apis$.subscribe((res) => {
 
       // console.log(res,"resp");
       
       if (!environment.isProduction) {
-        console.log(this.router.url,'this url');
+        // console.log(this.router.url,'this url');
         this.baseUrl = res.devAdminIp;
       } else {
-        this.baseUrl =  res.adminIp;;
+        this.baseUrl =  res.adminIp;
       }
     });
     if (cookieService.check(CURRENT_USER)) {
@@ -119,4 +121,10 @@ export class AuthService {
      return false
     }
    }
+   changePassword(userData: IChangePass) {
+    return this.http.post(
+      `${this.baseUrl}/updateUser/${userData.userId}`,
+      userData
+    );
+  }
 }
