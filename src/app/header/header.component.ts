@@ -2,19 +2,12 @@ import { Component } from '@angular/core';
 import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
-<<<<<<< HEAD
-import { AuthService } from '../services/auth.service';
-import { environment } from 'src/environments/environment';
-import { TokenService } from '../services/token.service';
-import { Router } from '@angular/router';
-=======
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
 import { environment } from 'src/environments/environment';
 
->>>>>>> 3288f93994c730ab46bc64ee22f9dc7fb4afb009
 
 @Component({
   selector: 'app-header',
@@ -29,6 +22,7 @@ export class HeaderComponent {
   isOpen: boolean = false;
   currentUser?: CurrentUser;
   dropdownMenu: any=[];
+  balance: number = 0;
   userNames: string;
   currencyCode:string|undefined = environment.currency ;
 
@@ -47,10 +41,10 @@ export class HeaderComponent {
     private router: Router,
 
 
+
   ) { }
 
   ngOnInit(): void {
-    
     // this.currentUser = this.authService.currentUser;
     // this.authService.currentUser$.subscribe((user) => {
     //   if (user) {

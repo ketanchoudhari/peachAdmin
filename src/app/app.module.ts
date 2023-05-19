@@ -29,7 +29,7 @@ import { EnvService } from './env.service';
 import { DirectivesModule } from './directives/directives.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-// import { UsersComponent } from './users/users.component';
+
 
 
 
@@ -46,7 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ChangePasswordComponent,
     SecurityAuthComponent,
     MainComponent,
-      HomeComponent,
+    HomeComponent,
   ],
 
   
