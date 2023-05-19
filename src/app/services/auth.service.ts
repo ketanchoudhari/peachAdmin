@@ -47,7 +47,7 @@ export class AuthService {
     
     commonService.apis$.subscribe((res) => {
 
-      // console.log(res,"resp");
+      console.log(res,"resp");
       
       if (!environment.isProduction) {
         console.log(this.router.url,'this url');
@@ -70,7 +70,6 @@ export class AuthService {
     errorCode: number;
     errorDescription: string | null;
     result: Array<any>;
-
   }> {
     return this.http.post<{
       errorCode: number;
@@ -109,14 +108,5 @@ export class AuthService {
       this.setCurrentUser;
     });
   }
-  authToken(){
-    let tokens= this.tokenService.get();
-    // console.log("token from cookies",tokens)
-    if(tokens!==undefined && tokens !== null){
-     return true
-    }
-    else{
-     return false
-    }
-   }
+  
 }

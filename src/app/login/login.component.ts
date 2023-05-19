@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
   captchaImg: SafeResourceUrl;
 
   showCaptcha: boolean = environment.captcha;
-  UsersName: string;
-
 
 
 
@@ -68,21 +66,21 @@ export class LoginComponent implements OnInit {
       log: ['0000', Validators.required],
       origin:["skyexch.live"]
     });
-    // console.log("loginform");
+    console.log("loginform");
     
   }
 
   serverError: boolean = false;
 
   login(){
-    // console.log(this.showCaptcha,"showcaptcha");
+    console.log(this.showCaptcha,"showcaptcha");
     
     if (!this.showCaptcha) {
       this.loginForm.controls['captcha'].setValue('0000');
       this.loginForm.controls['log'].setValue('0000');
     }
     if (this.loginForm.valid) {
-      //  console.log(this.loginForm.value,"login");
+       console.log(this.loginForm.value,"login");
       if (!this.isInTransit) {
         this.isInTransit = true;
         if (!this.showCaptcha) {
@@ -97,14 +95,11 @@ export class LoginComponent implements OnInit {
             // finalize(() => (this.isInTransit = false))
           )
           .subscribe((res: GenericResponse<CurrentUser[]>) => {
-            this.UsersName =res.result[0].userName
-            console.log("username",this.UsersName)
             if (res.errorCode === 0 && res.errorDescription==null) {
               // this.loadingService.setLoading(true);
-              
               const salt = bcrypt.genSaltSync(10);
               let pass = bcrypt.hashSync(this.loginForm.value.password, salt);
-              // console.log(pass, 'hashed password');
+              console.log(pass, 'hashed password');
               localStorage.setItem('password', pass);
               this.tokenService.set(res.result[0].token);
               this.authService.setCurrentUser(res.result[0]);
