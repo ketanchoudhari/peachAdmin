@@ -4,6 +4,7 @@ import { PasswordStrengthValidator } from '../users/user-list/sub/password-stren
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { GenericResponse } from '../shared/types/generic-response';
 
 @Component({
   selector: 'app-change-password',
@@ -16,6 +17,9 @@ export class ChangePasswordComponent {
   isChangePassword: boolean = false;
   showDropDown:boolean=false;
   changePassModalOpen: boolean = false;
+  IDuser: any;
+  Cuser: any;
+
 
 
 
@@ -41,13 +45,28 @@ export class ChangePasswordComponent {
         ],
         confirm: [null, Validators.required],
         password: [, Validators.required],
-
+        
         
       },
       { validators: ChangePasswordComponent.confirm }
     );
+
+    // this.authService.currentUser$.subscribe((currentUser) => {
+    //   if (!!currentUser) {
+    //     this.Cuser = currentUser;
+    //     this.changePassForm.get('userId').setValue(currentUser.userId);
+    //     this.commonService.apis$.subscribe((res:any) => {
+    //       this.usersService.getUser(currentUser.userId).subscribe((res: GenericResponse<User[]>) => {
+    //           if (res.errorCode === 0) {
+    //             this.currentUserProfile = res.result[0];
+    //           }
+    //         });
+    //     });
+    //   }
+    // });
     // this.IdUser=this.currentUser.results[0].userId;
     console.log("currentuer",this.authService.currentUser)
+    this.IDuser=this.authService.currentUser
   }
   get c() {
     return this.changePassForm.get('confirm');
@@ -69,7 +88,7 @@ export class ChangePasswordComponent {
   changePass() {
     console.log("chagepass button")
       const { confirm, ...result } = this.changePassForm.value;
-      this.authService.changePassword(result).subscribe((res: any) =>{
+      this.authService.changePassword(result).subscribe((res: GenericResponse) =>{
          console.log("change password api", res);
           if (res.errorCode === 0) {
             // this.toastr.success('Password changed successfully');

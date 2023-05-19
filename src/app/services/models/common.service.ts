@@ -16,10 +16,16 @@ export class CommonService {
 
   private _balanceSub = new ReplaySubject<number>(1);
   balance$ = this._balanceSub.asObservable();
+  private _balanceSub = new ReplaySubject<number>(1);
+  balance$ = this._balanceSub.asObservable();
 
   private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
   hierarchyMap$ = this._hierarchyMapSub.asObservable();
+  private _hierarchyMapSub = new ReplaySubject<Map<number, Hierarchy>>(1);
+  hierarchyMap$ = this._hierarchyMapSub.asObservable();
 
+  private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
+  hierarchyList$ = this._hierarchyListSub.asObservable();
   private _hierarchyListSub = new ReplaySubject<Hierarchy[]>(1);
   hierarchyList$ = this._hierarchyListSub.asObservable();
 
@@ -98,6 +104,17 @@ export class CommonService {
    
    getApis() {
     return this.http.get(`${this.apisUrl}`);
+  }
+
+  updateBalance() {
+    this.http
+      .get(`${this.baseUrl}/balance`)
+      .subscribe((res: any)=> {
+        console.log(res,"respocom");
+        if (res && res.errorCode === 0) {
+          this._balanceSub.next(res.result[0].balance);
+        }
+      });
   }
 
   // listHierarchy() {

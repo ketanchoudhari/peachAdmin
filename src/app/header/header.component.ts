@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
-import { TokenService } from '../services/token.service';
-import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../services/auth.service';
-import { environment } from 'src/environments/environment';
-
 
 @Component({
   selector: 'app-header',
@@ -22,34 +17,32 @@ export class HeaderComponent {
   isOpen: boolean = false;
   currentUser?: CurrentUser;
   dropdownMenu: any=[];
-  userNames: string;
-  currencyCode:string|undefined = environment.currency ;
+  balance: number = 0;
 
 
+  isBalanceLoader = false
 
 
 
   constructor(
     // private compIntraction: CompIntractionService,
     // private router: Router,
-    // private authService: AuthService,
+    private authService: AuthService,
     // private toastr: ToastrService,
     public commonService: CommonService,
-    private token:TokenService,
-    private router: Router,
-    private authService:AuthService
-
 
   ) { }
 
   ngOnInit(): void {
-    
-    // this.currentUser = this.authService.currentUser;
-    // this.authService.currentUser$.subscribe((user) => {
-    //   if (user) {
-    //     this.currentUser = user;
-    //   }
-    // });
+    this.currentUser = this.authService.currentUser;
+    this.authService.currentUser$.subscribe((user) => {
+      if (user) {
+        this.currentUser = user;
+      }
+    });
+    this.commonService.balance$.subscribe((balance) => {
+      this.balance = balance;
+    });
     this.dropdownMenu = [
       { routingLink: "teenpatti/teenpatti-twenty",gtype:"teen20", tableId: "-11",tableName: "TP2020",},
       { routingLink: "teenpatti/oneday",gtype:"teen", tableId: "-12", tableName: "TP1Day" },
@@ -81,6 +74,8 @@ export class HeaderComponent {
       }
     });
   }
+  
+
 
   toggleAccDropdrown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -99,8 +94,5 @@ export class HeaderComponent {
   //   alert("Please Select a user");
   //   return false;
   // }
-  logout(){
-    this.token.delete();
-    this.router.navigateByUrl('/');
-  }
 }
+

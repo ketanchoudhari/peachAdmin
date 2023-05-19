@@ -35,6 +35,7 @@
 
 
     <h2>Sports</h2>
+    <i class="fa fa-times"></i>
     <div class="mtree-main">
       <ul class="mtree transit bubba accordion"  id="myAccordion">
 
@@ -39816,8 +39817,8 @@
                                         <b>Banking</b>
                                     </a>
                                 </li>
-
-
+                              
+                               
                             </ul>
                         </li>
 
@@ -39873,7 +39874,7 @@
                                         </ul>
                                     </li>
                                     <li class="sub-dropdown">
-                                        <a
+                                        <a 
                                             class="dropdown-item">
                                             <b>Message</b>
                                         </a>
@@ -39985,8 +39986,14 @@
                 </div>
             </nav>
             <ul class="user-search list-unstyled">
+              <!-- <li (click)="updateBalance()" class="main-wallet no-multi">
+                <a id="topRefresh" style="color: red;" class="a-refresh" style="cursor: pointer"><img
+                    src="assets/images/transparent.gif"></a>
+              </li> -->
                 <li class="username">
-                    <span (click)="toggleAccDropdrown()">{{currentUser.userName}} <i class="fa fa-caret-down"></i></span>
+                    <span (click)="toggleAccDropdrown()">dmwdemo <i class="fa fa-caret-down"></i></span>
+                    <!-- <span (click)="updateBalance()">{{balance}} <i class="fa fa-caret-down"></i></span> -->
+
                     <ul [style.display]="isDropdownOpen ? 'block' : 'none'">
                         <li>
                             <a routerLink="/security-auth"><b>Secure
@@ -39998,8 +40005,8 @@
                                     Password</b></a>
                         </li>
                         <li>
-                            <a (click)="logout()"
-                               ><b>Logout</b></a>
+                            <a
+                                href="https://bmwexch.com/admin/logout/23581a6aa5fdea56a5e6b9fb2ec1705bb040595a"><b>Logout</b></a>
                         </li>
                     </ul>
                 </li>

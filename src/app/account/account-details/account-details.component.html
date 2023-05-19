@@ -1,5 +1,5 @@
 <nav>
-        <h1 class="accdet">Account Details</h1>
+    <h1 class="accdet">Account Details</h1>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
             role="tab" aria-controls="nav-home" aria-selected="true">Profile</button>
@@ -17,28 +17,34 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Profile</th>
+                                    <th scope="col">About you</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <th scope="col">Full Name</th>
-                                    <th scope="col">Prepost</th>
+                                    <th scope="col">{{ currentUserProfile?.name }}</th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Domain</th>
-                                    <th scope="col" class="ng-star-inserted">diamondex.live</th><!--bindings={
-            "ng-reflect-ng-if": "true"
-          }-->
+                                    <ng-template [ngIf]="currentUserProfile?.domainName != ''">
+                                        <th scope="col">Domain</th>
+                                        <th scope="col" class="ng-star-inserted">{{ currentUserProfile?.domainName }}
+                                        </th>
+                                        <!-- <dd>{{ currentUserProfile?.domainName }}</dd> -->
+                                    </ng-template>
+
                                 </tr>
                                 <tr>
+
                                     <th scope="col">Password</th>
                                     <th scope="col">
                                         <dd class="edit-pass">
-                                            <p class="ng-star-inserted"></p><!--bindings={
-            "ng-reflect-ng-if-else": "[object Object]"
-          }--><!--container--><a data-bs-toggle="modal" data-bs-target="#password" class="favor-set"><i
+                                            <p class="ng-star-inserted" *ngIf="showPassword; else censoredTemp"></p>
+                                            <ng-template #censoredTemp>
+                                                ********************************
+                                            </ng-template>
+                                            <a data-bs-toggle="modal" data-bs-target="#password" class="favor-set"><i
                                                     aria-hidden="true" class="fa fa-pencil-square-o"></i>Edit</a>
                                         </dd>
                                     </th>
@@ -48,6 +54,8 @@
                     </div>
                     <div class="col-6">
                         <table class="table table-striped">
+                            <!-- <th scope="col">Limits &amp; Commission</th> -->
+
                             <thead>
                                 <tr>
                                     <th scope="col">Limits &amp; Commission</th>
@@ -55,39 +63,47 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
+
                                     <th scope="col">Exposure Limit</th>
-                                    <th scope="col"> 1,00,00,00,000.00</th>
+                                    <th scope="col" id="mainwalletExposureLimit"> {{
+                                        currentUserProfile?.exposureLimit}}
+                                    </th>
                                 </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Share(%)</th><!--bindings={}-->
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Cricket Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Cricket Fancy Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Soccer Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Soccer Goal Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Tennis Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr>
-                                <tr class="ng-star-inserted">
-                                    <th scope="col">Indian Casino Share(%)</th>
-                                    <th scope="col">0%</th>
-                                </tr><!--bindings={
-            "ng-reflect-ng-if": "true"
-          }-->
+
+                                <ng-template [ngIf]="!isClient">
+
+                                    <tr class="ng-star-inserted" *ngIf="currentUserProfile?.sharePercent"> </tr>
+                                    <th scope="col"> Share(%)</th>
+                                    <th scope="col">{{ currentUserProfile?.sharePercent }}%</th>
+
+
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Cricket Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.cricketSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Cricket Fancy Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.cricketFancySharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Soccer Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.soccerSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Soccer Goal Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.soccerGoalsSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Tennis Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.tennisSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Indian Casino Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.indianCasinoSharing }}%</th>
+                                    </tr>
+                                </ng-template>
                             </tbody>
                         </table>
                     </div>
@@ -100,6 +116,22 @@
             <div class="listing-grid">
                 <div class="detail-row">
                     <h2>Activity Log</h2>
+                    <div class="total_all box">
+                        <span>
+                            <label>Last:</label>
+                            <select name="limit" id="limit" (change)="selectNoRows($event.target)">
+                                <option value="100">100 Txn</option>
+                                <option value="50">50 Txn</option>
+                                <option value="25">25 Txn</option>
+                                <option value="10" selected="">10 Txn</option>
+                                <option value="{{listCount}}">Full {{listCount}}</option>
+                            </select>
+                            <a id="getPL" (click)="getloginhistory()" style="color: #FFFFFF;"
+                                class="btn btn-diamond">ShowDefault</a>
+
+                        </span>
+
+                    </div>
                 </div>
                 <div class="table-responsive data-table" style="overflow: auto; white-space: nowrap;">
                     <table class="custom-table table table-striped" style="width: 100%;">
@@ -113,97 +145,59 @@
                             </tr>
                         </thead>
                         <tbody id="content">
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]"> Login Success </td>
-                                <td id="ipAddress"></td>
-                                <td id="isp"></td>
-                                <td id="location"></td>
+                            <tr id="tempTr" class="odd ng-star-inserted" *ngFor="let log of logList | paginate: { itemsPerPage: n, currentPage: p,totalItems:listCount }
+      ">
+                                <!-- <tr id="tempTr" class="odd ng-star-inserted"> -->
+                                <td id="loginDate"> {{ log.loginTime | date: "yyyy-MM-dd HH:mm:ss":timeFormat }} </td>
+                                <td class="align-L" [ngClass]="{
+                                  success: log.loginStatus === 1
+                                }" id="loginMessage">
+                                    Login Success
+                                </td>
+                                <!-- <td id="loginMessage" ng-reflect-ng-class="[object Object]"> Login Success </td> -->
+                                <td id="ipAddress">{{ log.loginIp }}</td>
+                                <td id="isp">{{ log.ISP }}</td>
+                                <td id="location">{{ log.origin }}</td>
                             </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-09 10:26:14 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">110.226.179.124</td>
-                                <td id="isp">Bharti Airtel Limited</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-08 22:43:22 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">49.32.164.196</td>
-                                <td id="isp">Reliance Jio Infocomm Ltd</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-08 22:34:00 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">2401:4900:1d7f:dd84:25b6:57a8:131d:66ba</td>
-                                <td id="isp">Bharti Airtel</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-08 18:49:12 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">2401:4900:1c97:1516:14ae:708b:2337:7257</td>
-                                <td id="isp">Bharti Airtel</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-08 09:39:50 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">2401:4900:1c97:1516:14ae:708b:2337:7257</td>
-                                <td id="isp">Bharti Airtel</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-07 17:32:39 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">206.84.229.205</td>
-                                <td id="isp">Vortex Netsol Private Limited</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-06 20:01:36 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">123.252.225.237</td>
-                                <td id="isp">Tata Teleservices (Maharashtra) Ltd</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-06 20:01:35 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">123.252.225.237</td>
-                                <td id="isp">Tata Teleservices (Maharashtra) Ltd</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr>
-                            <tr id="tempTr" class="odd ng-star-inserted">
-                                <td id="loginDate"> 2023-05-06 10:50:56 </td>
-                                <td id="loginMessage" ng-reflect-ng-class="[object Object]" class="success"> Login
-                                    Success </td>
-                                <td id="ipAddress">2401:4900:1c97:1516:3cee:3ae9:c9fa:8b9e</td>
-                                <td id="isp">Bharti Airtel</td>
-                                <td id="location">Mumbai/Maharashtra/India</td>
-                            </tr><!--bindings={
-          "ng-reflect-ng-for-of": "[object Object],[object Object"
-        }-->
+
                         </tbody>
                     </table>
-                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
-                            class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
-                            aria-controls="example" data-dt-idx="0" tabindex="0"
-                            id="example_previous">Previous</a><span><a
-                                class="button btn btn-diamond primary_button datatable-pagebuttons current"
-                                aria-controls="example" data-dt-idx="1" tabindex="0">1</a></span><a
-                            class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
-                            aria-controls="example" data-dt-idx="2" tabindex="0" id="example_next">Next</a></div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <pagination-template class="pagination" aria-label="Page navigation example"
+                            *ngIf="logList && listCount > n" #pagination="paginationApi"
+                            (pageChange)="pageChanged($event)">
+                            <ul class="pagination" id="pageNumberContent" class="pages">
+                                <li class="page-item" id="prev">
+                                    <a *ngIf="pagination.isFirstPage(); else prevTemp"
+                                        class="disable">{{Update?.Previous}}</a>
+                                    <ng-template #prevTemp>
+                                        <a class="page-link" (click)="pagination.previous()" style="color: white;">Previous</a>
+                                    </ng-template>
+                                </li>
+                                <ng-container *ngFor="let page of pagination.pages">
+                                    <li class="page-item" id="pageNumber">
+                                        <a class="page-link" (click)="pagination.setCurrent(page.value)"
+                                            *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                            page.value }}
+                                        </a>
+                                        <a class="page-link" *ngIf="pagination.getCurrent() == page.value"
+                                            class="select" style="pointer-events: none">{{ page.value
+                                            }}
+                                        </a>
+                                    </li>
+                                </ng-container>
+                                <li id="next" class="page-item">
+                                    <a class="page-link"
+                                        class="button btn btn-diamond primary_button datatable-pagebuttons previous "
+                                        *ngIf="pagination.isLastPage(); else nextTemp" class="disable" >Next</a>
+
+                                </li>
+                                <ng-template #nextTemp>
+                                    <a class="page-link" (click)="pagination.next()" style="color: white;">Next</a>
+                                </ng-template>
+                            </ul>
+                        </pagination-template>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,50 +219,82 @@
                 <button type="button" class="close" data-bs-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-                <form  novalidate="" ng-reflect-form="[object Object]"
-                    class="ng-untouched ng-pristine ng-invalid">
-                    <div  class="container-fluid">
-                        <div  class="row m-b-20">
-                            <div  class="col-md-4"><label >New
+                <form formGroup="changePassForm" (ngSubmit)="changePass()" class="ng-untouched ng-pristine ng-invalid">
+                    <div class="container-fluid">
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>New
                                     Password</label></div>
-                            <div  class="col-md-8"><input  type="Password"
-                                    formcontrolname="newpassword" id="new-password" required="" maxlength="20"
-                                    class="text-right ng-untouched ng-pristine ng-invalid" ng-reflect-name="newpassword"
-                                    ng-reflect-required="" ng-reflect-maxlength="20"><span 
-                                    class="error"><!--bindings={
-                "ng-reflect-ng-if": "false"
-              }--></span></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="newpassword" id="new-password"
+                                    required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
+                                    ng-reflect-name="newpassword" ng-reflect-maxlength="20">
+                                <!-- <span class="must">＊</span> -->
+                                <div class="errors" *ngIf="changePassForm.get('newpassword')?.invalid &&
+                                    (changePassForm.get('newpassword')?.touched ||
+                                    changePassForm.get('newpassword')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('newpassword')?.hasError('required')">
+                                        Password is required
+                                    </div>
+
+                                    <div *ngIf="changePassForm.get('newpassword')?.errors">
+                                        Password must be at least 8 characters
+                                    </div>
+
+                                    <div class="error-text"
+                                        *ngIf="changePassForm.get('newpassword')?.hasError('passwordStrength')">
+                                        {{changePassForm.get('newpassword')?.errors}}
+                                    </div>
+                                </div>
+                                <span id="newPasswordErrorText" class="error-text"></span>
+
+                            </div>
                         </div>
-                        <div  class="row m-b-20">
-                            <div  class="col-md-4"><label >Confirm
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>Confirm
                                     Password</label></div>
-                            <div  class="col-md-8"><input  type="Password"
-                                    formcontrolname="confirm" id="confirm-password" required="" maxlength="20"
-                                    class="text-right ng-untouched ng-pristine ng-invalid" ng-reflect-name="confirm"
-                                    ng-reflect-required="" ng-reflect-maxlength="20"><span 
-                                    class="error"><!--bindings={
-                "ng-reflect-ng-if": "false"
-              }--><!--bindings={
-                "ng-reflect-ng-if": "false"
-              }--></span></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="confirm" id="confirm-password"
+                                    required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
+                                    ng-reflect-name="confirm" ng-reflect-maxlength="20">
+                                <!-- <span class="must">＊</span> -->
+                                <div class="errors"
+                                    *ngIf="changePassForm.get('confirm')?.invalid &&
+                                          (changePassForm.get('confirm')?.touched || changePassForm.get('confirm')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('confirm')?.hasError('required')">
+                                        Confirm password is required
+                                    </div>
+                                    <span *ngIf="
+                                          f?.get('confirm')?.invalid &&
+                                          f.get('confirm')?.hasError('isNotMatching')
+                                        " class="error-text">Passwords don't match
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <div  class="row m-b-20">
-                            <div  class="col-md-4"><label >Transaction
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>Transaction
                                     Password</label></div>
-                            <div  class="col-md-8"><input  type="Password"
-                                    formcontrolname="password" name="" id="password-mpassword" required=""
-                                    maxlength="20" ng-reflect-name="password" ng-reflect-required=""
-                                    ng-reflect-maxlength="20" class="ng-untouched ng-pristine ng-invalid"><span
-                                     class="error"><!--bindings={
-                "ng-reflect-ng-if": "false"
-              }--></span></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="password" name=""
+                                    id="password-mpassword" required="" maxlength="20" ng-reflect-name="password"
+                                    ng-reflect-required="" ng-reflect-maxlength="20"
+                                    class="ng-untouched ng-pristine ng-invalid">
+                                <!-- <span class="must">＊</span> -->
+                                <div class="errors" *ngIf="changePassForm.get('password')?.invalid &&
+                                        (changePassForm.get('password')?.touched ||
+                                        changePassForm.get('password')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('password')?.hasError('required')">
+                                        Password is required
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">submit</button>
+                <button type="submit" class="btn btn-primary" id="changePasswordBtn"
+                    (ngSubmit)="changePass()">submit</button>
             </div>
         </div>
     </div>
