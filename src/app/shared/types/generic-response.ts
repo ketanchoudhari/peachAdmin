@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-export interface GenericResponse<> {
+export interface GenericResponse<T> {
   errorCode: number;
-  errorDescription: any;
-  // result: T;
+  errorDescription: string|undefined;
+  result: T;
 }
-=======
-export interface GenericResponse<T>{
-    errorCode: number;
-    errorDescription: any;
-    result: T;
-  } 
   
->>>>>>> acebcb52d204c9142e77ca18ecf6f4b2cced7be9
+

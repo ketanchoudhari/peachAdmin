@@ -8,7 +8,7 @@ let hostname = window.origin;
 
 export const environment = {
   production: true,
-  siteName: 'betfair365',
+  siteName: 'peachAdmin',
   // xpgPay:false,
   // baseUrl: 'http://51.195.220.62:81', // Test
   baseUrl: 'http://136.244.79.114:81', // prod

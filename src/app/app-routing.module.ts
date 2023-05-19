@@ -11,6 +11,7 @@ import { SecurityAuthComponent } from './security-auth/security-auth.component';
 import { MainComponent } from './main/main.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: MainComponent,
+    component: MainComponent,canActivate:[AuthGuard],
     children: [
       { path: 'active-user', component: ActiveUsersComponent },
       { path: 'active-running-users', component: RunningMarketComponent },

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   isInTransit!: boolean;
   siteName=environment.siteName;
-  errorMsg!: string;
+  errorMsg: any;
   isCaptchaInTransit: boolean;
   captchaImg: SafeResourceUrl;
 
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       captcha: ['0000', Validators.required],
       log: ['0000', Validators.required],
-      origin:["skyexch.live"]
+      origin:"skyexch.live"
     });
     console.log("loginform");
     
@@ -94,10 +94,7 @@ export class LoginComponent implements OnInit {
             // delay(0),
             // finalize(() => (this.isInTransit = false))
           )
-          .subscribe((res: GenericResponse<CurrentUser[]>) => {
-            // console.log("login id", res.result[0].userId) //getting login id
-            this.UsersName =res.result[0].userName
-            console.log("username",this.UsersName)
+          .subscribe((res: any) => {
             if (res.errorCode === 0 && res.errorDescription==null) {
               // this.loadingService.setLoading(true);
               const salt = bcrypt.genSaltSync(10);
@@ -125,7 +122,7 @@ export class LoginComponent implements OnInit {
               this.commonService.updateBalance();
               setTimeout(() => {
                 this.router.navigate(['/active-user']);
-                // this.router.navigate([`/home/${res?.result[0]?.userType + 1}`]);
+                // this.router.navigate([`/account`]);
                 this.loadingService.setLoading(false);
               },
               (this.siteName == 'skyexch') ? 1000 : 0);

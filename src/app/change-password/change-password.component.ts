@@ -88,7 +88,7 @@ export class ChangePasswordComponent {
   changePass() {
     console.log("chagepass button")
       const { confirm, ...result } = this.changePassForm.value;
-      this.authService.changePassword(result).subscribe((res: GenericResponse) =>{
+      this.authService.changePassword(result).subscribe((res: any) =>{
          console.log("change password api", res);
           if (res.errorCode === 0) {
             // this.toastr.success('Password changed successfully');

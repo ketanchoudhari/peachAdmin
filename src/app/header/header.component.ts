@@ -3,6 +3,8 @@ import { Hierarchy } from '../services/types/hierarchy';
 import { CommonService } from '../services/models/common.service';
 import { CurrentUser } from '../shared/models/current-user';
 import { AuthService } from '../services/auth.service';
+import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,21 +17,23 @@ export class HeaderComponent {
 
   isDropdownOpen: boolean = false;
   isOpen: boolean = false;
-  currentUser?: CurrentUser;
+  currentUser: CurrentUser;
   dropdownMenu: any=[];
   balance: number = 0;
 
 
   isBalanceLoader = false
+  currencyCode: string | undefined;
 
 
 
   constructor(
     // private compIntraction: CompIntractionService,
-    // private router: Router,
+    private router: Router,
     private authService: AuthService,
     // private toastr: ToastrService,
     public commonService: CommonService,
+    private token : TokenService
 
   ) { }
 
@@ -94,5 +98,9 @@ export class HeaderComponent {
   //   alert("Please Select a user");
   //   return false;
   // }
+  logout(){
+    this.token.delete();
+    this.router.navigateByUrl('/');
+  }
 }
 
