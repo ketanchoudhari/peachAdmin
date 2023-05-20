@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { GenericResponse } from '../shared/types/generic-response';
+import { CommonService } from '../services/models/common.service';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/models/user.model';
 
 @Component({
   selector: 'app-change-password',
@@ -12,7 +15,8 @@ import { GenericResponse } from '../shared/types/generic-response';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent {
-  changePassForm: FormGroup;
+  changePassForm?: FormGroup;
+  currentUserProfile?: User;
   submitted: boolean = false;
   isChangePassword: boolean = false;
   showDropDown:boolean=false;
@@ -26,7 +30,9 @@ export class ChangePasswordComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router:Router,
-    private authService:AuthService
+    private authService:AuthService,
+    private commonService: CommonService,
+    private usersService: UsersService,
 
   ){
 
@@ -51,19 +57,19 @@ export class ChangePasswordComponent {
       { validators: ChangePasswordComponent.confirm }
     );
 
-    // this.authService.currentUser$.subscribe((currentUser) => {
-    //   if (!!currentUser) {
-    //     this.Cuser = currentUser;
-    //     this.changePassForm.get('userId').setValue(currentUser.userId);
-    //     this.commonService.apis$.subscribe((res:any) => {
-    //       this.usersService.getUser(currentUser.userId).subscribe((res: GenericResponse<User[]>) => {
-    //           if (res.errorCode === 0) {
-    //             this.currentUserProfile = res.result[0];
-    //           }
-    //         });
-    //     });
-    //   }
-    // });
+    this.authService.currentUser$.subscribe((currentUser) => {
+      if (!!currentUser) {
+        this.Cuser = currentUser;
+        this.changePassForm.get('userId').setValue(currentUser.userId);
+        this.commonService.apis$.subscribe((res:any) => {
+          this.usersService.getUser(currentUser.userId).subscribe((res: GenericResponse<User[]>) => {
+              if (res.errorCode === 0) {
+                this.currentUserProfile = res.result[0];
+              }
+            });
+        });
+      }
+    });
     // this.IdUser=this.currentUser.results[0].userId;
     console.log("currentuer",this.authService.currentUser)
     this.IDuser=this.authService.currentUser
@@ -87,6 +93,7 @@ export class ChangePasswordComponent {
   }
   changePass() {
     console.log("chagepass button")
+    if (this.changePassForm.valid) {
       const { confirm, ...result } = this.changePassForm.value;
       this.authService.changePassword(result).subscribe((res: any) =>{
          console.log("change password api", res);
@@ -102,7 +109,7 @@ export class ChangePasswordComponent {
             // this.toastr.error(res.errorDescription);
           }
         });
-
+      }
   }
 
 }
