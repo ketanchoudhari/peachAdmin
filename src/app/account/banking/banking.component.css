@@ -42,7 +42,7 @@ ul.btn_list-DW{
 button.btn{
     border: 1px solid !important;
 
-    border-radius: 4px 0 0 4px;
+    /* border-radius: 4px 0 0 4px; */
 
 }
 button#wBtnW_474397{
@@ -81,11 +81,7 @@ div#nav-tab {
     border-bottom: none;
 
 }
-.nav-tabs .nav-link:focus, .nav-tabs .nav-link:active {
-    
-    background: #1e2040;
-    color: white;
-}
+
 h1.banking  {
     margin-top: 11px;
     font-size: 1.6rem;
@@ -129,12 +125,7 @@ tr#order2{
     display: inline-block;
     padding: 10px;
 }
-/* li.submit-payment1 {
-    background-color: #c5d0d7;
-    border-radius: 6px;
-    padding: 5px;
-    margin-left: 10px;
-} */
+
 .submit-wrap1 input, .submit-wrap textarea {
     width: 180px;
     height: 35px;
@@ -161,3 +152,76 @@ tr#order2{
     padding: 5px 7px 5px 10px;
 }
 
+
+.suspended {
+    display: revert !important;
+   
+}
+.suspended {
+    background-color: #ececec !important;
+}
+
+td#right {
+    text-align: right !important;
+
+}
+ul#pageNumberContent{
+    display: flex;
+    margin-top: 10px;
+
+}
+a:not([href]):not([tabindex]) {
+    display: inherit;
+    color: black;
+    text-decoration: none;
+}
+
+.pagination {
+    margin-top: 10px;
+}
+.pages li {
+    display: inline;
+    list-style: none;
+    line-height: 50px;
+    margin-right: 5px;
+}
+ .pages a.select, .pages a.select{
+    color: white;
+    background: #1e2040;
+    border-radius: 10px;
+}
+.pages a {
+    display: inline;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.375rem 0.75rem;
+}
+.btn-diamond {
+    background-color: var(--theme1-bg);
+    border-color:black;
+    color: white;
+}
+
+.pagination{
+    margin-top: 10px;
+}
+tr#totalTempTr {
+    font-weight: 900;
+}
+.dataTables_paginate {
+    margin-top: -77px !important;
+}
+span#submitCount {
+    background-color: #cb8009;
+    /* background-color: #666; */
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 4px;
+    padding: 5px;
+}

@@ -8,7 +8,7 @@ import {  RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BankingLogComponent } from './banking/banking-log/banking-log.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DirectivesModule } from '../directives/directives.module';
@@ -42,7 +42,13 @@ const routes: Routes = [
   {
     path:'banking/banking-log',
     component:BankingLogComponent,
+  },
+  {
+    path:'banking/banking-log/:userId',
+    component:BankingLogComponent,
   }
+  
+  
  
 ]; 
 
@@ -71,11 +77,14 @@ const routes: Routes = [
         NgxPaginationModule,
         RouterModule.forChild(routes),
         PipesModule,
+        ReactiveFormsModule,
       
         
     ]
+
 })
 export class AccountModule {
+  
 
 
  }

@@ -5,8 +5,8 @@
     <div class="container-fluid" id="userSearchUl">
         <form class="d-flex" role="search">
             <input class="form-control me-2" id="searchUserId" placeholder="{{Update?.EnteruserId}}..."
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="filterByTerm($event,true)" type="search" placeholder="Search" aria-label="Search">
+                [(ngModel)]="searchTerm" (ngModelChange)="filterByTerm($event,true)" type="search" placeholder="Search"
+                aria-label="Search">
             <button class="btn btn-outline-success" id="searchUserId" type="submit">Search</button>
         </form>
     </div>
@@ -15,13 +15,13 @@
     <dl class="banking-head float-L">
         <dt>Your Balance </dt>
         <dd id="yourBalance"><span> <ng-container *ngIf="showCurrency">
-            <ng-container *ngIf="!fixCurrency">
-                {{ currentUser.currencyCode }}
-              </ng-container>
-              <ng-container *ngIf="fixCurrency">
-                {{ fixCurrency }}
-              </ng-container>
-        </ng-container></span> {{ usersData.balance  }}</dd>
+                    <ng-container *ngIf="!fixCurrency">
+                        {{ currentUser.currencyCode }}
+                    </ng-container>
+                    <ng-container *ngIf="fixCurrency">
+                        {{ fixCurrency }}
+                    </ng-container>
+                </ng-container></span> {{ usersData.balance }}</dd>
     </dl>
     <ul class="input-list float-R" style="display: none;">
         <li><label>Sort by </label></li>
@@ -33,520 +33,735 @@
     </ul>
 </div>
 
-<div id="totalBox" class="total_box filtertotaldivweb" *ngIf="!isPremiumSite">
-    <dl id="yourBalance" class="total_dl">
-      <dt>Available Balance</dt>
-
-      <dd id="myCreditLimit">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.balance | indianCurrency }}
-      </dd>
-    </dl>
-  
-    <dl id="balanceDownline" class="total_dl">
-      <dt>Balance in Downline</dt>
-      <dd id="myCreditLimit">
-        <ng-container *ngIf="showCurrency">
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-
-        {{ usersData.downlineBalance | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="totalExposureDL" class="total_dl">
-      <dt>Total Exposure</dt>
-      <dd id="totalExposure">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.totalExposure | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="creditLimitDL" class="total_dl">
-      <dt>Credit Reference</dt>
-      <dd id="myCreditLimit">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.creditRef | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="creditGivenOutDL" class="total_dl">
-      <dt>Reference PL</dt>
-      <dd id="totalCreditGivenOut">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ ((usersData.refPL === 0) ? totalRow?.refPL : usersData.refPL) | indianCurrency }}
-      </dd>
-    </dl>
-
-    <dl id="creditAvailBalDL" class="total_dl" style="display: none">
-      <dt>Credit Avail Bal</dt>
-      <dd id="myCreditAvailBal">
-        even 
-      </dd>
-    </dl>
-    <dl id="totalBalanceDL" class="total_dl" style="display: none">
-      <dt>Total Balance</dt>
-      <dd id="totalBalance">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.totalBalance | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="myCurrentPLDL" class="total_dl" style="display: none">
-      <dt>Today P/L with Upline</dt>
-      <dd id="myCurrentPL"> 0.0</dd>
-    </dl>
-    <dl id="availableBalanceDL" class="total_dl" style="display: none">
-      <dt>Total Avail. bal.</dt>
-      <dd id="totalAvailBal">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.totalAvailableBalance | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="masterBalanceDL" class="total_dl" style="display: none">
-      <dt>Balance</dt>
-      <dd id="mastersBalance">
-        <ng-container *ngIf="showCurrency"  >
-          <ng-container *ngIf="!fixCurrency">
-            {{ currentUser.currencyCode }}
-          </ng-container>
-          <ng-container *ngIf="fixCurrency">
-            {{ fixCurrency }}
-          </ng-container>
-        </ng-container>
-        {{ usersData.totalBalance | indianCurrency }}
-      </dd>
-    </dl>
-    <dl id="masterAvailableBalanceDL" class="total_dl" style="display: none">
-      <dt>Available Balance</dt>
-      <dd id="mastersAvailBal">
-      </dd>
-    </dl>
-    <dl id="transferablePLWithUplineDL" class="total_dl" style="display: none">
-      <dt>Transferable P/L with Upline</dt>
-      <dd id="transferablePLWithUpline"> 0.00</dd>
-    </dl>
-  </div>
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist" *ngIf="showTotalBox">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#banking" type="button"
-            role="tab" aria-controls="nav-home" aria-selected="true">Credit Reference
+            role="tab" aria-controls="nav-home" aria-selected="true" [class.select]="selectedTabIndex === 0"
+            (click)="selectTab(0)">Credit Reference
         </button>
         <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#bank" type="button"
-            role="tab" aria-controls="nav-profile" aria-selected="false">Settlement</button>
+            role="tab" aria-controls="nav-profile" aria-selected="false" [class.select]="selectedTabIndex === 1"
+            (click)="selectTab(1)" *ngIf="!showSettlementTab">Settlement</button>
 
     </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="banking" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-        <div class="col-md-12 main-container">
-            <div>
-                <div class="listing-grid">
+<form [formGroup]="transferForm" (ngSubmit)="
+  (transferDelay)
+    ? timeouttransfer()
+    : transfer()
+">
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="banking" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <div class="col-md-12 main-container">
+                <div>
+                    <div class="listing-grid">
+                        <div class="table-responsive data-table">
 
+                            <div id="example_wrapper" class="dataTables_wrapper no-footer">
 
-                    <div class="table-responsive data-table">
-                        <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                                <table class=" table01 tab-transfer tab-banking" id="example"
+                                    class="table table-bordered datatable dataTable no-footer" style="width:100%"
+                                    role="grid" aria-describedby="example_info">
 
-
-                            <table id="example" class="table table-bordered datatable dataTable no-footer"
-                                style="width:100%" role="grid" aria-describedby="example_info">
-                                <thead>
-                                    <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    <thead>
+                                        <tr role="row">
+                                            <!-- <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                                             aria-label=": activate to sort column ascending" style="width: 11.72px;">
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Event Type: activate to sort column ascending"
-                                            style="width: 15%;">UID
-                                        </th>
-                                        <th class="sorting"  id="myCreditLimit" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Event Name: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Available Balance </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Username: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Balance in Downline </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Runner Name: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Exposure in Downline </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Bet Type: activate to sort column ascending"
-                                            style="width: 20%;">
-                                            Deposit / Withdraw </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="User Rate: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Credit Reference </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Amount: activate to sort column ascending" style="width: 10%;">
-                                            Reference P/L </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Place Date: activate to sort column ascending"
-                                            style="width: 10%;">
-                                            Remark </th>
-                                      
-                                        <th class="full-amount" style="width: 50%;"><a id="allLog" class="btn-send"
-                                                routerLink="banking-log">All</a></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="order">
-                                        <td>
-                                            <span class="order" style="margin-right: 5px;">1.</span>
-                                        </td>
-                                        <td>
-                                            <span class="lv_7"></span>
-                                            Demo
-                                        </td>
-                                        <td class="text-right"> 99,000.00 </td>
-                                        <td class="text-right"> 1,095.00 </td>
-                                        <td class="text-right"><span class="red">(0.00)</span></td>
-                                        <!-- <td class="text-right">1.00</td> -->
-                                        <td class="DW-amount"><!---->
-                                            <div class="displayfelx"><input type="radio" formcontrolname="txnType"
-                                                    value="1" style="display: none;"
-                                                    class="ng-untouched ng-pristine ng-valid">
-                                                <input type="radio" formcontrolname="txnType" value="2"
-                                                    style="display: none;" class="ng-untouched ng-pristine ng-valid">
-                                                <ul class="btn_list-DW">
-
-                                                    <li><button type="button" class="btn"> D </button></li>
-                                                    <li><button type="button" class="btn float-L" id="wBtnW_474397"> W
-                                                        </button>
-                                                    </li>
-                                                </ul><!----><!----><span class="plus"
-                                                    style="position: absolute;font-weight: 700;left: 995px;line-height: 29px;font-size:20px;color: rgb(56, 179, 56);">+</span><input
-                                                    name="amount" formcontrolname="amount" type="number" placeholder="0"
-                                                    numberonly="" class="ng-untouched ng-pristine ng-valid"><button
-                                                    type="button" class="btn float-L disable" disabled="" id="full">
-                                                    Full
-                                                </button>
-                                            </div><!---->
-                                        </td>
-                                        <td class="credit-amount">
-                                            <div style="display: inline-flex; align-items: center; float:right"><span
-                                                    style="margin-right: 4px;">1,00,000.00</span></div>
-                                        </td>
-                                        <td id="userReferencePL"><!----><span style="float: right;">95.00 </span><!---->
-                                        </td>
-                                        <td class="border-l"><input formcontrolname="remark" type="text"
-                                                placeholder="Remark" class="ng-untouched ng-pristine ng-valid"></td>
-                                        <td class="full-amount"><a id="log" class="btn"
-                                                href="#/banking/bankinglog/474397">Log</a></td>
-                                    </tr>
-                                 
-
-
-                                    <!-- <tr class="odd">
-                                        <td valign="top" colspan="10" class="dataTables_empty">No data available in
-                                            table</td>
-                                    </tr> -->
-                                </tbody>
-                            </table>
-                            <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to
-                                0 of 0
-                                entries</div> -->
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <nav class="pagination" aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link"
-                                                style="color: white; background-color: #444444;">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                                style="color:white;background-color: #444444;  ">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-        <div class="col-md-12 main-container">
-            <div>
-                <div class="listing-grid">
-
-
-                    <div class="table-responsive data-table">
-                        <div id="example_wrapper" class="dataTables_wrapper no-footer">
-
-
-                            <table id="example" class="table table-bordered datatable dataTable no-footer"
-                                style="width:100%" role="grid" aria-describedby="example_info">
-                                <thead>
-                                    <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label=": activate to sort column ascending" style="width: 11.72px;">
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Event Type: activate to sort column ascending"
-                                            style="width: 15%;">UID
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Event Name: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Available Balance </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Username: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Balance in Downline </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Runner Name: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Exposure in Downline </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Bet Type: activate to sort column ascending"
-                                            style="width: 20%;">
-                                            Deposit / Withdraw </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="User Rate: activate to sort column ascending"
-                                            style="width: 11%;">
-                                            Credit Reference </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Amount: activate to sort column ascending" style="width: 10%;">
-                                            Reference P/L </th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Place Date: activate to sort column ascending"
-                                            style="width: 10%;">
-                                            Remark </th>
-                                        <!-- <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            aria-label="Match Date: activate to sort column ascending" style="width: 47px;" > All
                                         </th> -->
-                                        <th class="full-amount" style="width: 50%;"><a id="allLog"
-                                                routerlink="/banking/bankinglog" class="btn-send"
-                                                ng-reflect-router-link="/banking/bankinglog"
-                                                href="#/banking/bankinglog">All</a></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="order">
-                                        <td>
-                                            <span class="order" style="margin-right: 5px;">1.</span>
-                                        </td>
-                                        <td>
-                                            <span class="lv_7"></span>
-                                            Demo
-                                        </td>
-                                        <td class="text-right"> 99,000.00 </td>
-                                        <td class="text-right"> 1,095.00 </td>
-                                        <td class="text-right"><span class="red">(0.00)</span></td>
-                                        <!-- <td class="text-right">1.00</td> -->
-                                        <td class="DW-amount"><!---->
-                                            <div class="displayfelx"><input type="radio" formcontrolname="txnType"
-                                                    value="1" style="display: none;"
-                                                    class="ng-untouched ng-pristine ng-valid">
-                                                <input type="radio" formcontrolname="txnType" value="2"
-                                                    style="display: none;" class="ng-untouched ng-pristine ng-valid">
-                                                <ul class="btn_list-DW">
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Event Type: activate to sort column ascending"
+                                                style="width: 15%;">UID
+                                            </th>
+                                            <th class="sorting" id="myCreditLimit" tabindex="0" aria-controls="example"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Event Name: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Available Balance </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Username: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Balance in Downline </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Runner Name: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Exposure in Downline </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Bet Type: activate to sort column ascending"
+                                                style="width: 20%;">
+                                                Deposit / Withdraw </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="User Rate: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Credit Reference </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Amount: activate to sort column ascending"
+                                                style="width: 10%;">
+                                                Reference P/L </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Place Date: activate to sort column ascending"
+                                                style="width: 10%;">
+                                                Remark </th>
 
-                                                    <li><button type="button" disabled class="btn float-L disable"> D
-                                                        </button></li>
-                                                    <li><button type="button" class="btn float-L" id="wBtnW_474397"> W
+                                            <th class="full-amount" style="width: 50%;"><a id="allLog" class="btn-send"
+                                                    routerLink="banking-log">All</a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="order" formArrayName="users" id="{{ user.userName }}"
+                                            [ngClass]="(user.userStatus == 0)?'':'suspended'" *ngFor="
+                                              let user of usersData?.users
+                                                | paginate: { itemsPerPage: itemsPerPage, currentPage: p };
+                                              let i = index;
+                                              trackBy: trackById">
+
+                                            <ng-container class="order" *ngIf="usersArray && usersArray.length"
+                                                [formGroupName]="itemsPerPage * (p - 1) + i">
+                                                <td class="td-uid">
+                                                    <span class="order">{{ itemsPerPage * (p - 1) + i + 1 }} .</span>
+                                                    <span
+                                                        class="{{(isPremiumSite && !isRental)?'premium':'isRental'}} {{(isBdlevel)?'Bdlevel':''}} lv_{{ user.userType }}"></span>
+                                                    {{ user.userName }}
+                                                </td>
+                                                <td id="siteCol" style="display: none">Sky</td>
+                                                <td id="currencyTypeCol" style="display: none">PTH</td>
+                                                <td class="text-right">
+                                                    {{ user.availableBalance | indianCurrency }}
+                                                </td>
+                                                <td class="text-right" id="balanceDownline"
+                                                    *ngIf="currentUser?.userType !== commonService.agentUserType">
+                                                    {{ user.downlineBalance | indianCurrency }}
+                                                </td>
+                                                <td id="userExposure"><span class="red">({{ user.exposure |
+                                                        indianCurrency }})</span></td>
+                                                <!-- <td class="text-right"><span class="red">(0.00)</span></td> -->
+                                                <!-- <td class="text-right">1.00</td> -->
+                                                <td class="DW-amount">
+                                                    <div *ngIf="selectedTabIndex == 0" class="displayfelx">
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" value="1" #txnType
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" #txnType value="2"
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <ul class="btn_list-DW" [ngClass]="{
+                                                            'select-D': user.selectDW === 1,
+                                                            'select-W': user.selectDW === 2
+                                                          }">
+
+                                                            <li><button type="button" class="btn"
+                                                                    (click)="selectTxType(user, 1)"> D </button>
+                                                            </li>
+                                                            <li><button class="btn float-L" type="button" class="btn"
+                                                                    (click)="selectTxType(user, 2)"
+                                                                    [disabled]="user.refPL !== 0 && !currentUser.prepaid"
+                                                                    [class.disable]="user.refPL !== 0 && !currentUser.prepaid">
+                                                                    W
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="plus"
+                                                        *ngIf="user.selectDW == 1"
+                                                         style="
+                                                          position: absolute;font-weight: 700;
+                                                          left: 965px;
+                                                          line-height: 29px;
+                                                          font-size: 13px;
+                                                          color: rgb(56, 179, 56);
+                                                        ">+</span>
+                                                        <span class="minus" *ngIf="user.selectDW == 2" style="position: absolute;font-weight: 700;
+                                                        left: 965px;
+                                                        line-height: 29px;font-size: 13px; color: #d0021b">-</span>
+
+
+
+                                                        <input name="amount" formControlName="amount" class=""
+                                                            type="number" placeholder="0" #amount numberOnly class="ng-untouched ng-pristine ng-valid" />
+                                                        <button type="button" type="button"
+
+                                                            (click)="setFullAmount(user, itemsPerPage * (p - 1) + i)"
+                                                            class="btn float-L" [class.disable]="user.selectDW !== 2"
+                                                            [disabled]="user.selectDW !== 2" 
+                                                            class="btn float-L disable">
+                                                            Full
                                                         </button>
-                                                    </li>
-                                                </ul><!----><!----><span class="plus"
-                                                    style="position: absolute;font-weight: 700;left: 995px;line-height: 29px;font-size:20px;color: rgb(56, 179, 56);">+</span><input
-                                                    name="amount" formcontrolname="amount" type="number" placeholder="0"
-                                                    numberonly="" class="ng-untouched ng-pristine ng-valid"><button
-                                                    type="button" class="btn float-L disable" disabled="" id="full">
-                                                    Full
-                                                </button>
-                                            </div><!---->
-                                        </td>
-                                        <td class="credit-amount">
-                                            <div style="display: inline-flex; align-items: center; float:right"><span
-                                                    style="margin-right: 4px;">1,00,000.00</span></div>
-                                        </td>
-                                        <td id="userReferencePL"><!----><span style="float: right;">95.00 </span><!---->
-                                        </td>
-                                        <td class="border-l"><input formcontrolname="remark" type="text"
-                                                placeholder="Remark" class="ng-untouched ng-pristine ng-valid"></td>
-                                        <td class="full-amount"><a id="log" class="btn"
-                                                href="#/banking/bankinglog/474397">Log</a></td>
-                                    </tr>
-                                    <tr id="order2">
-                                        <td>
-                                            <span class="order" style="margin-right: 5px;">2.</span>
-                                        </td>
-                                        <td>
-                                            <span class="lv_7"></span>
-                                            Demo2
-                                        </td>
-                                        <td class="text-right"> 99,000.00 </td>
-                                        <td class="text-right"> 1,095.00 </td>
-                                        <td class="text-right"><span class="red">(0.00)</span></td>
-                                        <!-- <td class="text-right">1.00</td> -->
-                                        <td class="DW-amount"><!---->
-                                            <div class="displayfelx"><input type="radio" formcontrolname="txnType"
-                                                    value="1" style="display: none;"
-                                                    class="ng-untouched ng-pristine ng-valid">
-                                                <input type="radio" formcontrolname="txnType" value="2"
-                                                    style="display: none;" class="ng-untouched ng-pristine ng-valid">
-                                                <ul class="btn_list-DW">
+                                                    </div>
+                                                    <!-- new div
+ -->
+                                                    <div *ngIf="selectedTabIndex == 1" class="displayfelx">
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" value="1" #txnType
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" #txnType value="2"
+                                                            [(ngModel)]="user.selectDW" 
+                                                            class="ng-untouched ng-pristine ng-valid" />
 
-                                                    <li><button type="button" disabled class="btn float-L disable"> D
-                                                        </button></li>
-                                                    <li><button type="button" class="btn float-L" id="wBtnW_474397"> W
+                                                        <ul class="btn_list-DW" [ngClass]="{
+                                                          'select-D': user.selectDW === 1,
+                                                          'select-W': user.selectDW === 2
+                                                        }">
+
+                                                            <li>
+                                                                <button  id="wBtnD_{{ user.userId }}"
+                                                                type="button"
+                                                                (click)="selectTxType(user, 1)"
+                                                                class="btn float-L"
+                                                                disabled
+                                                                [class.disable]="user.refPL >= 0"
+                                                                [ngClass]="{ selectedDep: user.selectDW == 1 }"
+                                                                [disabled]="user.refPL >= 0"
+                                                              > D </button>
+                                                            </li>
+                                                            <li><button id="wBtnW_{{ user.userId }}"
+                                                                class="btn float-L"
+                                                                type="button"
+                                                                disabled
+                                                                (click)="selectTxType(user, 2)"
+                                                                [class.disable]="user.refPL <= 0"
+                                                                [ngClass]="{ selectedWith: user.selectDW == 2 }"
+                                                                [disabled]="user.refPL <= 0"
+                                                              >
+                                                                    W
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+
+
+                                                        <span class="plus"
+                                                        *ngIf="user.selectDW == 1"
+                                                        
+                                                        style="
+                                                          
+                                                          font-size: 13px;
+                                                          color: rgb(56, 179, 56);
+                                                        "
+                                                        >+</span
+                                                      >
+                                                      <span class="minus"
+                                                        *ngIf="user.selectDW == 2"
+                                                        style=" font-size: 13px; color: #d0021b"
+                                                        >-</span
+                                                      >
+                                                        <input name="amount"
+                                                        formControlName="amount"
+                                                        class=""
+                                                        type="number"
+                                                        placeholder="0"
+                                                        #amount
+                                                        numberOnly
+                                                        class="ng-untouched ng-pristine ng-valid"
+                                                        >
+                                                        <button  type="button"
+                                                        (click)="setFullPL(user, itemsPerPage * (p - 1) + i)"
+                                                        class="btn float-L"
+                                                        [class.disable]="user.selectDW == null"
+                                                        [disabled]="user.selectDW == null"
+                                                      >
+                                                            Full
                                                         </button>
-                                                    </li>
-                                                </ul><!----><!----><span class="plus"
-                                                    style="position: absolute;font-weight: 700;left: 995px;line-height: 29px;font-size:20px;color: rgb(56, 179, 56);">+</span><input
-                                                    name="amount" formcontrolname="amount" type="number" placeholder="0"
-                                                    numberonly="" class="ng-untouched ng-pristine ng-valid"><button
-                                                    type="button" class="btn float-L disable" disabled="" id="full">
-                                                    Full
-                                                </button>
-                                            </div><!---->
-                                        </td>
-                                        <td class="credit-amount">
-                                            <div style="display: inline-flex; align-items: center; float:right"><span
-                                                    style="margin-right: 4px;">1,00,000.00</span></div>
-                                        </td>
-                                        <td id="userReferencePL"><!----><span style="float: right;">95.00 </span><!---->
-                                        </td>
-                                        <td class="border-l"><input formcontrolname="remark" type="text"
-                                                placeholder="Remark" class="ng-untouched ng-pristine ng-valid"></td>
-                                        <td class="full-amount"><a id="log" class="btn"
-                                                href="#/banking/bankinglog/474397">Log</a></td>
-                                    </tr>
-                                    <tr id="order">
-                                        <td>
-                                            <span class="order" style="margin-right: 5px;">3.</span>
-                                        </td>
-                                        <td>
-                                            <span class="lv_7"></span>
-                                            Demo3
-                                        </td>
-                                        <td class="text-right"> 99,000.00 </td>
-                                        <td class="text-right"> 1,095.00 </td>
-                                        <td class="text-right"><span class="red">(0.00)</span></td>
-                                        <td class="DW-amount"><!---->
-                                            <div class="displayfelx"><input type="radio" formcontrolname="txnType"
-                                                    value="1" style="display: none;"
-                                                    class="ng-untouched ng-pristine ng-valid">
-                                                <input type="radio" formcontrolname="txnType" value="2"
-                                                    style="display: none;" class="ng-untouched ng-pristine ng-valid">
-                                                <ul class="btn_list-DW">
-
-                                                    <li><button type="button" class="btn float-L disable"> D </button>
-                                                    </li>
-                                                    <li><button type="button" disabled class="btn float-L"
-                                                            id="wBtnW_474397"> W
-                                                        </button>
-                                                    </li>
-                                                </ul><!----><!----><span class="plus"
-                                                    style="position: absolute;font-weight: 700;left: 995px;line-height: 29px;font-size:20px;color: rgb(56, 179, 56);">+</span><input
-                                                    name="amount" formcontrolname="amount" type="number" placeholder="0"
-                                                    numberonly="" class="ng-untouched ng-pristine ng-valid"><button
-                                                    type="button" class="btn float-L disable" disabled="" id="full">
-                                                    Full
-                                                </button>
-                                            </div><!---->
-                                        </td>
-                                        <td class="credit-amount">
-                                            <div style="display: inline-flex; align-items: center; float:right"><span
-                                                    style="margin-right: 4px;">1,00,000.00</span></div>
-                                        </td>
-                                        <td id="userReferencePL"><!----><span style="float: right;">95.00 </span><!---->
-                                        </td>
-                                        <td class="border-l"><input formcontrolname="remark" type="text"
-                                                placeholder="Remark" class="ng-untouched ng-pristine ng-valid"></td>
-                                        <td class="full-amount"><a id="log" class="btn"
-                                                href="#/banking/bankinglog/474397">Log</a></td>
-                                    </tr>
+                                                    </div>
 
 
-                                    <!-- <tr class="odd">
-                                        <td valign="top" colspan="10" class="dataTables_empty">No data available in
-                                            table</td>
-                                    </tr> -->
-                                </tbody>
-                            </table>
-                            <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to
-                                0 of 0
-                                entries</div> -->
+                                                </td>
 
 
 
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <nav class="pagination" aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link"
-                                                style="color: white; background-color: #444444;">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                                style="color:white;background-color: #444444;  ">Next</a></li>
-                                    </ul>
-                                </nav>
+
+                                                <td class="credit-amount">
+
+                                                    <div style="display: inline-flex; align-items: center; float:right">
+                                                        <span style="margin-right: 4px">{{
+                                                            user.creditRef | indianCurrency
+                                                            }}</span>
+                                                    </div>
+                                                </td>
+
+                                                <td id="userReferencePL"><!---->
+                                                    <span style="float: right;" *ngIf="user.refPL < 0" class="loss-text">
+                                                        ({{ user.refPL | indianCurrency }})
+                                                    </span>
+                                                    <span *ngIf="user.refPL >= 0">{{ user.refPL | indianCurrency }}
+                                                    </span>
+                                                </td>
+
+                                                <td class="border-l"><input formControlName="remark"
+                                                    class="ng-untouched ng-pristine ng-valid"
+                                                    class=""
+                                                    type="text"
+                                                    placeholder="Remark">
+                                                </td>
+                                                <td class="full-amount"><a  id="log"
+                                                    [routerLink]="['/banking/banking-log', user.userId]"
+                                                    class="btn">Log</a>
+                                                </td>
+                                            </ng-container>
+                                        </tr>
+
+
+                                        <tr id="totalTempTr" class="total">
+                                            <td class="align-L">Total</td>
+                                           
+                                            <td id="totalAvailableBalance">
+                                                {{ totalRow?.availableDW | indianCurrency }}
+                                              </td>
+                                            <td id="totalBalanceDownline" id="right" 
+                                            *ngIf="currentUser?.userType !== commonService.agentUserType">
+                                            {{ totalRow?.downlineBalance | indianCurrency }}
+                                        </td><!---->
+                                            <td id="totalExposure" id="right"><span class="red">
+                                                ({{ totalRow?.exposure | indianCurrency }})
+                                            </span></td>
+
+                                            <td id="totalCreditReference" id="right" colspan="2"> 
+                                                {{ totalRow?.creditRef | indianCurrency }}
+                                            </td>
+                                            <td id="totalReferencePL" id="right">
+                                                <span *ngIf="totalRow?.refPL < 0" class="loss-text"> 
+                                                    ({{ totalRow?.refPL * -1 | indianCurrency }})
+                                                  </span>
+                                               
+                                                  <span *ngIf="totalRow?.refPL >= 0">{{ totalRow?.refPL | indianCurrency }}
+                                                </span>     
+                                                
+
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
                             </div>
+                        </div>
+                        <div id="settlementBar" class="submit-wrap1">
+                            <ul>
+                                <li><a id="clearAllBtn" (click)="cancelAll()" class="btn btn-diamond">Clear All</a>
+                                </li>
+                                <li class="submit-payment1">
+                                    <input   formControlName="password"
+                                    id="paymentPassword"
+                                    type="password"
+                                    placeholder="Password"/>
+                                    <button id="submit" class="btn-send" [disabled]="submitted" class="btn btn-diamond">Submit
+                                        <span id="submitCount" class="validrow">{{ validRow }}</span>
+                                        Payment
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+
+
+                        <div id="example_paginate" class="dataTables_paginate paging_simple_numbers">
+                            <pagination-template #pagination="paginationApi"
+                                *ngIf="usersData?.users && usersData.users.length > 10"
+                                (pageChange)="p = $event">
+                                <ul id="pageNumberContent" class="pages">
+                                    <li id="prev">
+                                        <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable"
+                                            style="border: 1px solid #dee2e6;">Prev</a>
+                                        <ng-template #prevTemp>
+                                            <a (click)="pagination.previous()"
+                                                style="border: 1px solid #dee2e6;">Prev</a>
+                                        </ng-template>
+                                    </li>
+                                    <ng-container *ngFor="let page of pagination.pages">
+                                        <li id="pageNumber">
+                                            <a (click)="pagination.setCurrent(page.value)"
+                                                *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                                page.value }}
+                                            </a>
+                                            <a *ngIf="pagination.getCurrent() == page.value" class="select"
+                                                style="pointer-events: none">{{ page.value }}
+                                            </a>
+                                        </li>
+                                    </ng-container>
+
+                                    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+                                    <li id="next">
+                                        <a *ngIf="pagination.isLastPage(); else nextTemp" class="disable"
+                                            style="border: 1px solid #dee2e6;">Next</a>
+                                        <ng-template #nextTemp>
+                                            <a (click)="pagination.next()"
+                                                style="border: 1px solid #dee2e6;">Next</a>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </pagination-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <!--settlement tab-->
+
+        <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div class="col-md-12 main-container">
+                <div>
+                    <div class="listing-grid">
+                        <div class="table-responsive data-table">
+
+                            <div id="example_wrapper" class="dataTables_wrapper no-footer">
+
+                                <table class=" table01 tab-transfer tab-banking" id="example"
+                                    class="table table-bordered datatable dataTable no-footer" style="width:100%"
+                                    role="grid" aria-describedby="example_info">
+
+                                    <thead>
+                                        <tr role="row">
+                                            <!-- <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                            aria-label=": activate to sort column ascending" style="width: 11.72px;">
+                                        </th> -->
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Event Type: activate to sort column ascending"
+                                                style="width: 15%;">UID
+                                            </th>
+                                            <th class="sorting" id="myCreditLimit" tabindex="0" aria-controls="example"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Event Name: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Available Balance </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Username: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Balance in Downline </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Runner Name: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Exposure in Downline </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Bet Type: activate to sort column ascending"
+                                                style="width: 20%;">
+                                                Deposit / Withdraw </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="User Rate: activate to sort column ascending"
+                                                style="width: 11%;">
+                                                Credit Reference </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Amount: activate to sort column ascending"
+                                                style="width: 10%;">
+                                                Reference P/L </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label="Place Date: activate to sort column ascending"
+                                                style="width: 10%;">
+                                                Remark </th>
+
+                                            <th class="full-amount" style="width: 50%;"><a id="allLog" class="btn-send"
+                                                    routerLink="banking-log">All</a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="order" formArrayName="users" id="{{ user.userName }}"
+                                            [ngClass]="(user.userStatus == 0)?'':'suspended'" *ngFor="
+                                              let user of usersData?.users
+                                                | paginate: { itemsPerPage: itemsPerPage, currentPage: p };
+                                              let i = index;
+                                              trackBy: trackById">
+
+                                            <ng-container class="order" *ngIf="usersArray && usersArray.length"
+                                                [formGroupName]="itemsPerPage * (p - 1) + i">
+                                                <td class="td-uid">
+                                                    <span class="order">{{ itemsPerPage * (p - 1) + i + 1 }} .</span>
+                                                    <span
+                                                        class="{{(isPremiumSite && !isRental)?'premium':'isRental'}} {{(isBdlevel)?'Bdlevel':''}} lv_{{ user.userType }}"></span>
+                                                    {{ user.userName }}
+                                                </td>
+                                                <td id="siteCol" style="display: none">Sky</td>
+                                                <td id="currencyTypeCol" style="display: none">PTH</td>
+                                                <td class="text-right">
+                                                    {{ user.availableBalance | indianCurrency }}
+                                                </td>
+                                                <td class="text-right" id="balanceDownline"
+                                                    *ngIf="currentUser?.userType !== commonService.agentUserType">
+                                                    {{ user.downlineBalance | indianCurrency }}
+                                                </td>
+                                                <td id="userExposure"><span class="red">({{ user.exposure |
+                                                        indianCurrency }})</span></td>
+                                                <!-- <td class="text-right"><span class="red">(0.00)</span></td> -->
+                                                <!-- <td class="text-right">1.00</td> -->
+                                                <td class="DW-amount">
+                                                    <div *ngIf="selectedTabIndex == 0" class="displayfelx">
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" value="1" #txnType
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" #txnType value="2"
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <ul class="btn_list-DW" [ngClass]="{
+                                                            'select-D': user.selectDW === 1,
+                                                            'select-W': user.selectDW === 2
+                                                          }">
+
+                                                            <li><button type="button" class="btn"
+                                                                    (click)="selectTxType(user, 1)"> D </button>
+                                                            </li>
+                                                            <li><button class="btn float-L" type="button" class="btn"
+                                                                    (click)="selectTxType(user, 2)"
+                                                                    [disabled]="user.refPL !== 0 && !currentUser.prepaid"
+                                                                    [class.disable]="user.refPL !== 0 && !currentUser.prepaid">
+                                                                    W
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="plus"
+                                                        *ngIf="user.selectDW == 1"
+                                                         style="
+                                                          position: absolute;font-weight: 700;
+                                                          left: 965px;
+                                                          line-height: 29px;
+                                                          font-size: 13px;
+                                                          color: rgb(56, 179, 56);
+                                                        ">+</span>
+                                                        <span class="minus" *ngIf="user.selectDW == 2" style="position: absolute;font-weight: 700;
+                                                        left: 965px;
+                                                        line-height: 29px;font-size: 13px; color: #d0021b">-</span>
+
+
+
+                                                        <input name="amount" formControlName="amount" class=""
+                                                            type="number" placeholder="0" #amount numberOnly class="ng-untouched ng-pristine ng-valid" />
+                                                        <button type="button" type="button"
+
+                                                            (click)="setFullAmount(user, itemsPerPage * (p - 1) + i)"
+                                                            class="btn float-L" [class.disable]="user.selectDW !== 2"
+                                                            [disabled]="user.selectDW !== 2" 
+                                                            class="btn float-L disable">
+                                                            Full
+                                                        </button>
+                                                    </div>
+                                                    <!-- new div
+ -->
+                                                    <div *ngIf="selectedTabIndex == 1" class="displayfelx">
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" value="1" #txnType
+                                                            [(ngModel)]="user.selectDW"
+                                                            class="ng-untouched ng-pristine ng-valid" />
+                                                        <input style="display: none" type="radio"
+                                                            formControlName="txnType" #txnType value="2"
+                                                            [(ngModel)]="user.selectDW" 
+                                                            class="ng-untouched ng-pristine ng-valid" />
+
+                                                        <ul class="btn_list-DW" [ngClass]="{
+                                                          'select-D': user.selectDW === 1,
+                                                          'select-W': user.selectDW === 2
+                                                        }">
+
+                                                            <li>
+                                                                <button  id="wBtnD_{{ user.userId }}"
+                                                                type="button"
+                                                                (click)="selectTxType(user, 1)"
+                                                                class="btn float-L"
+                                                                disabled
+                                                                [class.disable]="user.refPL >= 0"
+                                                                [ngClass]="{ selectedDep: user.selectDW == 1 }"
+                                                                [disabled]="user.refPL >= 0"
+                                                              > D </button>
+                                                            </li>
+                                                            <li><button id="wBtnW_{{ user.userId }}"
+                                                                class="btn float-L"
+                                                                type="button"
+                                                                disabled
+                                                                (click)="selectTxType(user, 2)"
+                                                                [class.disable]="user.refPL <= 0"
+                                                                [ngClass]="{ selectedWith: user.selectDW == 2 }"
+                                                                [disabled]="user.refPL <= 0"
+                                                              >
+                                                                    W
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+
+
+                                                        <span class="plus"
+                                                        *ngIf="user.selectDW == 1"
+                                                        
+                                                        style="
+                                                          
+                                                          font-size: 13px;
+                                                          color: rgb(56, 179, 56);
+                                                        "
+                                                        >+</span
+                                                      >
+                                                      <span class="minus"
+                                                        *ngIf="user.selectDW == 2"
+                                                        style=" font-size: 13px; color: #d0021b"
+                                                        >-</span
+                                                      >
+                                                        <input name="amount"
+                                                        formControlName="amount"
+                                                        class=""
+                                                        type="number"
+                                                        placeholder="0"
+                                                        #amount
+                                                        numberOnly
+                                                        class="ng-untouched ng-pristine ng-valid"
+                                                        >
+                                                        <button  type="button"
+                                                        (click)="setFullPL(user, itemsPerPage * (p - 1) + i)"
+                                                        class="btn float-L"
+                                                        [class.disable]="user.selectDW == null"
+                                                        [disabled]="user.selectDW == null"
+                                                      >
+                                                            Full
+                                                        </button>
+                                                    </div>
+
+
+                                                </td>
+
+
+
+
+                                                <td class="credit-amount">
+
+                                                    <div style="display: inline-flex; align-items: center; float:right">
+                                                        <span style="margin-right: 4px">{{
+                                                            user.creditRef | indianCurrency
+                                                            }}</span>
+                                                    </div>
+                                                </td>
+
+                                                <td id="userReferencePL"><!---->
+                                                    <span style="float: right;" *ngIf="user.refPL < 0" class="loss-text">
+                                                        ({{ user.refPL | indianCurrency }})
+                                                    </span>
+                                                    <span *ngIf="user.refPL >= 0">{{ user.refPL | indianCurrency }}
+                                                    </span>
+                                                </td>
+
+                                                <td class="border-l"><input formControlName="remark"
+                                                    class="ng-untouched ng-pristine ng-valid"
+                                                    class=""
+                                                    type="text"
+                                                    placeholder="Remark">
+                                                </td>
+                                                <td class="full-amount"><a  id="log"
+                                                    [routerLink]="['/banking/bankinglog', user.userId]"
+                                                    class="btn">Log</a>
+                                                </td>
+                                            </ng-container>
+                                        </tr>
+
+
+                                        <tr id="totalTempTr" class="total">
+                                            <td class="align-L">Total</td>
+                                           
+                                            <td id="totalAvailableBalance">
+                                                {{ totalRow?.availableDW | indianCurrency }}
+                                              </td>
+                                            <td id="totalBalanceDownline" id="right" 
+                                            *ngIf="currentUser?.userType !== commonService.agentUserType">
+                                            {{ totalRow?.downlineBalance | indianCurrency }}
+                                        </td><!---->
+                                            <td id="totalExposure" id="right"><span class="red">
+                                                ({{ totalRow?.exposure | indianCurrency }})
+                                            </span></td>
+
+                                            <td id="totalCreditReference" id="right" colspan="2"> 
+                                                {{ totalRow?.creditRef | indianCurrency }}
+                                            </td>
+                                            <td id="totalReferencePL" id="right">
+                                                <span *ngIf="totalRow?.refPL < 0" class="loss-text"> 
+                                                    ({{ totalRow?.refPL * -1 | indianCurrency }})
+                                                  </span>
+                                               
+                                                  <span *ngIf="totalRow?.refPL >= 0">{{ totalRow?.refPL | indianCurrency }}
+                                                </span>     
+                                                
+
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div id="settlementBar" class="submit-wrap1">
+                            <ul>
+                                <li><a id="clearAllBtn" (click)="cancelAll()" class="btn btn-diamond">Clear All</a>
+                                </li>
+                                <li class="submit-payment1">
+                                    <input   formControlName="password"
+                                    id="paymentPassword"
+                                    type="password"
+                                    placeholder="Password"/>
+                                    <button id="submit" class="btn-send" [disabled]="submitted" class="btn btn-diamond">Submit
+                                        <span id="submitCount" class="validrow">{{ validRow }}</span>
+                                        Payment
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+
+
+                        <div id="example_paginate" class="dataTables_paginate paging_simple_numbers">
+                            <pagination-template #pagination="paginationApi"
+                                *ngIf="usersData?.users && usersData.users.length > 10"
+                                (pageChange)="p = $event">
+                                <ul id="pageNumberContent" class="pages">
+                                    <li id="prev">
+                                        <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable"
+                                            style="border: 1px solid #dee2e6;">Prev</a>
+                                        <ng-template #prevTemp>
+                                            <a (click)="pagination.previous()"
+                                                style="border: 1px solid #dee2e6;">Prev</a>
+                                        </ng-template>
+                                    </li>
+                                    <ng-container *ngFor="let page of pagination.pages">
+                                        <li id="pageNumber">
+                                            <a (click)="pagination.setCurrent(page.value)"
+                                                *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                                page.value }}
+                                            </a>
+                                            <a *ngIf="pagination.getCurrent() == page.value" class="select"
+                                                style="pointer-events: none">{{ page.value }}
+                                            </a>
+                                        </li>
+                                    </ng-container>
+
+                                    <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
+                                    <li id="next">
+                                        <a *ngIf="pagination.isLastPage(); else nextTemp" class="disable"
+                                            style="border: 1px solid #dee2e6;">Next</a>
+                                        <ng-template #nextTemp>
+                                            <a (click)="pagination.next()"
+                                                style="border: 1px solid #dee2e6;">Next</a>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </pagination-template>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+       
+
+
     </div>
-
-
-</div>
-<div id="settlementBar" class="submit-wrap1">
-    <ul>
-        <li><a id="clearAllBtn1" class="btn">Clear All</a></li>
-        <li class="submit-payment1"><input formcontrolname="password"
-                id="paymentPassword" type="password" placeholder="Password" ng-reflect-name="password"
-                class="ng-untouched ng-pristine ng-invalid"><button id="submit"
-                class="btn btn-diamond btnsend"> Submit <span id="submitCount">0 </span> Payment
-            </button></li>
-    </ul>
-</div>
+</form>

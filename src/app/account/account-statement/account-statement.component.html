@@ -187,9 +187,9 @@
                         <pagination-template class="pagination" aria-label="Page navigation example"*ngIf="userLogs && listCount > n" #pagination="paginationApi" (pageChange)="pageChanged($event)">
                             <ul class="pagination" id="pageNumberContent" class="pages">
                                 <li class="page-item" id="prev">
-                                    <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable">{{Update?.Previous}}</a>
+                                    <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable" style="border: 1px solid #dee2e6 ">Previous</a>
                                     <ng-template #prevTemp>
-                                        <a class="page-link"  (click)="pagination.previous()">Previous</a>
+                                        <a class="page-link"  (click)="pagination.previous()" style="color: white;border-radius: 0.25rem;background-color: #1e2040;">Previous</a>
                                       </ng-template>
                                     </li>
                                     <ng-container *ngFor="let page of pagination.pages">
@@ -203,11 +203,11 @@
                                 </li>
                                 </ng-container>
                                 <li id="next" class="page-item">
-                                    <a  class="page-link" class="button btn btn-diamond primary_button datatable-pagebuttons previous "*ngIf="pagination.isLastPage(); else nextTemp" class="disable">Next</a>
+                                    <a  class="page-link" class="button btn btn-diamond primary_button datatable-pagebuttons previous "*ngIf="pagination.isLastPage(); else nextTemp" class="disable"style="border: 1px solid #dee2e6 ">Next</a>
 
                                    </li>
                                    <ng-template #nextTemp>
-                                    <a class="page-link"     (click)="pagination.next()">Next</a>
+                                    <a class="page-link"     (click)="pagination.next()" style="color: white;border-radius: 0.25rem;background-color: #1e2040;">Next</a>
                                   </ng-template>
                             </ul>
                         </pagination-template>
