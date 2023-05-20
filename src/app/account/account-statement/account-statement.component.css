@@ -51,7 +51,7 @@ a:not([href]):not([tabindex]) {
     display: inline;
     font-weight: normal;
     margin: 0;
-    padding: 0.375rem 0.75rem;
+    padding: 10px;
 }
 .total, .grand-total{
     font-weight: bold;
