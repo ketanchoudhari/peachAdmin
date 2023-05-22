@@ -56,7 +56,12 @@ const routes: Routes = [
       {
         path:'stakesettings',
         loadChildren:() => import('./stakesettings/stakesettings.module').then((m) => m.StakesettingsModule ),
-      }
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+        import('./settings/settings.module').then((m) => m.SettingsModule),
+      },
 
     ]
   

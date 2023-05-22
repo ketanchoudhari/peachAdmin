@@ -41,7 +41,7 @@ a:not([href]):not([tabindex]) {
  .pages a.select, .pages a.select{
     color: white;
     background: #1e2040;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 .pages a {
     display: inline;
@@ -55,4 +55,10 @@ a:not([href]):not([tabindex]) {
 a#getPL {
     margin-bottom: 8px;
     margin-left: 21px;
+}
+#previd{
+    background-color: #1e2040;
+    color: white;
+    border-radius: 10px;
+
 }

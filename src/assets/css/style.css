@@ -1759,6 +1759,7 @@ table.dataTable,
 table.dataTable th,
 table.dataTable td {
     box-sizing: border-box;
+    text-align: center;
 }
 
 .crf,

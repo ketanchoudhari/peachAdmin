@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="table-responsive data-table" style="overflow: auto; white-space: nowrap;">
-                    <table class="custom-table table table-striped" style="width: 100%;">
+                    <table class="custom-table table table-striped" style="width: 100%; text-align: center;">
                         <thead>
                             <tr>
                                 <th>Login Date &amp; Time</th>
@@ -162,17 +162,21 @@
 
                         </tbody>
                     </table>
+                  
+
+
+
+
                     <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
                         <pagination-template class="pagination" aria-label="Page navigation example"
                             *ngIf="logList && listCount > n" #pagination="paginationApi"
                             (pageChange)="pageChanged($event)">
                             <ul class="pagination" id="pageNumberContent" class="pages">
-                                <li class="page-item" id="prev">
+                                <li class="page-item" >
                                     <a *ngIf="pagination.isFirstPage(); else prevTemp"
-                                        class="disable">{{Update?.Previous}}</a>
+                                      id="previd" >Previous</a>
                                     <ng-template #prevTemp>
-                                        <a class="page-link" (click)="pagination.previous()" style="color: white;border-radius: 0.25rem;background-color: #1e2040;
-                                        ">Previous</a>
+                                        <a class="page-link" id="previd" (click)="pagination.previous()" style="color: white;">Previous</a>
                                     </ng-template>
                                 </li>
                                 <ng-container *ngFor="let page of pagination.pages">
@@ -182,19 +186,19 @@
                                             page.value }}
                                         </a>
                                         <a class="page-link" *ngIf="pagination.getCurrent() == page.value"
-                                            class="select" style="pointer-events: none">{{ page.value
-                                            }}
+                                            class="select" style="pointer-events: none">{{ page.value}}
                                         </a>
                                     </li>
                                 </ng-container>
                                 <li id="next" class="page-item">
-                                    <a class="page-link"
+                                    <a class="page-link" id="previd"
                                         class="button btn btn-diamond primary_button datatable-pagebuttons previous "
-                                        *ngIf="pagination.isLastPage(); else nextTemp" class="disable" >Next</a>
+                                        *ngIf="pagination.isLastPage(); else nextTemp"  >Next</a>
 
                                 </li>
                                 <ng-template #nextTemp>
-                                    <a class="page-link" (click)="pagination.next()" style="color: white;border-radius: 0.25rem;background-color: #1e2040;">Next</a>
+                                    <a class="page-link" id="previd" style="color: white;" (click)="pagination.next()"
+                                        >Next</a>
                                 </ng-template>
                             </ul>
                         </pagination-template>

@@ -35,18 +35,18 @@ const routes: Routes = [
     path: 'account-sum',
     component:AccountSummeryComponent,
   },
-  {
-    path: 'banking',
-    component:BankingComponent,
-  },
-  {
-    path:'banking/banking-log',
-    component:BankingLogComponent,
-  },
-  {
-    path:'banking/banking-log/:userId',
-    component:BankingLogComponent,
-  }
+  // {
+  //   path: 'banking',
+  //   component:BankingComponent,
+  // },
+  // {
+  //   path:'banking/banking-log',
+  //   component:BankingLogComponent,
+  // },
+  // {
+  //   path:'banking/banking-log/:userId',
+  //   component:BankingLogComponent,
+  // }
   
   
  
