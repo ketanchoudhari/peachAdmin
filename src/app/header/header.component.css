@@ -1,63 +1,24 @@
-
-.sidebar-opener {
-  cursor: pointer;
+.sub-drop .sub-import:hover .sub-options {
+  display: block;
 }
 
-.sidebar-slider {
-  position: fixed;
-  top: 52px;
-  left: 0;
-  bottom: 0;
-  background-color: white;
-  transform: translateX(-100%);
-  transition: ease-in-out 300ms transform;
-  width: 300px;
-  z-index: 999;
+.sub-options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
 }
-
-.sidebar-slider.sidebar-slide-in {
-  transform: translateX(0%);
-  transition: ease-in-out 600ms transform;
+.sub-options{
+  width: 10em;
+  margin-left: -0.8em;
+  margin-top: 6px;
+  background-color: #1e2040;
 }
-
-.sidebar-close {
-  position: fixed;
-  top: 0;
-  right: 0;
-  color: rgb(12, 10, 10);
-  cursor: pointer;
-  padding: 16px;
+.sub-style>a{
+  text-decoration: none;
+  color: white;
 }
-
-.sidebar-content {
-  /* display: flex; */
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  color: rgb(10, 9, 9);
-  font-size: 16px;
-  padding: 16px;
-  /* height: 100%; */
+.sub-import >a{
+color: #ffff;
+text-decoration: none;
 }
-
-
-
-
-
-.mtree-open > a:after {
-
-  font-family: FontAwesome;
-  content:"-";
-  padding-right: 5px;
-}
-.mtree-open > a.collapsed:after {
-
-  content:"+";
-}
-.mtree-open > a:hover,
-.mtree-open > a:active,
-.mtree-open > a:focus  {
-  text-decoration:none;
-}
-
-
