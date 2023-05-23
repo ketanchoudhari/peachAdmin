@@ -19,6 +19,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Market Analysis</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
       <li class="nav-item dropdown list-dropdown">
         <a class="nav-link dropdown-toggle " id="dropdown-menu"routerLink="/market-anaylish" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -107,8 +110,8 @@
           {{currentUser.userName}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Change Password</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" routerLink="/change-password">Change Password</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </div>
       <!-- <form class="form-inline my-2 my-lg-0">
@@ -123,7 +126,7 @@
       </form> -->
       <form class="form-inline my-2 my-lg-0">
         <div class="input-group">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <input class="search-control" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-outline-success" type="submit">
               <i class="fas fa-search-plus"></i>
