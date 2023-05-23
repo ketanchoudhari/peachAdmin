@@ -1,7 +1,7 @@
-<h1 class="banking" style="display:none;">Banking</h1>
+<h1 class="banking">Banking</h1>
 
 
-<nav class="navbar bg-body-tertiary" style="display:none;">
+<nav class="navbar bg-body-tertiary">
     <div class="container-fluid" id="userSearchUl">
         <form class="d-flex" role="search">
             <input class="form-control me-2" id="searchUserId" placeholder="{{Update?.EnteruserId}}..."
@@ -11,7 +11,7 @@
         </form>
     </div>
 </nav>
-<div class="function-wrap clearfix" style="display:none;">
+<div class="function-wrap clearfix">
     <dl class="banking-head float-L">
         <dt>Your Balance </dt>
         <dd id="yourBalance"><span> <ng-container *ngIf="showCurrency">
@@ -34,7 +34,7 @@
 </div>
 
 
-<nav style="display:none;">
+<nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist" *ngIf="showTotalBox">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#banking" type="button"
             role="tab" aria-controls="nav-home" aria-selected="true" [class.select]="selectedTabIndex === 0"
@@ -46,7 +46,7 @@
 
     </div>
 </nav>
-<form style="display:none;" [formGroup]="transferForm" (ngSubmit)="
+<form [formGroup]="transferForm" (ngSubmit)="
   (transferDelay)
     ? timeouttransfer()
     : transfer()

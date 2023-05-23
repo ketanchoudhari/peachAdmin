@@ -58,10 +58,10 @@ export class AppComponent {
     this.commonService.getApis();
     if (this.auth.checkIsLoggedIn()) {
       this.commonService.apis$.subscribe((res) => {
-        // console.log(res);
-        // this.commonService.loadfullHierarchy();
-        // this.commonService.listHierarchy();
-        // this.commonService.listAllHierarchy();
+        console.log(res);
+        this.commonService.loadfullHierarchy();
+        this.commonService.listHierarchy();
+        this.commonService.listAllHierarchy();
         this.commonService.updateBalance();
         this.commonService.apis = res;
       });

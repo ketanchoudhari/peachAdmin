@@ -116,9 +116,9 @@ export class LoginComponent implements OnInit {
                 tennisSharing: res.result[0].tennisSharing,
               };
               // this.usersService.setSharing(sharing);
-              // this.commonService.listHierarchy();
+              this.commonService.listHierarchy();
               // this.commonService.loadfullHierarchy(this.userdata);
-              // this.commonService.listAllHierarchy();
+              this.commonService.listAllHierarchy();
               this.commonService.updateBalance();
               setTimeout(() => {
                 this.router.navigate(['/active-user']);

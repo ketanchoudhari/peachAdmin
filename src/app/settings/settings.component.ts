@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { User } from '../users/models/user.model';
 import { Hierarchy } from '../services/types/hierarchy';
 import { CurrentUser } from '../shared/models/current-user';
@@ -6,13 +6,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { IMarket } from '../shared/types/market';
 import { IEvent } from '../shared/types/event';
-import { CommonService } from '../services/models/common.service';
 import { UsersService } from '../users/users.service';
 import { SettingsService } from './settings.service';
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { GenericResponse } from '../shared/types/generic-response';
 import { IUserList } from '../users/models/user-list';
+import { environment } from 'src/environments/environment';
+import { CommonService } from '../services/models/common.service';
 
 export class SettingsWise {
   typeWise: string;
@@ -23,17 +24,20 @@ export class SettingsWise {
   event: string;
   market: string;
   marketName: string;
+  competition: string;
+
 }
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
   @ViewChild('userWise') userWise: ElementRef;
   hierarchyList = Array<Hierarchy>();
   currentUser: CurrentUser;
   usersListMap: { userType: number; users: User[] } | {} = {};
+  siteName = environment.siteName;
 
   settingForm: FormGroup;
 
@@ -50,8 +54,15 @@ export class SettingsComponent {
 
   eventsList: IEvent[];
   marketList: IMarket[];
+  competitionList:IEvent[];
+  showSoccerBookSettings: boolean = false;
+  showpretab: boolean = false;
 
   settingFormInitialVal;
+  showPremiumSettings = false;
+  
+
+  
 
   sportsEventIds = [
     { name: 'Soccer', id: '1' },
@@ -78,6 +89,8 @@ export class SettingsComponent {
       userId: ['0'],
       typeWise: ['default'],
       value: ['0'],
+      sportId: ['0'],
+      competitionName: ['0'],
     });
 
     this.addLimitControl();
@@ -86,10 +99,12 @@ export class SettingsComponent {
     this.addBookmakingControl();
 
     this.settingFormInitialVal = this.settingForm.value;
+    console.log(this.settingForm.value,"this.settingForm.value;");
 
     this.common.hierarchyList$.subscribe((list) => {
-      console.log(this.common,"hierachy")
       this.hierarchyList = list;
+      console.log(list,"hierarchyList");
+    
     });
     this.common.apis$.subscribe((res) => {
     this.usersService
@@ -98,6 +113,7 @@ export class SettingsComponent {
         if (res.errorCode === 0) {
           res.result[0].users.forEach((user) => {
             if (user.userType in this.usersListMap) {
+              console.log(this.usersListMap,"usertype")
               this.usersListMap[user.userType].push(user);
             } else {
               this.usersListMap[user.userType] = [user];
@@ -111,16 +127,21 @@ export class SettingsComponent {
       typeWise: this.settingForm.get('typeWise').value,
       value: this.settingForm.get('value').value,
       userId: this.settingForm.get('userId').value,
+      sportId: this.settingForm.get('sportId').value
+
+
     };
     this.common.apis$.subscribe((res) => {
     this.getSettings();
     });
 
+   
     this.settingsWise$.subscribe((settingsWise) => {
       getSettingsData = {
         typeWise: this.settingForm.get('typeWise').value,
         value: this.settingForm.get('value').value,
         userId: this.settingForm.get('userId').value,
+        sportId: this.settingForm.get('sportId').value,
       };
       this.common.apis$.subscribe((res) => {
       this.settingsService
@@ -156,34 +177,80 @@ export class SettingsComponent {
         });
       });
 
-      if (
-        settingsWise.sport &&
-        settingsWise.sport !== '4' &&
-        settingsWise.sport !== '-1' &&
-        settingsWise.sportType === 'teenpatti' &&
-        settingsWise.sport !== '0'
-      ) {
-        this.showSessionSettings = false;
-        this.showBookSettings = false;
-        this.settingForm.removeControl('sessionSetting');
-        this.settingForm.removeControl('bookSettings');
-        this.settingForm.updateValueAndValidity();
-      } else {
-        this.showSessionSettings = true;
-        this.showBookSettings = true;
-        this.addSessionControl();
-        this.addBookmakingControl();
-        this.settingForm.updateValueAndValidity();
+      if(this.siteName == 'cricBuzzer'){
+        if (
+          settingsWise.sport &&
+          settingsWise.sport !== '1' &&
+          settingsWise.sport !== '-1' &&
+          settingsWise.sportType === 'teenpatti' &&
+          settingsWise.sport !== '0'
+        ) {
+          this.showSessionSettings = false;
+          this.showSoccerBookSettings = false;
+          this.settingForm.removeControl('sessionSetting');
+          this.settingForm.removeControl('soccerBookSettings');
+          this.settingForm.updateValueAndValidity();
+        } else {
+          this.showSessionSettings = true;
+          this.showSoccerBookSettings = true;
+          this.addSessionControl();
+          this.addSoccerBookmakingControl();
+          this.settingForm.updateValueAndValidity();
+        }
+        if (
+          settingsWise.sport &&
+          settingsWise.sport !== '4' &&
+          settingsWise.sport !== '-1' &&
+          settingsWise.sportType === 'teenpatti' &&
+          settingsWise.sport !== '0'
+        ) {
+          this.showSessionSettings = false;
+          this.showBookSettings = false;
+          this.settingForm.removeControl('sessionSetting');
+          this.settingForm.removeControl('bookSettings');
+          this.settingForm.updateValueAndValidity();
+        } else {
+          this.showSessionSettings = true;
+          this.showBookSettings = true;
+          this.addSessionControl();
+          this.addBookmakingControl();
+          this.settingForm.updateValueAndValidity();
+        }
+      } else{
+        if (
+          settingsWise.sport &&
+          settingsWise.sport !== '4' &&
+          settingsWise.sport !== '-1' &&
+          settingsWise.sportType === 'teenpatti' &&
+          settingsWise.sport !== '0'
+        ) {
+          this.showSessionSettings = false;
+          this.showBookSettings = false;
+          this.settingForm.removeControl('sessionSetting');
+          this.settingForm.removeControl('bookSettings');
+          this.settingForm.updateValueAndValidity();
+        } else {
+          this.showSessionSettings = true;
+          this.showBookSettings = true;
+          this.addSessionControl();
+          this.addBookmakingControl();
+          this.settingForm.updateValueAndValidity();
+        }
       }
-      if (settingsWise.sport && settingsWise.sport === '-2') {
-        this.showMarketSettings = false;
-        this.settingForm.removeControl('marketSetting');
-        this.settingForm.updateValueAndValidity();
-      } else {
-        this.showMarketSettings = true;
-        this.addMarketControl();
-        this.settingForm.updateValueAndValidity();
+      if (this.showpretab) {
+        if (this.siteName == 'cricBuzzer' || this.siteName == 'lc247') {
+          if (settingsWise.sport === '1' || settingsWise.sport === '2' || settingsWise.sport === '4') {
+            this.showPremiumSettings = true;
+            this.addPremiumControl();
+            this.settingForm.updateValueAndValidity();
+          } else {
+            this.showPremiumSettings = false;
+            this.settingForm.removeControl('premiumSetting');
+            this.settingForm.updateValueAndValidity();
+          }
+        }
       }
+      
 
       if (settingsWise.sport && settingsWise.typeWise === 'market') {
         if (settingsWise.sport !== '-1' && settingsWise.sport !== '-2') {
@@ -271,7 +338,7 @@ export class SettingsComponent {
   }
 
 getSettings() {
-  let getSettingsData = {
+  let getSettingsData:any = {
     typeWise: this.settingForm.get('typeWise').value,
     value: this.settingForm.get('value').value,
     userId: this.settingForm.get('userId').value,
@@ -301,6 +368,12 @@ getSettings() {
           this.resetSettingInputs();
           this.settingForm.patchValue(res.result[0]);
         }
+        else {
+          this.resetSettingInputs();
+        }
+      }
+      else {
+        this.resetSettingInputs();
       }
     });
 }
@@ -332,6 +405,9 @@ addLimitControl() {
 get limitSetting() {
   return this.settingForm.get('limitSetting');
 }
+get premiumSetting() {
+  return this.settingForm.get('premiumSetting');
+}
 
 get marketSetting() {
   return this.settingForm.get('marketSetting');
@@ -344,7 +420,28 @@ get sessionSetting() {
 get bookSetting() {
   return this.settingForm.get('bookSetting');
 }
+addPremiumControl() {
+  let premiumFormGroup = this.formBuilder.group({
+    betDelay: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    minStake: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    maxStake: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    maxProfit: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
 
+  });
+  this.settingForm.addControl('premiumSetting', premiumFormGroup);
+}
 
 addSessionControl() {
   let sessionFormGroup = this.formBuilder.group({
@@ -451,6 +548,35 @@ addBookmakingControl() {
   });
   this.settingForm.addControl('bookSettings', bookFormGroup);
 }
+addSoccerBookmakingControl() {
+  let soccerbookFormGroup = this.formBuilder.group({
+    betDelay: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    minStake: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    maxStake: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    maxProfit: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    maxLoss: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+    perRateMaxStake: this.formBuilder.group({
+      value: [],
+      inherited: [false],
+    }),
+  });
+  this.settingForm.addControl('soccerBookSettings', soccerbookFormGroup);
+}
 
 
 
@@ -473,6 +599,11 @@ resetSettingInputs() {
       .get('bookSettings')
       .reset(this.settingFormInitialVal.bookSettings);
   }
+  if (this.settingForm.get('premiumSetting')) {
+    this.settingForm
+      .get('premiumSetting')
+      .reset(this.settingFormInitialVal.premiumSetting);
+  }
 }
 
 submit() {
@@ -482,7 +613,7 @@ submit() {
       .setSetting(this.settingForm.value)
       .subscribe((res: GenericResponse<any>) => {
         if (res && res.errorCode === 0) {
-          // this.toastr.success(res.errorDescription);
+          this.toastr.success(res.errorDescription);
           this.getSettings();
           this.toastr.success('Settings Saved');
           // history.back();
@@ -501,8 +632,8 @@ setUsersWise(event: Event, id?: string) {
   this.settingForm.get('userId').setValue(0);
   // }
 
-  // (<HTMLInputElement>event.target).value = '';
-  // this.userWise.nativeElement.value = '';
+  (<HTMLInputElement>event.target).value = '';
+  this.userWise.nativeElement.value = '';
   if ((<HTMLInputElement>event.target).checked) {
     let elements = <HTMLCollectionOf<HTMLElement>>(
       document.getElementsByClassName('user-wise')
@@ -524,18 +655,38 @@ setUsersWise(event: Event, id?: string) {
   this._settingsWiseSubject.next(settingWise);
 }
 
-setTypeWise(typeWise: any) {
+setTypeWise(typeWise) {
   let settingWise = this._settingsWiseSubject.getValue();
-  console.log(this.setTypeWise,"sports")
-
   settingWise.sport = '0';
-  this.settingForm.get('value').setValue('0');
+  settingWise.competition = '0';
   settingWise.event = '0';
   settingWise.market = '0';
+  this.settingForm.get('value').setValue('0');
+  this.settingForm.get('sportId').setValue('0');
+  this.settingForm.get('competitionName').setValue('0');
   settingWise.typeWise = typeWise.value;
   this._settingsWiseSubject.next(settingWise);
-  // this.getSettings();
+  this.getSettings();
+  // console.log(settingWise);
+}
+selectCompetition(competition: string, sport: string) {
+  let settingWise = this._settingsWiseSubject.getValue();
+  settingWise.competition = competition;
+  sport ? (settingWise.sportType = sport) : (settingWise.sportType = '');
+  let selectedCompetition = this.competitionList.find(
+    (comp) => comp.competitionId == +settingWise.competition
+  );
 
+  if (selectedCompetition) {
+    // console.log(selectedCompetition);
+    settingWise.sport = selectedCompetition.sportId;
+    this.settingForm.get('sportId').setValue(selectedCompetition.sportId);
+    this.settingForm.get('competitionName').setValue(selectedCompetition.competitionName);
+  } else {
+    settingWise.sport = null;
+  }
+  this._settingsWiseSubject.next(settingWise);
+  this.getSettings();
 }
 
 
@@ -564,7 +715,6 @@ selectEvent(eventId: string) {
   this.getSettings();
 }
 
-
 selectMarket(gameId: string, sport: string) {
   let settingWise = this._settingsWiseSubject.getValue();
   settingWise.market = gameId;
@@ -580,6 +730,7 @@ selectMarket(gameId: string, sport: string) {
   }
   this._settingsWiseSubject.next(settingWise);
   this.getSettings();
+
 }
 
 selectUser(userId: string) {

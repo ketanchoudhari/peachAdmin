@@ -1,6 +1,9 @@
 export interface IEvent {
+
   tv: number;
   isFancy: number;
+  usersLogged?: number;
+  sportId: string;
   activeStatus: number;
   sportsName: string;
   competitionName: string;
