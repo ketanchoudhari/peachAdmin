@@ -15,8 +15,6 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { ActivityLog } from '../models/activity-log.model';
 import { ExportService } from 'src/app/services/export-as.service';
 import { environment } from 'src/environments/environment';
-import * as html2pdf from 'html2pdf.js'
-
 
 @Component({
   selector: 'app-account-details',
@@ -169,8 +167,8 @@ getloginhistory(){
 }
 
 
-udt;
-edata = [];
+udt:any;
+edata: any;
 exportExcel() {
   this.udt = {
     data: [
@@ -202,7 +200,7 @@ exportCsv() {
   this.exportService.exportToCsv(this.logList, 'Activity Log_'+new Date().toDateString(), col);
 }
 exportPdf() {
-  var element = document.getElementById('content');
+  var element = document.getElementById('table01');
   var opt = {
     margin: 1,
     filename: 'Activity Log_'+new Date().toDateString(),
@@ -210,7 +208,7 @@ exportPdf() {
     html2canvas: { scale: 2 },
     jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
   };
-  html2pdf().from(element).set(opt).save();
+  // html2pdf().from(element).set(opt).save();
 }
 }
 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg ">
   
   <a class="navbar-brand" href="#">
-    <img src="assets/images/logo-cricbuzzer.png" height="30px">
+    <img src="../../assets/images/logo-cricbuzzer.png" height="30px">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" style="padding-left: 0em !important; padding-right: 10em;">
       <li class="nav-item" >
         <a class="nav-link" routerLink="/active-user">List of Clients</a>
       </li>
@@ -17,12 +17,11 @@
         <a class="nav-link blink-ipl"  routerLink="/active-running-users">IPL 2023</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Market Analysis</a>
+        <a class="nav-link" routerLink="/market-nalysis">Market Analysis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  routerLink="/settings">settings</a>
+        <a class="nav-link"routerLink="/settings">Settings</a>
       </li>
-   
       <li class="nav-item dropdown list-dropdown">
         <a class="nav-link dropdown-toggle " id="dropdown-menu"routerLink="/market-anaylish" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -45,8 +44,6 @@
           <a class="dropdown-item" routerLink="account/account-Statement">Account's Statement</a>
           <a class="dropdown-item" routerLink="account/account-sum">Account Summary</a>
           <a class="dropdown-item" routerLink="account/account-details">Account Details</a>
-          <!-- <a class="dropdown-item" routerLink="account/banking">banking</a> -->
-
         </div>
       </li>
       <li class="nav-item dropdown list-dropdown">
@@ -106,7 +103,7 @@
         </div>
       </li>
     </ul>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row search-group">
       <div class="dropdown mr-2">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">

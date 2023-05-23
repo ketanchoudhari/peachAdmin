@@ -24,7 +24,7 @@ const routes: Routes = [
     children: [
       { path: 'active-user', component: ActiveUsersComponent },
       { path: 'active-running-users', component: RunningMarketComponent },
-      { path: 'market-anaylish', component: MarketanaylsisComponent },
+      { path: 'market-analysis', component: MarketanaylsisComponent },
       { path: 'sidebar', component: SidebarComponent },
       { path: 'home', component: HomeComponent },
       { path: 'add-account', component: AddaccountComponent },

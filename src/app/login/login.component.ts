@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { DomSanitizer, Meta, SafeResourceUrl } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { CommonService } from '../services/models/common.service';
+import { DataShareService } from '../services/data-share.service';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
   captchaImg: SafeResourceUrl;
 
   showCaptcha: boolean = environment.captcha;
+  userdata: any;
+  userId: any;
 
 
 
@@ -43,7 +46,7 @@ export class LoginComponent implements OnInit {
     private sanitization: DomSanitizer,
     private meta:Meta,
     private commonService: CommonService,
-
+    private dataShareing : DataShareService
 
 
 
@@ -66,11 +69,11 @@ export class LoginComponent implements OnInit {
       log: ['0000', Validators.required],
       origin:"skyexch.live"
     });
-    console.log("loginform");
     
   }
 
   serverError: boolean = false;
+
 
   login(){
     console.log(this.showCaptcha,"showcaptcha");
@@ -95,11 +98,14 @@ export class LoginComponent implements OnInit {
             // finalize(() => (this.isInTransit = false))
           )
           .subscribe((res: any) => {
+            this.userId=res.result[0].userId
+            this.dataShareing.IDuser(this.userId)
+            console.log(this.userId)
             if (res.errorCode === 0 && res.errorDescription==null) {
               // this.loadingService.setLoading(true);
               const salt = bcrypt.genSaltSync(10);
               let pass = bcrypt.hashSync(this.loginForm.value.password, salt);
-              console.log(pass, 'hashed password');
+              // console.log(pass, 'hashed password');
               localStorage.setItem('password', pass);
               this.tokenService.set(res.result[0].token);
               this.authService.setCurrentUser(res.result[0]);
@@ -117,7 +123,7 @@ export class LoginComponent implements OnInit {
               };
               // this.usersService.setSharing(sharing);
               this.commonService.listHierarchy();
-              // this.commonService.loadfullHierarchy(this.userdata);
+              this.commonService.loadfullHierarchy(this.userdata);
               this.commonService.listAllHierarchy();
               this.commonService.updateBalance();
               setTimeout(() => {

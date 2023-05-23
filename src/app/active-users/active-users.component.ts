@@ -1,5 +1,6 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DataShareService } from '../services/data-share.service';
 
 @Component({
   selector: 'app-active-users',
@@ -8,7 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ActiveUsersComponent {
   modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService){}
+  constructor(private modalService: BsModalService, private dataSharing: DataShareService){}
   @ViewChild('modalDeposit') modalDeposit!: ElementRef;
   depositShow:boolean=false;
   withdrawShow:boolean=false;

@@ -838,8 +838,8 @@ input+.slider span:last-child {
     font-size: 12px;
 }
 
-/* .navbar-nav {
-    padding-left: 0rem !important;
+.navbar-nav {
+    padding-left: 150px !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -850,7 +850,7 @@ input+.slider span:last-child {
 .navbar>li>a {
     text-transform: capitalize;
     padding: 10px 10px;
-} */
+}
 
 .btco-hover-menu .active a,
 .btco-hover-menu .active a:focus,
@@ -1759,7 +1759,6 @@ table.dataTable,
 table.dataTable th,
 table.dataTable td {
     box-sizing: border-box;
-    text-align: center;
 }
 
 .crf,
@@ -1868,13 +1867,12 @@ select.form-control {
     width: 100%;
 }
 
-
 .suspended:after {
     position: absolute;
     content: attr(data-title);
     top: 0;
     right: 0;
-    /* background: rgba(0, 0, 0, 0.3); */
+    background: rgba(0, 0, 0, 0.3);
     color: #ff0000;
     width: 510px;
     height: 100%;

@@ -60,14 +60,9 @@ export class UsersService {
       return this.httpClient.get(`${this.baseUrl}/accountDetails/${selctedUid}`);
     }
   
-    listUser(selctedUid: number, userType?: number, userStatus?: string) {
-      if (userType) {
+    listUser(selctedUid: number) {
         return this.httpClient.get(
-          `${this.baseUrl}/listUsers/${selctedUid}/${userType}?active=${userStatus}`
-        );
-      } else {
-        return this.httpClient.get(`${this.baseUrl}/listUsers/${selctedUid}?active=${userStatus}`);
-      }
+          `${this.baseUrl}/listUsers/${selctedUid}`);
     }
   
     fullHierarchy(){
