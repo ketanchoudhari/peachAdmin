@@ -838,8 +838,8 @@ input+.slider span:last-child {
     font-size: 12px;
 }
 
-.navbar-nav {
-    padding-left: 150px !important;
+/* .navbar-nav {
+    padding-left: 0rem !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -850,7 +850,7 @@ input+.slider span:last-child {
 .navbar>li>a {
     text-transform: capitalize;
     padding: 10px 10px;
-}
+} */
 
 .btco-hover-menu .active a,
 .btco-hover-menu .active a:focus,
@@ -1759,6 +1759,7 @@ table.dataTable,
 table.dataTable th,
 table.dataTable td {
     box-sizing: border-box;
+    text-align: center;
 }
 
 .crf,
@@ -1867,12 +1868,13 @@ select.form-control {
     width: 100%;
 }
 
+
 .suspended:after {
     position: absolute;
     content: attr(data-title);
     top: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.3);
+    /* background: rgba(0, 0, 0, 0.3); */
     color: #ff0000;
     width: 510px;
     height: 100%;
@@ -6450,7 +6452,9 @@ img.rrotate {
     max-width: 19.666667%;
 }
 }
-
+/* .col-gd-2{
+    width: 8em;
+} */
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -6483,3 +6487,41 @@ img.rrotate {
     border-radius: 0.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.cal-width{
+    margin-right: 5px;
+    width: 8rem;
+}
+.my-timepicker{
+    width: 8em;
+}
+.grid-row{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Create four equal-width columns */
+    grid-gap: 10px; /* Add gap between grid items */
+    overflow: auto;
+}
+.btn-flex{
+    display: flex;
+}
+.col-bt-10{
+    /* margin-right: 10px; */
+    width: 7.8em;
+    margin-top: 1.4em;
+}
+/* .solid-size{
+    grid-column: span 4;
+} */
+.col-wide{
+    grid-column: 1 / 3;
+}
+@media (max-width: 768px) {
+    .grid-row {
+      grid-template-columns: repeat(2, 1fr); /* Change to two columns for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-row {
+      grid-template-columns: repeat(2, 1fr); /* Change to a single column for even smaller screens */
+    }
+  }

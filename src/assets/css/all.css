@@ -2428,34 +2428,40 @@ a.btn.disabled,fieldset:disabled a.btn {
 
 .btn-secondary {
     color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .btn-secondary:hover {
     color: #fff;
-    background-color: #5a6268;
-    border-color: #545b62
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .btn-secondary.focus,.btn-secondary:focus {
-    box-shadow: 0 0 0 .2rem rgba(108,117,125,.5)
+    box-shadow: 0 0 0 .2rem rgba(246, 246, 247, 0)
 }
 
 .btn-secondary.disabled,.btn-secondary:disabled {
     color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active,.btn-secondary:not(:disabled):not(.disabled):active,.show>.btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #545b62;
-    border-color: #4e555b
+    /* background-color: black;
+    border-color: black; */
 }
-
+.btn-secondary:not(:disabled):not(.disabled):active{
+    background-color: transparent !important;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
 .btn-secondary:not(:disabled):not(.disabled).active:focus,.btn-secondary:not(:disabled):not(.disabled):active:focus,.show>.btn-secondary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(108,117,125,.5)
+    box-shadow: 0 0 0 .2rem rgba(247, 250, 253, 0)
 }
 
 .btn-success {
@@ -2728,7 +2734,7 @@ a.btn.disabled,fieldset:disabled a.btn {
 }
 
 .btn-outline-success.focus,.btn-outline-success:focus {
-    box-shadow: 0 0 0 .2rem rgba(40,167,69,.5)
+    box-shadow: 0 0 0 .2rem rgb(253, 255, 254)
 }
 
 .btn-outline-success.disabled,.btn-outline-success:disabled {
@@ -2737,13 +2743,13 @@ a.btn.disabled,fieldset:disabled a.btn {
 }
 
 .btn-outline-success:not(:disabled):not(.disabled).active,.btn-outline-success:not(:disabled):not(.disabled):active,.show>.btn-outline-success.dropdown-toggle {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745
+    color: #000;
+    /* background-color: #28a745;
+    border-color: #28a745 */
 }
 
 .btn-outline-success:not(:disabled):not(.disabled).active:focus,.btn-outline-success:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-success.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(40,167,69,.5)
+    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.993)
 }
 
 .btn-outline-info {
@@ -3143,21 +3149,22 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: .25rem 1.5rem;
+    padding: 0.4rem 0.8rem;
     clear: both;
     font-weight: 400;
-    color: #212529;
+    color: #ffff;
     text-align: inherit;
     white-space: nowrap;
-    background-color: transparent;
+    background-color: #1e2040;
     border: 0
 }
-
+/* HOVE-MENU */
+/* 
 .dropdown-item:focus,.dropdown-item:hover {
     color: #16181b;
     text-decoration: none;
     background-color: #f8f9fa
-}
+} */
 
 .dropdown-item.active,.dropdown-item:active {
     color: #fff;
@@ -3761,8 +3768,96 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     background-color: #dee2e6;
     border-radius: 1rem
 }
+.navbar{
+    background-color: #1e2040 !important;
+    padding: 5px 38px 5px 5px;
+}
+.navbar-nav .nav-link {
+    color: white !important;
+  }
+.search-control{
+    border: none;
+    border-radius: 2px !important;
+    width: 160px !important;
+}
+.navbar .btn-outline-success {
+    background-color: transparent;
+    margin: 0px 0 0 -7px !important;
+    color: black;
+    border: none !important;
+  }
+  .navbar .btn-outline-success :hover{
+    border: none !important;
+  }
+  .navbar .btn-outline-success :active{
+   background-color: transparent !important;
+  }
+  .navbar .btn-outline-success :visited{
+    background-color: transparent !important;
+   }
+   .dropdown-toggle{
+    background-color: transparent;
+   }
+  /* .navbar .input-group {
+    position: relative;
+  }
+  .navbar .input-group-append {
+    position: absolute;
+    right: 0;
+    top: 0;
+  } */
+  .navbar .input-group {
+    position: relative;
+  }
 
-.nav {
+  .navbar .input-group .search-control {
+    padding-right: 5px; /* Add space for the button */
+  }
+
+  .navbar .input-group .btn-outline-success {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 25px;
+    padding: 8px 9px 6px 0px;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  .input-group{
+    width: 10.3em !important;
+  }
+
+.blink-ipl {
+    animation: new-launch 1s linear infinite;
+}
+
+@keyframes new-launch {
+    50% {
+        opacity: 0
+    }
+}
+.navbar .list-dropdown:hover{
+    background-color: #00A358;
+}
+.navbar .list-dropdown:hover .sub-drop {
+    display: block;
+  }
+ .dropdown-item:hover{
+    background-color: #00A358 !important;
+    color: #ffff !important;
+    text-decoration: none !important;
+ 
+  }
+  .dropdown-item:focus {
+    color: #ffff;
+    text-decoration: none;
+    background-color: #1e2040 !important;
+}
+.visible{
+    display: none;
+  }
+
+/* .nav {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -3920,7 +4015,7 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
     -ms-flex-positive: 1;
-    flex-grow: 1;
+    flex-grow: 0;
     -ms-flex-align: center;
     align-items: center
 }
@@ -4266,7 +4361,7 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 
 .navbar-dark .navbar-text a:focus,.navbar-dark .navbar-text a:hover {
     color: #fff
-}
+} */
 
 .card {
     position: relative;
@@ -9685,4 +9780,40 @@ a.text-dark:focus,a.text-dark:hover {
     clear: both;
     float: left;
     padding-top: 0.755em;
+}
+
+
+.input-group>.custom-select:not(:last-child),.input-group>.search-control:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0
+}
+ .input-group>.search-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+
+@media (min-width: 576px){
+.form-inline .search-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+}
+
+.search-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

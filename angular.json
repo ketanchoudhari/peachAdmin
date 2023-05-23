@@ -30,12 +30,13 @@
                 "src/assets/css/all.css",
                 "src/assets/css/style.css",
                 "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-                "node_modules/@ng-select/ng-select/themes/default.theme.css"
+                "node_modules/@ng-select/ng-select/themes/default.theme.css",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css"
               
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -43,8 +44,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

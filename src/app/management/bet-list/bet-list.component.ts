@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bet-list',
@@ -6,9 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./bet-list.component.css']
 })
 export class BetListComponent {
+  selectedsSortList:any;  //drop down list
   selecttodate: Date;
   selectfromtime: Date;
   selecttotime: Date;
+  selectedTime: NgbTimeStruct; //a
+  selectedDate: NgbDateStruct; //a
   time = { hour: 13, minute: 30 };   //for time selection
 	meridian = true;                //for time selection
   filteredEventList: any = [];   //temperory variable for pagination
@@ -23,6 +27,18 @@ export class BetListComponent {
     this.selectfromtime = new Date(new Date().setHours(0, 0, 0));
     this.selecttotime = new Date(new Date().setHours(23, 59, 0));
   }
+    // >>>>>>>>>>>>>>>>>DatePicker FromDate and ToDate
+  getFromDateAndTime() {
+    return `${this.selectfromdate.getFullYear()}-${
+      this.selectfromdate.getMonth() + 1
+    }-${this.selectfromdate.getDate()} ${this.selectfromdate.getHours()}:${this.selectfromdate.getMinutes()}:${this.selectfromdate.getSeconds()}`;
+  }
+
+  getToDateAndTime() {
+    return `${this.selecttodate.getFullYear()}-${
+      this.selecttodate.getMonth() + 1
+    }-${this.selecttodate.getDate()} ${this.selecttodate.getHours()}:${this.selecttodate.getMinutes()}:${this.selecttodate.getSeconds()}`;
+  } 
 
   tableLength:boolean=true;
   docButton:boolean=false;
@@ -36,6 +52,7 @@ export class BetListComponent {
     {id: 4, label: 'Option 4'},
     {id: 5, label: 'Option 5'}
   ];
+  // >>>>>>>>>>>>>>>>>>>>>list of sport DropDown array
   sportFilterList = [
     { id: 1, fillname: 'soccer', name: 'Soccer' },
     { id: 2, fillname: 'tennis', name: 'Tennis' },
@@ -72,19 +89,7 @@ export class BetListComponent {
     { id: 43, fillname: 'Winter Sports', name: 'Winter Sports' },
     { id: 43, fillname: 'Mixed Martial Arts', name: 'Mixed Martial Arts' },
   ];
-  fromDateOptions = {
-    dateFormat: 'mm/dd/yyyy',
-    minYear: 1900,
-    maxYear: 2099,
-    firstDayOfWeek: 'su'
-  };
-  toDateOptions = {
-    dateFormat: 'mm/dd/yyyy',
-    minYear: 1900,
-    maxYear: 2099,
-    firstDayOfWeek: 'su'
-  };
-
+ 
   toggleMeridian() {
 		this.meridian = !this.meridian;
 	}

@@ -44,8 +44,8 @@
                                             <ng-template #censoredTemp>
                                                 ********************************
                                             </ng-template>
-                                            <a data-bs-toggle="modal" data-bs-target="#password" class="favor-set"><i
-                                                    aria-hidden="true" class="fa fa-pencil-square-o"></i>Edit</a>
+                                            <!-- <a data-bs-toggle="modal" data-bs-target="#password" class="favor-set"><i
+                                                    aria-hidden="true" class="fa fa-pencil-square-o"></i>Edit</a> -->
                                         </dd>
                                     </th>
                                 </tr>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="table-responsive data-table" style="overflow: auto; white-space: nowrap;">
-                    <table class="custom-table table table-striped" style="width: 100%;">
+                    <table class="custom-table table table-striped" style="width: 100%; text-align: center;">
                         <thead>
                             <tr>
                                 <th>Login Date &amp; Time</th>
@@ -162,16 +162,21 @@
 
                         </tbody>
                     </table>
+                  
+
+
+
+
                     <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
                         <pagination-template class="pagination" aria-label="Page navigation example"
                             *ngIf="logList && listCount > n" #pagination="paginationApi"
                             (pageChange)="pageChanged($event)">
                             <ul class="pagination" id="pageNumberContent" class="pages">
-                                <li class="page-item" id="prev">
+                                <li class="page-item" >
                                     <a *ngIf="pagination.isFirstPage(); else prevTemp"
-                                        class="disable">{{Update?.Previous}}</a>
+                                      id="previd" >Previous</a>
                                     <ng-template #prevTemp>
-                                        <a class="page-link" (click)="pagination.previous()" style="color: white;">Previous</a>
+                                        <a class="page-link" id="previd" (click)="pagination.previous()" style="color: white;">Previous</a>
                                     </ng-template>
                                 </li>
                                 <ng-container *ngFor="let page of pagination.pages">
@@ -181,19 +186,19 @@
                                             page.value }}
                                         </a>
                                         <a class="page-link" *ngIf="pagination.getCurrent() == page.value"
-                                            class="select" style="pointer-events: none">{{ page.value
-                                            }}
+                                            class="select" style="pointer-events: none">{{ page.value}}
                                         </a>
                                     </li>
                                 </ng-container>
                                 <li id="next" class="page-item">
-                                    <a class="page-link"
+                                    <a class="page-link" id="previd"
                                         class="button btn btn-diamond primary_button datatable-pagebuttons previous "
-                                        *ngIf="pagination.isLastPage(); else nextTemp" class="disable" >Next</a>
+                                        *ngIf="pagination.isLastPage(); else nextTemp"  >Next</a>
 
                                 </li>
                                 <ng-template #nextTemp>
-                                    <a class="page-link" (click)="pagination.next()" style="color: white;">Next</a>
+                                    <a class="page-link" id="previd" style="color: white;" (click)="pagination.next()"
+                                        >Next</a>
                                 </ng-template>
                             </ul>
                         </pagination-template>
@@ -210,7 +215,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- <div class="modal fade" id="password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -219,7 +224,7 @@
                 <button type="button" class="close" data-bs-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-                <form formGroup="changePassForm" (ngSubmit)="changePass()" class="ng-untouched ng-pristine ng-invalid">
+                <form [formGroup]="changePassForm" (ngSubmit)="changePass()" class="ng-untouched ng-pristine ng-invalid">
                     <div class="container-fluid">
                         <div class="row m-b-20">
                             <div class="col-md-4"><label>New
@@ -227,7 +232,6 @@
                             <div class="col-md-8"><input type="Password" formcontrolname="newpassword" id="new-password"
                                     required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
                                     ng-reflect-name="newpassword" ng-reflect-maxlength="20">
-                                <!-- <span class="must">＊</span> -->
                                 <div class="errors" *ngIf="changePassForm.get('newpassword')?.invalid &&
                                     (changePassForm.get('newpassword')?.touched ||
                                     changePassForm.get('newpassword')?.dirty)">
@@ -255,7 +259,6 @@
                             <div class="col-md-8"><input type="Password" formcontrolname="confirm" id="confirm-password"
                                     required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
                                     ng-reflect-name="confirm" ng-reflect-maxlength="20">
-                                <!-- <span class="must">＊</span> -->
                                 <div class="errors"
                                     *ngIf="changePassForm.get('confirm')?.invalid &&
                                           (changePassForm.get('confirm')?.touched || changePassForm.get('confirm')?.dirty)">
@@ -278,7 +281,6 @@
                                     id="password-mpassword" required="" maxlength="20" ng-reflect-name="password"
                                     ng-reflect-required="" ng-reflect-maxlength="20"
                                     class="ng-untouched ng-pristine ng-invalid">
-                                <!-- <span class="must">＊</span> -->
                                 <div class="errors" *ngIf="changePassForm.get('password')?.invalid &&
                                         (changePassForm.get('password')?.touched ||
                                         changePassForm.get('password')?.dirty)">
@@ -298,4 +300,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

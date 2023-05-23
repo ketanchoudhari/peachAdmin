@@ -15,8 +15,7 @@ export class HeaderComponent {
   heirarchyList?: Hierarchy[];
   public sidebarShow: boolean = false;
 
-  isDropdownOpen: boolean = false;
-  isOpen: boolean = false;
+  public isCollapsed = true;
   currentUser: CurrentUser;
   dropdownMenu: any=[];
   balance: number = 0;
@@ -81,19 +80,10 @@ export class HeaderComponent {
   
 
 
-  toggleAccDropdrown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-  toggleSidebar() {
-    this.isOpen = true;
-    // this.compIntraction.setSidebar(this.isOpen);
-    // console.log('header called');
 
-  }
+ 
 
-  closeSideBar() {
-    this.isOpen =false;
-  }
+
   // clickme() {
   //   alert("Please Select a user");
   //   return false;

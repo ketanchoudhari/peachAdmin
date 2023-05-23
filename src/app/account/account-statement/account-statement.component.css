@@ -31,6 +31,7 @@ a.btn.buttons-excel {
 a:not([href]):not([tabindex]) {
     display: inherit;
     color: black;
+    margin-bottom: 15px;
     text-decoration: none;
 }
 /* .pages {
@@ -51,7 +52,7 @@ a:not([href]):not([tabindex]) {
     display: inline;
     font-weight: normal;
     margin: 0;
-    padding: 0.375rem 0.75rem;
+    padding: 10px;
 }
 .total, .grand-total{
     font-weight: bold;
@@ -66,4 +67,22 @@ a#getPL{
 }
 .detail-row h2 {
     margin-top: 20px;
+}
+
+#previd{
+    background-color: #1e2040;
+    color: white;
+    border-radius: 10px;
+
+}
+.fromto {
+    margin: 0 5px;
+    background-position: -20px -182px;
+    height: 8px;
+    width: 7px;
+    vertical-align: middle;
+}
+.fromto, .prevMonth, .nextMonth, .selection, .trans-replay, .btn_expand:before, .btn_expand.close:before {
+    background-image: url(https://www.svgrepo.com/svg/335312/arrow-expand-small);
+    background-repeat: no-repeat;
 }
