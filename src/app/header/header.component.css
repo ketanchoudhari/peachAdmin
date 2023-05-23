@@ -22,3 +22,36 @@
 color: #ffff;
 text-decoration: none;
 }
+
+
+
+
+.navbar-nav li:hover > ul.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu {
+  position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top:0;
+  left:100%;
+  margin-top: 5px;}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+  text-decoration: underline;
+  transform: rotate(-90deg);
+}
+
+.dropdown-toggle {
+   background-color: black !important;
+}
+
+@media screen and (max-width:1280px) {
+  .side-menu-button {
+display: block !important;    }
+}
+.side-menu-button {
+left:340px !important;
+display: none;
+}

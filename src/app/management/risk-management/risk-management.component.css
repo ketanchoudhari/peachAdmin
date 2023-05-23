@@ -99,7 +99,7 @@ display: block;
 .hide thead{
   display: none;
 }
-.t1, .table,
+.table,
 .table tbody,
 .table tr,
 .table td{
@@ -112,8 +112,40 @@ display: block;
 }
 }
 
+@media screen and (max-width:896px) {
+  .row{
+    display: block;
+      }
+      .col-4 {
+        /* flex: 0 0 33.333333%; */
+        max-width: 83.333333%;
+    }
+    .nav{
+      flex-wrap:unset;
+    }
+    .table thead {
+      display: block;
+    }
+    .table tr {
+      margin-bottom: 0px;
+    }
+    .hide thead{
+      display: none;
+    }
+    .table,
+    .table tbody,
+    .table tr,
+    .table td{
+    display: block;
+    }
+
+
+    .row, .col-6{
+      display: block;
+    }
+}
 
 
 .nav-tabs .nav-link {
-color: black;
+  color: black;
 }

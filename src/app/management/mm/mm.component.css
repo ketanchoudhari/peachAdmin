@@ -84,10 +84,11 @@ margin-top: 40px;
   left: 31px;
 }
  .spacer{
-flex: 1;
-margin-right: 1685px;
+
+margin-right: 1419px;
 
 }
+
 
 
 a:not([href]):not([tabindex]){
@@ -177,7 +178,9 @@ color: black !important;
   padding-right: 0;
   margin-right: 4px;
 }
-
+.table.dataTable, table.dataTable th, table.dataTable td{
+text-align: unset;
+}
 .expand-close > a:after {
 
   font-family: FontAwesome;
@@ -193,3 +196,10 @@ color: black !important;
 .expand-close > a:focus  {
   text-decoration:none;
 }
+
+.market{
+  margin-left: 58px;
+}
+/* .btn{
+  float: right;
+} */
