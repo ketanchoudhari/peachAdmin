@@ -50,7 +50,7 @@ a:not([href]):not([tabindex]) {
     padding: 10px;
 }
 .total_all.box {
-    padding: 35px 1px 36px 1px;
+    padding: 20px 1px 20px 1px;
 }
 a#getPL {
     margin-bottom: 8px;
@@ -61,4 +61,11 @@ a#getPL {
     color: white;
     border-radius: 10px;
 
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: white !important;
+    /* background-color: #28a745 !important; */
+    background-color: #1e2040 !important;
+    border-color: var(--bs-nav-tabs-link-active-border-color);
 }

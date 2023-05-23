@@ -6,7 +6,9 @@ import { IApis } from 'src/app/shared/types/apis';
 import { environment } from 'src/environments/environment';
 import { Hierarchy } from '../types/hierarchy';
 import { GenericResponse } from 'src/app/shared/types/generic-response';
+import { fullHierarchy } from 'src/app/users/models/user-list';
 export const HIERARCY_LIST = 'hierarcy_list';
+
 
 
 @Injectable({
@@ -26,8 +28,8 @@ export class CommonService {
   hierarchyList$ = this._hierarchyListSub.asObservable();
 
 
-  // private _allUsersSub = new ReplaySubject<fullHierarchy>(1);
-  // _allUsersSub$ = this._allUsersSub.asObservable();
+  private _allUsersSub = new ReplaySubject<fullHierarchy>(1);
+  _allUsersSub$ = this._allUsersSub.asObservable();
   private baseUrl: string;
   apis: IApis;
   userid: any = 0;
@@ -37,7 +39,7 @@ export class CommonService {
   apis$ = new ReplaySubject<IApis>(1);
   private apisUrl = (environment.siteName == 'lc247') ? environment.BDapisUrl : environment.apisUrl;
   private isPremiumSite = environment.isPremiumSite;
-  hierarchy:any;
+  hierarchy;
   private isBdlevel = environment.isBdlevel;
   private isRental = environment.isRental;
 
@@ -114,33 +116,303 @@ export class CommonService {
       });
   }
 
-  // listHierarchy() {
-  //   this.http
-  //     .get(`${this.baseUrl}/listHierarchy`)
-  //     .subscribe((res: GenericResponse<Hierarchy[][]>) => {
-  //       if (res && res.errorCode === 0) {
-  //         if (this.isPremiumSite && !this.isBdlevel && !this.isRental) {
-  //           res.result[0].forEach(level => {
-  //             level.name = this.BdbetHierarchy[level.name]
-  //           })
-  //         } else if (this.isPremiumSite && this.isBdlevel) {
-  //           res.result[0].forEach(level => {
-  //             level.name = this.sharingHierarchy[level.name]
-  //           })
-  //         } else if (!this.isPremiumSite && this.isBdlevel) {
-  //           res.result[0].forEach(level => {
-  //             level.name = this.sharingHierarchy[level.name]
-  //           })
-  //         } else if (this.isPremiumSite && this.isRental) {
-  //           res.result[0].forEach(level => {
-  //             level.name = this.defaultHierarchy[level.name]
-  //           })
-  //         }
-  //         // console.log(res.result[0]);
+  listHierarchy() {
+    this.http
+      .get(`${this.baseUrl}/listHierarchy`)
+      .subscribe((res: GenericResponse<Hierarchy[][]>) => {
+        if (res && res.errorCode === 0) {
+          if (this.isPremiumSite && !this.isBdlevel && !this.isRental) {
+            res.result[0].forEach(level => {
+              level.name = this.BdbetHierarchy[level.name]
+            })
+          } else if (this.isPremiumSite && this.isBdlevel) {
+            res.result[0].forEach(level => {
+              level.name = this.sharingHierarchy[level.name]
+            })
+          } else if (!this.isPremiumSite && this.isBdlevel) {
+            res.result[0].forEach(level => {
+              level.name = this.sharingHierarchy[level.name]
+            })
+          } else if (this.isPremiumSite && this.isRental) {
+            res.result[0].forEach(level => {
+              level.name = this.defaultHierarchy[level.name]
+            })
+          }
+          // console.log(res.result[0]);
 
-  //         this._hierarchyListSub.next(res.result[0]);
-  //       }
-  //     });
-  // }
+          this._hierarchyListSub.next(res.result[0]);
+        }
+      });
+  }
+  loadfullHierarchy(userid: any = 0) {
+    setTimeout(() => {
+      this.http
+        .get(`${this.baseUrl}/fullHierarchy?last=${userid}`)
+        .subscribe((res: any) => {
+          if (res && res.errorCode === 0) {
+            this._allUsersSub.next(res.result);
+            this.userlist = res.result;
+            this.userid = this.userlist[this.userlist.length - 1];
+            this.usermainid = this.userid?.userId
+            // console.log(this.usermainid)
+            localStorage.setItem('lastuser', this.usermainid);
+
+          }
+        });
+    }, 15000);
+  }
+  fullHierarchy2(userid: any) {
+    return this.http.get(`${this.baseUrl}/fullHierarchy?last=${userid}`);
+  }
+  get hierarchyMap(): Map<number, Hierarchy> {
+    return this.hierarchy;
+  }
+  listAllHierarchy() {
+    this.http
+      .get(`${this.baseUrl}/listAllHierarchy`)
+      .subscribe((res: GenericResponse<Hierarchy[][]>) => {
+        if (res && res.errorCode === 0) {
+
+          if (this.isPremiumSite && !this.isBdlevel && !this.isRental) {
+            res.result[0].forEach(level => {
+              level.name = this.BdbetHierarchy[level.name]
+            })
+
+            let hierarchyMap = new Map<number, Hierarchy>(
+              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+            );
+            // console.log(hierarchyMap);
+            let heirarchyList = Array.from(hierarchyMap);
+            // console.log(heirarchyList);
+            this.vrnlUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'vrnladmin';
+            })[0];
+
+            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'whitelabel';
+            })[0];
+
+            this.adminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'admin';
+            })[0];
+
+            this.subAdminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'senior sub admin';
+            })[0];
+
+            // this.superMasterUserType = heirarchyList.find(([k, v]) => {
+            //   return v.name === 'sub admin';
+            // })[0];
+
+            // this.masterUserType = heirarchyList.find(([k, v]) => {
+            //   return v.name === 'super';
+            // })[0];
+
+            // this.agentUserType = heirarchyList.find(([k, v]) => {
+            //   return v.name === 'master';
+            // })[0];
+
+            // this.clientUserType = heirarchyList.find(([k, v]) => {
+            //   return v.name === 'user';
+            // })[0];
+
+            this.hierarchy = hierarchyMap;
+            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+            this._hierarchyMapSub.next(hierarchyMap);
+          } else if (this.isPremiumSite && this.isBdlevel) {
+            res.result[0].forEach(level => {
+              level.name = this.sharingHierarchy[level.name]
+            })
+
+            let hierarchyMap = new Map<number, Hierarchy>(
+              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+            );
+            // console.log(hierarchyMap);
+            let heirarchyList = Array.from(hierarchyMap);
+            // console.log(heirarchyList);
+            this.vrnlUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'vrnladmin';
+            })[0];
+
+            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'mother panel';
+            })[0];
+
+            this.adminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'whitelabel';
+            })[0];
+
+            this.subAdminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'admin';
+            })[0];
+
+            this.superMasterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'sub admin';
+            })[0];
+
+            this.masterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'super master';
+            })[0];
+
+            this.agentUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'master';
+            })[0];
+
+            this.clientUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'user';
+            })[0];
+
+            this.hierarchy = hierarchyMap;
+            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+            this._hierarchyMapSub.next(hierarchyMap);
+          } else if (!this.isPremiumSite && this.isBdlevel) {
+            res.result[0].forEach(level => {
+              level.name = this.sharingHierarchy[level.name]
+            })
+
+            let hierarchyMap = new Map<number, Hierarchy>(
+              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+            );
+            // console.log(hierarchyMap);
+            let heirarchyList = Array.from(hierarchyMap);
+            // console.log(heirarchyList);
+            this.vrnlUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'vrnladmin';
+            })[0];
+
+            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'mother panel';
+            })[0];
+
+            this.adminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'whitelabel';
+            })[0];
+
+            this.subAdminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'admin';
+            })[0];
+
+            this.superMasterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'sub admin';
+            })[0];
+
+            this.masterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'super master';
+            })[0];
+
+            this.agentUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'master';
+            })[0];
+
+            this.clientUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'user';
+            })[0];
+
+            this.hierarchy = hierarchyMap;
+            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+            this._hierarchyMapSub.next(hierarchyMap);
+          } else if (this.isPremiumSite && this.isRental) {
+            res.result[0].forEach(level => {
+              level.name = this.defaultHierarchy[level.name]
+            })
+            let hierarchyMap = new Map<number, Hierarchy>(
+              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+            );
+            // console.log(hierarchyMap);
+            let heirarchyList = Array.from(hierarchyMap);
+            // console.log(heirarchyList);
+            this.vrnlUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'vrnladmin';
+            })[0];
+
+            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'whitelabel';
+            })[0];
+
+            this.adminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'admin';
+            })[0];
+
+            this.subAdminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'subadmin';
+            })[0];
+
+            this.superMasterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'supermaster';
+            })[0];
+
+            this.masterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'master';
+            })[0];
+
+            this.agentUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'agent';
+            })[0];
+
+            this.clientUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'client';
+            })[0];
+
+            this.hierarchy = hierarchyMap;
+            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+            this._hierarchyMapSub.next(hierarchyMap);
+          } else {
+            let hierarchyMap = new Map<number, Hierarchy>(
+              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+            );
+            // console.log(hierarchyMap);
+            let heirarchyList = Array.from(hierarchyMap);
+            // console.log(heirarchyList);
+            this.vrnlUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'vrnladmin';
+            })[0];
+
+            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'whitelabel';
+            })[0];
+
+            this.adminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'admin';
+            })[0];
+
+            this.subAdminUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'subadmin';
+            })[0];
+
+            this.superMasterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'supermaster';
+            })[0];
+
+            this.masterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'master';
+            })[0];
+
+            this.agentUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'agent';
+            })[0];
+
+            this.clientUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'client';
+            })[0];
+
+            this.hierarchy = hierarchyMap;
+            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+            this._hierarchyMapSub.next(hierarchyMap);
+          }
+          // console.log(res.result[0]);
+        }
+      });
+  }
+  fanybooklist() {
+    let url = `http://103.228.114.32:52135/fanybooklist`;
+    return this.http.get(url)
+
+  }
+  bookmaking() {
+    let url = `http://103.228.114.32:52134/bookmaking`;
+    return this.http.get(url)
+
+  }
+  
   
 }

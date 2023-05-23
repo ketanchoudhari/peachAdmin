@@ -134,6 +134,12 @@
                     </div>
                 </div>
                 <div class="table-responsive data-table" style="overflow: auto; white-space: nowrap;">
+                     <div class="download-reports push" id="example_filter" class="dataTables_filter " style="display: flex; margin-bottom: 10px;">
+                        <a class="btn buttons-pdf " title="Export Pdf"  (click)="exportPdf()">PDF</a>
+                        <a class="btn buttons-excel" title="Export Excel" (click)="exportExcel()">Excel</a>
+                        <!-- <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
+                                aria-controls="example"></label> -->
+                    </div>
                     <table class="custom-table table table-striped" style="width: 100%; text-align: center;">
                         <thead>
                             <tr>
