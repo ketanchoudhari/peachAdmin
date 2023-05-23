@@ -10,7 +10,7 @@ import { ExportService } from 'src/app/services/export-as.service';
 import { GenericResponse } from 'src/app/shared/types/generic-response';
 import { IUserLog } from '../models/user-log';
 import { ShareDataService } from 'src/app/services/share-data.service';
-
+import * as html2pdf from 'html2pdf.js'
 
   
 
@@ -186,8 +186,8 @@ export class AccountStatementComponent {
   }
 
 
-  udt:any;
-  edata:any;
+  udt;
+  edata = [];
   exportExcel() {
     this.udt = {
       data: [
@@ -205,7 +205,7 @@ export class AccountStatementComponent {
       ],
       skipHeader: true,
     };
-    this.userLogs.forEach((x:any) => {
+    this.userLogs.forEach((x) => {
       if (x.type == this.transactionType.DEPOSIT_UPLINE) {
         this.depositUpline = x.amount;
       }
@@ -249,11 +249,11 @@ export class AccountStatementComponent {
       E: this.totalWithdrawDownline
     });
     this.edata.push(this.udt);
-    // this.edata.push(this.udt);
     this.exportService.exportJsonToExcel(this.edata.slice(-1), 'Activity Statement_'+new Date().toDateString());
   }
   exportPdf() {
-    var element = document.getElementById('table_log');
+    var element = document.getElementById('example');
+    console.log(this.exportPdf,"exe")
     var opt = {
       margin: 1,
       filename: 'Activity Statement_'+new Date().toDateString(),
@@ -261,6 +261,6 @@ export class AccountStatementComponent {
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
     };
-    // html2pdf().from(element).set(opt).save();
+    html2pdf().from(element).set(opt).save();
   }
 }
