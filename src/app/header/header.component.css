@@ -314,8 +314,10 @@ text-decoration: none;
     position: static;
     float: none
 }
-.dropdown-menu{
+.dropdown-menu {
   background-color: #1e2040;
+  border-radius: 0;
+  padding: 0 0 0 0;
 }
 .navbar-text {
     display: inline-block;
@@ -699,3 +701,4 @@ text-decoration: none;
   left:340px !important;
   display: none;
   }
+  

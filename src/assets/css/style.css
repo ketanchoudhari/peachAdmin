@@ -367,8 +367,8 @@ p {
 /* Buttons */
 
 .btn-diamond {
-    background-color: var( --theme1-bg) !important;
-    border-color: var( --theme1-bg) !important;
+    background-color: var(--theme1-bg) !important;
+    border-color: var(--theme1-bg) !important;
     color: var(--primary-color) !important;
     padding: 6px 10px;
 }
@@ -395,8 +395,8 @@ p {
 }
 
 .btn-submit {
-    background-color: var( --theme1-bg);
-    border-color: var( --theme1-bg);
+    background-color: var(--theme1-bg);
+    border-color: var(--theme1-bg);
     color: var(--primary-color);
 }
 
@@ -406,8 +406,8 @@ p {
 }
 
 .btn-submit:hover {
-    background-color: var( --theme1-bg);
-    border-color: var( --theme1-bg);
+    background-color: var(--theme1-bg);
+    border-color: var(--theme1-bg);
     color: var(--primary-color);
 }
 
@@ -877,6 +877,7 @@ input+.slider span:last-child {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
+
 #sub-dropdown {
     padding: 0px 0;
     margin: 0 0 0;
@@ -887,6 +888,7 @@ input+.slider span:last-child {
     box-shadow: none !important;
     background-color: #1E2040;
 }
+
 #sub-dropdown :hover {
     background: var(--theme2-bg);
     color: var(--secondary-color);
@@ -1371,7 +1373,8 @@ ul.mtree.transit li.mtree-open>a::after {
 }
 
 .main-container {
-    padding-top: 0px; /*to reduce the height of top div of label*/
+    padding-top: 0px;
+    /*to reduce the height of top div of label*/
 }
 
 .back {
@@ -1447,7 +1450,7 @@ ul.mtree.transit li.mtree-open>a::after {
 }
 
 .fancy-marker-title h4 {
-    background-color: var(--theme2-bg70) ;
+    background-color: var(--theme2-bg70);
     color: var(--secondary-color);
     font-size: 14px;
     padding: 6px 8px;
@@ -1836,10 +1839,12 @@ select.form-control {
     top: 55%;
     right: 10px;
 }
+
 .fa-caret-down:before {
     content: "\f0d7";
     margin-left: 5px;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
     color: #000;
 }
@@ -2000,7 +2005,7 @@ tr.suspended-fancy {
     padding-right: 15px;
 }
 
-.btn-report{
+.btn-report {
     background-color: var(--theme1-bg) !important;
     border-color: var(--theme1-bg) !important;
     color: var(--primary-color) !important;
@@ -2009,6 +2014,7 @@ tr.suspended-fancy {
     height: 40px;
     border-radius: 5px;
 }
+
 /*Horse Design*/
 
 .game-header {
@@ -2132,9 +2138,11 @@ tr.suspended-fancy {
     display: inline-block;
     width: auto;
 }
-.dataTables_length{
+
+.dataTables_length {
     margin-top: 10px;
 }
+
 .dataTables_filter {
     text-align: right;
 }
@@ -2554,18 +2562,23 @@ tr.suspended-fancy {
     0% {
         color: red;
     }
+
     20% {
         color: red;
     }
+
     40% {
         color: red;
     }
+
     60% {
         color: red;
     }
+
     80% {
         color: #000;
     }
+
     100% {
         color: #000;
     }
@@ -2575,18 +2588,23 @@ tr.suspended-fancy {
     0% {
         color: red;
     }
+
     20% {
         color: red;
     }
+
     40% {
         color: red;
     }
+
     60% {
         color: red;
     }
+
     80% {
         color: #000;
     }
+
     100% {
         color: #000;
     }
@@ -2851,6 +2869,7 @@ td.suspendedtd:after {
     from {
         opacity: 1.0;
     }
+
     to {
         opacity: 0.0;
     }
@@ -2867,23 +2886,28 @@ td.suspendedtd:after {
 }
 
 @keyframes pulse {
+
     0%,
     100% {
         background-color: red;
     }
+
     50% {
         background-color: #F9A9BA;
     }
 }
 
 @keyframes nudge {
+
     0%,
     100% {
         transform: translate(0, 0);
     }
+
     50% {
         transform: translate(15px, 0);
     }
+
     100% {
         transform: translate(30px, 0);
     }
@@ -2893,15 +2917,19 @@ td.suspendedtd:after {
     0% {
         background-color: #ffc01a;
     }
+
     49% {
         background-color: #ffc01a;
     }
+
     50% {
         background-color: #ffc01a;
     }
+
     99% {
         background-color: #ffc01a;
     }
+
     100% {
         background-color: #ffc01a;
     }
@@ -2911,15 +2939,19 @@ td.suspendedtd:after {
     0% {
         background-color: #ffc01a;
     }
+
     49% {
         background-color: #ffc01a;
     }
+
     50% {
         background-color: #ffc01a;
     }
+
     99% {
         background-color: #ffc01a;
     }
+
     100% {
         background-color: #ffc01a;
     }
@@ -2929,15 +2961,19 @@ td.suspendedtd:after {
     0% {
         background-color: #ffc01a;
     }
+
     49% {
         background-color: #ffc01a;
     }
+
     50% {
         background-color: #ffc01a;
     }
+
     99% {
         background-color: #ffc01a;
     }
+
     100% {
         background-color: #ffc01a;
     }
@@ -3620,15 +3656,18 @@ marquee.casino-remark {
         -webkit-transform: translate(-5px, -50px);
         transform: translate(-5px, -50px);
     }
+
     10%,
     90% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
         -webkit-transform: translate(-5px, 0px);
         transform: translate(-5px, 0px);
     }
+
     100% {
         opacity: 0;
         -webkit-transform: translate(-5px, 50px);
@@ -3642,15 +3681,18 @@ marquee.casino-remark {
         -webkit-transform: translate(-5px, -50px);
         transform: translate(-5px, -50px);
     }
+
     10%,
     90% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
         -webkit-transform: translate(-5px, 0px);
         transform: translate(-5px, 0px);
     }
+
     100% {
         opacity: 0;
         -webkit-transform: translate(-5px, 50px);
@@ -4037,9 +4079,11 @@ marquee.casino-remark {
     0% {
         transform: scale(0);
     }
+
     50% {
         transform: scale(1.5);
     }
+
     100% {
         transform: scale(1);
     }
@@ -4492,11 +4536,13 @@ marquee.casino-remark {
         /*transform: scale(1);*/
         color: #ffff00;
     }
+
     50% {
         /*-webkit-transform: scale(1.2);*/
         /*transform: scale(1.2);*/
         color: #ff0000;
     }
+
     100% {
         /*-webkit-transform: scale(1);*/
         /*transform: scale(1);*/
@@ -4510,11 +4556,13 @@ marquee.casino-remark {
         /*transform: scale(1);*/
         color: #ffff00;
     }
+
     50% {
         /*-webkit-transform: scale(1.2);*/
         /*transform: scale(1.2);*/
         color: #ff0000;
     }
+
     100% {
         /*-webkit-transform: scale(1);*/
         /*transform: scale(1);*/
@@ -4528,11 +4576,13 @@ marquee.casino-remark {
         /*transform: scale(1);*/
         color: #ffff00;
     }
+
     50% {
         /*-webkit-transform: scale(1.2);*/
         /*transform: scale(1.2);*/
         color: #ff0000;
     }
+
     100% {
         /*-webkit-transform: scale(1);*/
         /*transform: scale(1);*/
@@ -4940,15 +4990,19 @@ img.rrotate {
     0% {
         background-color: yellow;
     }
+
     49% {
         background-color: yellow;
     }
+
     50% {
         background-color: red;
     }
+
     99% {
         background-color: red;
     }
+
     100% {
         background-color: yellow;
     }
@@ -6314,24 +6368,27 @@ img.rrotate {
     background-color: var(--theme2-bg);
 }
 
-.race-details .suspended:after{
+.race-details .suspended:after {
     width: 60% !important;
 }
-#col-md-3{
-    margin-top: 23px;
+
+#col-md-3 {
+    margin-top: 34px;
     padding: 0 0 0 0;
     margin-left: -2.1em;
-  }
-  #col-md-2{
-    margin-top:23px;
-    padding-left:0;
+}
 
-  }
-  .btn-report{
+#col-md-2 {
+    margin-top: 34px;
+    padding-left: 0;
+
+}
+
+.btn-report {
     margin-left: 6px;
-  }
+}
 
-  .mx-input {
+.mx-input {
     display: block;
     width: 100%;
     padding: .375rem .75rem;
@@ -6342,8 +6399,9 @@ img.rrotate {
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
+
 /* .bs-calendar-layout{
     text-align: center;
     width: 23px;
@@ -6368,12 +6426,14 @@ img.rrotate {
 }
 
 .selected {
-    background-image: linear-gradient(to bottom,#08c,#04c);
+    background-image: linear-gradient(to bottom, #08c, #04c);
     border-radius: 4px !important;
 }
-.bs-datepicker-head{
+
+.bs-datepicker-head {
     background-color: #fff !important;
 }
+
 .bs-datepicker-head button {
     display: inline-block;
     vertical-align: top;
@@ -6387,10 +6447,12 @@ img.rrotate {
     color: #0c0c0c !important;
     transition: 0.3s;
 }
+
 .ng-select-container {
     height: 40px !important;
-    border: 1px solid #bfbfbf  !important;
+    border: 1px solid #bfbfbf !important;
 }
+
 .ng-dropdown-panel {
     opacity: 1;
     border-radius: 10px !important;
@@ -6399,7 +6461,8 @@ img.rrotate {
     padding-bottom: 6px !important;
     margin-top: 1px !important;
 }
-.ng-option:hover{
+
+.ng-option:hover {
     background-color: #48a1ff !important;
 }
 
@@ -6409,47 +6472,52 @@ img.rrotate {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
-  }
+}
 
-  .tab {
+.tab {
     cursor: pointer;
     padding: 10px;
-  }
+}
 
-  .tab.active {
+.tab.active {
     background-color: gray;
     color: white;
-  }
+}
 
-  .tab-content {
+.tab-content {
     margin-top: 20px;
-  }
-.margin-1{
+}
+
+.margin-1 {
     margin: 15px;
 }
-.sec-hedding{
+
+.sec-hedding {
     display: flex;
     margin-top: 10px;
 
 }
-.headding-btn{
+
+.headding-btn {
     position: absolute;
     right: 0;
     margin-top: 17px;
     margin-right: 30px;
 }
-#ngbNav{
+
+#ngbNav {
     margin-left: 10px;
 }
-.col-md-5{
 
+.col-md-5 {}
+
+@media (min-width: 768px) {
+    .col-bt-1 {
+        flex: 0 0 21.666667%;
+        max-width: 19.666667%;
+    }
 }
-@media (min-width: 768px){
-.col-bt-1 {
-    flex: 0 0 21.666667%;
-    max-width: 19.666667%;
-}
-}
+
 /* .col-gd-2{
     width: 8em;
 } */
@@ -6466,7 +6534,7 @@ img.rrotate {
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .btn-pop {
@@ -6483,43 +6551,54 @@ img.rrotate {
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-.cal-width{
+
+.cal-width {
     margin-right: 5px;
     width: 8rem;
 }
-.my-timepicker{
+
+.my-timepicker {
     width: 8em;
 }
-.grid-row{
+
+.grid-row {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Create four equal-width columns */
-    grid-gap: 10px; /* Add gap between grid items */
+    grid-template-columns: repeat(6, 1fr);
+    /* Create four equal-width columns */
+    grid-gap: 10px;
+    /* Add gap between grid items */
     overflow: auto;
 }
-.btn-flex{
+
+.btn-flex {
     display: flex;
 }
-.col-bt-10{
+
+.col-bt-10 {
     /* margin-right: 10px; */
     width: 7.8em;
     margin-top: 1.4em;
 }
+
 /* .solid-size{
     grid-column: span 4;
 } */
-.col-wide{
+.col-wide {
     grid-column: 1 / 3;
 }
+
 @media (max-width: 768px) {
     .grid-row {
-      grid-template-columns: repeat(2, 1fr); /* Change to two columns for smaller screens */
+        grid-template-columns: repeat(2, 1fr);
+        /* Change to two columns for smaller screens */
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .grid-row {
-      grid-template-columns: repeat(2, 1fr); /* Change to a single column for even smaller screens */
+        grid-template-columns: repeat(2, 1fr);
+        /* Change to a single column for even smaller screens */
     }
-  }
+}
