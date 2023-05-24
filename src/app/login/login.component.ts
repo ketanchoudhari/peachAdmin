@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
   siteName=environment.siteName;
   errorMsg: any;
   isCaptchaInTransit: boolean;
+  userdata: any;
+
   captchaImg: SafeResourceUrl;
 
   showCaptcha: boolean = environment.captcha;
-  userdata: any;
   userId: any;
 
 

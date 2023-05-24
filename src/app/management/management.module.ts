@@ -14,6 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RacesComponent } from './races/races.component';
 import { SportsComponent } from './sports/sports.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 const routes: Routes = [
@@ -64,6 +65,7 @@ const routes: Routes = [
     ModalModule,
     FormsModule,
     NgxPaginationModule,
+    DirectivesModule,
     TimepickerModule.forRoot(),
     NgbModule
   ],

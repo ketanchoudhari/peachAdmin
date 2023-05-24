@@ -123,8 +123,37 @@ input#ALl {
   align-items: center;
 }
 .input-list input {
-  margin: 0 8px;
+  margin: 0 8px !important;
 }
 label, select, summary, textarea {
   touch-action: manipulation;
+}
+
+input:checked ~ .checkmark {
+  background-color: #444  !important;
+}
+input:disabled {
+  background-color: #d4d4d4 !important;
+}
+input#admin {
+  box-shadow: none !important;
+}
+input#usersWise
+{
+  box-shadow: none !important;
+}
+input#subadmin {
+  box-shadow: none !important;
+}
+input#supermaster{
+  box-shadow: none !important;
+}
+input#master{
+  box-shadow: none !important;
+}
+input#agent{
+  box-shadow: none !important;
+}
+input#client  {
+  box-shadow: none !important;
 }

@@ -22,12 +22,27 @@ export class SettingsService {
     });
    }
 
-   setSetting(data: ISetting) {
+  setSetting(data: ISetting) {
     return this.httpClient.post(`${this.baseUrl}/setSetting`, data);
   }
 
   listSetting(data: {typeWise: string, value: string, userId}) {
     return this.httpClient.get(`${this.baseUrl}/listSetting?typeWise=${data.typeWise}&value=${data.value}&userId=${data.userId}`)
   }
-  
+  listTeenpatti(selectedUid?: number) {
+    if (selectedUid) {
+      return this.httpClient.get(
+        `${this.baseUrl}/listCasinoTable/${selectedUid}`
+      );
+    } else {
+      return this.httpClient.get(`${this.baseUrl}/listCasinoTable`);
+    }
+  }
+  setdefaultSetting(data : string){
+    return this.httpClient.post(`${this.baseUrl}/resetSettings/${data}`,{});
+  }
+
+  activeCasino(params) {
+    return this.httpClient.post(`${this.baseUrl}/activateCasinoTable`, params);
+  }
 }

@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbAlertModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from "../pipes/pipes.module";
 
 
 const routes: Routes = [
@@ -74,31 +75,32 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    DownlineComponent,
-    MarketComponent,
-    AllCasinoComponent,
-    DiamondCasinoComponent,
-    SnCasinoComponent,
-    SlotcasinoComponent,
-    BetgamesComponent,
-    AwcComponent,
-    PokerComponent,
-    LogInoutComponent,
-    RecentAccountComponent
-  ],
-  imports: [
-    CommonModule,
-    ModalModule,
-    FormsModule,
-    BsDatepickerModule.forRoot(),
-    RouterModule.forChild(routes),
-    NgSelectModule,
-    NgbNavModule,
-    NgbAlertModule,
-    NgbTimepickerModule,
-    NgxPaginationModule
-  ],
-  exports:[RouterModule]
+    declarations: [
+        DownlineComponent,
+        MarketComponent,
+        AllCasinoComponent,
+        DiamondCasinoComponent,
+        SnCasinoComponent,
+        SlotcasinoComponent,
+        BetgamesComponent,
+        AwcComponent,
+        PokerComponent,
+        LogInoutComponent,
+        RecentAccountComponent,
+    ],
+    exports: [RouterModule],
+    imports: [
+        CommonModule,
+        ModalModule,
+        FormsModule,
+        BsDatepickerModule.forRoot(),
+        RouterModule.forChild(routes),
+        NgSelectModule,
+        NgbNavModule,
+        NgbAlertModule,
+        NgbTimepickerModule,
+        NgxPaginationModule,
+        PipesModule
+    ]
 })
 export class ReportModule { }
