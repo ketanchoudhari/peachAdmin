@@ -31,9 +31,9 @@ export class ReportsService {
     return this.httpClient.get(`${this.baseUrl}/failedLogInReport`);
   }
 
-  plReportByDownLine(datefrom: string, dateto: string) {
+  plReportByDownLine(selectfromdate: string, selecttodate: string) {
     return this.httpClient.get(
-      `${this.baseUrl}/plReportByDownLine?from=${datefrom}&to=${dateto}`
+      `${this.baseUrl}/plReportByDownLine?from=${selectfromdate}&to=${selecttodate}`
     );
   }
 
