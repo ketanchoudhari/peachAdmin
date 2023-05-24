@@ -143,11 +143,12 @@ export class CommonService {
         }
       });
   }
-  loadfullHierarchy(userid: any = 0) {
+  loadfullHierarchy(userid:any=0 ) {
     setTimeout(() => {
       this.http
         .get(`${this.baseUrl}/fullHierarchy?last=${userid}`)
         .subscribe((res: any) => {
+          // console.log("loadfullhierarchy",res)
           if (res && res.errorCode === 0) {
             this._allUsersSub.next(res.result);
             this.userlist = res.result;
@@ -160,6 +161,7 @@ export class CommonService {
         });
     }, 15000);
   }
+
   fullHierarchy2(userid: any) {
     return this.http.get(`${this.baseUrl}/fullHierarchy?last=${userid}`);
   }

@@ -683,7 +683,7 @@ export class SubComponent implements OnInit {
             if (res && res.errorCode === 0) {
               this.addMemberModalOpen = false;
               this.toastr.success('User Created');
-              this.listUsers(this.selectedUid, this.userType, this.usersStatus);
+              this.listUsers(this.selectedUid);
               this.commonService.updateBalance();
               this.userRegForm.reset(this.userRegDefaultValues);
             } else {

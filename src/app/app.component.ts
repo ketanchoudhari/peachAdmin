@@ -59,7 +59,7 @@ export class AppComponent {
     if (this.auth.checkIsLoggedIn()) {
       this.commonService.apis$.subscribe((res) => {
         // console.log(res);
-        this.commonService.loadfullHierarchy();
+        // this.commonService.loadfullHierarchy();
         this.commonService.listHierarchy();
         this.commonService.listAllHierarchy();
         this.commonService.updateBalance();

@@ -52,4 +52,7 @@ export class DownlineComponent {
   toggleMeridian() {
 		this.meridian = !this.meridian;
 	}
+  showDefault(){
+    console.log("show default working")
+  }
 }
