@@ -36,4 +36,17 @@ listSetting(data: { typeWise: string; value: string; userId;sportId }) {
       `${this.baseUrl}/listSetting?typeWise=${data.typeWise}&value=${data.value}&userId=${data.userId}&sportId=${data.sportId}`
     );
   }
+  listTeenpatti(selectedUid?: number) {
+    if (selectedUid) {
+      return this.httpClient.get(
+        `${this.baseUrl}/listCasinoTable/${selectedUid}`
+      );
+    } else {
+      return this.httpClient.get(`${this.baseUrl}/listCasinoTable`);
+    }
+  }
+
+  activeCasino(params) {
+    return this.httpClient.post(`${this.baseUrl}/activateCasinoTable`, params);
+  }
 }

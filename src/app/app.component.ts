@@ -1,10 +1,11 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, TitleCasePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CommonService } from './services/models/common.service';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { IApis } from './shared/types/apis';
+import { Meta, Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -24,6 +25,11 @@ export class AppComponent {
     private commonService: CommonService,
     private auth: AuthService,
     private router: Router,
+    private titleService: Title,
+    private readonly meta: Meta,
+    private titleCase: TitleCasePipe,
+
+
 
 
     @Inject(DOCUMENT) private document: Document,
@@ -68,19 +74,19 @@ export class AppComponent {
     } else {
       this.router.navigate(['/login']);
     }
-    // this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
-    //   if (isLoggedIn) {
-    //     this.commonService.hierarchyMap$.subscribe((list) => {
-    //       this.titleService.setTitle(
-    //         this.titleCase.transform(
-    //           list.get(this.auth.currentUser.userType).name
-    //         )
-    //       );
-    //     });
-    //   } else {
-    //     this.titleService.setTitle('Admin');
-    //   }
-    // });
+    this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.commonService.hierarchyMap$.subscribe((list) => {
+          this.titleService.setTitle(
+            this.titleCase.transform(
+              list.get(this.auth.currentUser.userType).name
+            )
+          );
+        });
+      } else {
+        this.titleService.setTitle('Admin');
+      }
+    });
   }
   
 

@@ -14,6 +14,9 @@ import { GenericResponse } from '../shared/types/generic-response';
 import { IUserList } from '../users/models/user-list';
 import { environment } from 'src/environments/environment';
 import { CommonService } from '../services/models/common.service';
+import { ShareDataService } from '../services/share-data.service';
+import { MmService } from '../management/mm/mm.service';
+import { DataFormatService } from '../services/data-format.service';
 
 export class SettingsWise {
   typeWise: string;
@@ -74,14 +77,22 @@ export class SettingsComponent implements OnInit {
   ];
 
   constructor(
+    private authService: AuthService,
     private common:CommonService,
     private usersService:UsersService,
     private settingsService:SettingsService,
     private auth:AuthService,
     private formBuilder:FormBuilder,
     private toastr : ToastrService,
+    private MmService: MmService,
+    private dataFormatService: DataFormatService,
 
-  ){
+
+
+
+
+  )
+  {
 
   }
   ngOnInit(): void {
@@ -132,8 +143,95 @@ export class SettingsComponent implements OnInit {
 
     };
     this.common.apis$.subscribe((res) => {
-    this.getSettings();
+      this.usersService
+        .listUser(this.auth.currentUser.userId, undefined, 'active')
+        .subscribe((res: GenericResponse<IUserList[]>) => {
+          if (res.errorCode === 0) {
+            res.result[0].users.forEach((user) => {
+              if (user.userType in this.usersListMap) {
+                this.usersListMap[user.userType].push(user);
+              } else {
+                this.usersListMap[user.userType] = [user];
+              }
+            });
+          }
+        });
+      this.getSettings();
+
+      // this.settingsService
+      //   .listSetting(getSettingsData)
+      //   .subscribe((res: GenericResponse<any>) => {
+      //     if (res && res.errorCode === 0) {
+      //       if (res.result.length) {
+      //         res.result[0] = Object.entries(res.result[0]).reduce(
+      //           (acc, [key, value]) => {
+      //             if (value && typeof value == 'object') {
+      //               value = Object.entries(value).reduce((a, [k, v]) => {
+      //                 if (v) {
+      //                   a[k] = v;
+      //                 }
+      //                 return a;
+      //               }, {});
+      //             }
+      //             if (!!value) {
+      //               acc[key] = value;
+      //             }
+      //             return acc;
+      //           },
+      //           {}
+      //         );
+      //         this.resetSettingInputs();
+      //         this.settingForm.patchValue(res.result[0]);
+      //       } else {
+      //         this.resetSettingInputs();
+      //       }
+      //     } else {
+      //       this.resetSettingInputs();
+      //     }
+      //   });
+
+      this.MmService
+        .activateListGame()
+        .subscribe((res: GenericResponse<IEvent[]>) => {
+          if (res.errorCode === 0 && res.result) {
+            this.eventsList = res.result;
+            this.eventsList = this.eventsList.filter((e) => e.markets);
+            this.eventsList.forEach((event) => {
+              event.markets.map((market) => {
+                market.sportsName = event.sportsName;
+              });
+            });
+            this.competitionList = this.dataFormatService.competitionWise(
+              this.eventsList
+            );
+            // console.log(this.competitionList);
+
+            this.marketList = this.dataFormatService.marketWise(
+              this.eventsList
+            );
+          }
+        });
+
+      this.settingsService
+        .listTeenpatti()
+        // .subscribe((res: GenericResponse<ICasinoTable[]>) => {
+        //   if (res.errorCode === 0) {
+        //     this.casinoTablesList = res.result;
+        //     this.casinoTablesList.forEach((table) => {
+        //       let m: ICasinoMarket;
+        //       table.markets?.forEach((market) => {
+        //         m = {
+        //           tableName: table.tableName,
+        //           marketName: market.marketName,
+        //           gameId: market.gameId,
+        //         };
+        //         this.casinoMarketsList.push(m);
+        //       });
+        //     });
+        //   }
+        // });
     });
+    
 
    
     this.settingsWise$.subscribe((settingsWise) => {
@@ -722,6 +820,8 @@ selectMarket(gameId: string, sport: string) {
 
   if (market) {
     settingWise.sport = market.eventTypeId;
+    console.log(this.marketList,"market")
+
   } else {
     // settingWise.sport = this.casinoMarketsList.find(
     //   (market) => market.gameId === gameId

@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
   siteName=environment.siteName;
   errorMsg: any;
   isCaptchaInTransit: boolean;
+  userdata: any;
+
   captchaImg: SafeResourceUrl;
 
   showCaptcha: boolean = environment.captcha;
@@ -117,7 +119,7 @@ export class LoginComponent implements OnInit {
               };
               // this.usersService.setSharing(sharing);
               this.commonService.listHierarchy();
-              // this.commonService.loadfullHierarchy(this.userdata);
+              this.commonService.loadfullHierarchy(this.userdata);
               this.commonService.listAllHierarchy();
               this.commonService.updateBalance();
               setTimeout(() => {
