@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   captchaImg: SafeResourceUrl;
 
   showCaptcha: boolean = environment.captcha;
-  userdata: any;
   userId: any;
 
 

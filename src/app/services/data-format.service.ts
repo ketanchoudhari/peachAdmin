@@ -20,7 +20,6 @@ export class DataFormatService {
     })
     return competitions;
   }
-
   marketWise(activeGames: IEvent[]) {
     let markets = [];
     activeGames.forEach((event: IEvent) => {

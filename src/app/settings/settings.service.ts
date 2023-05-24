@@ -22,7 +22,7 @@ export class SettingsService {
     });
    }
 
-   setSetting(data: ISetting) {
+  setSetting(data: ISetting) {
     return this.httpClient.post(`${this.baseUrl}/setSetting`, data);
   }
 
@@ -37,6 +37,9 @@ export class SettingsService {
     } else {
       return this.httpClient.get(`${this.baseUrl}/listCasinoTable`);
     }
+  }
+  setdefaultSetting(data : string){
+    return this.httpClient.post(`${this.baseUrl}/resetSettings/${data}`,{});
   }
 
   activeCasino(params) {
