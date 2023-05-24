@@ -1,15 +1,22 @@
 <nav class="navbar navbar-expand-lg ">
-  
+
   <a class="navbar-brand" href="#">
-    <img src="assets/images/logo-cricbuzzer.png" height="30px">
+    <img src="../../assets/images/logo-cricbuzzer.png" height="30px">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <span class="navbar-toggler-icon"> </span>
+  </button> -->
+
+
+  <div class="side-menu-button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+</div>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" style="padding-left: 0em !important; padding-right: 10em;">
       <li class="nav-item" >
         <a class="nav-link" routerLink="/active-user">List of Clients</a>
       </li>
@@ -17,12 +24,11 @@
         <a class="nav-link blink-ipl"  routerLink="/active-running-users">IPL 2023</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Market Analysis</a>
+        <a class="nav-link" routerLink="/market-nalysis">Market Analysis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  routerLink="/settings">settings</a>
+        <a class="nav-link"routerLink="/settings">Settings</a>
       </li>
-   
       <li class="nav-item dropdown list-dropdown">
         <a class="nav-link dropdown-toggle " id="dropdown-menu"routerLink="/market-anaylish" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -45,8 +51,6 @@
           <a class="dropdown-item" routerLink="account/account-Statement">Account's Statement</a>
           <a class="dropdown-item" routerLink="account/account-sum">Account Summary</a>
           <a class="dropdown-item" routerLink="account/account-details">Account Details</a>
-          <!-- <a class="dropdown-item" routerLink="account/banking">banking</a> -->
-
         </div>
       </li>
       <li class="nav-item dropdown list-dropdown">
@@ -67,24 +71,38 @@
           <li>
             <a class="dropdown-item" routerLink="management/mmc">MM</a>
           </li>
-          <li class="dropdown-item sub-import" routerLink="management/mmc">
-            <a href="#">Import</a>
-            <ul class="sub-options">
-              <li class="sub-style"  style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#">Race Import</a></li>
-              <li class="sub-style" style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#" >Sport Import</a></li>
+
+
+
+
+
+          <li class="dropdown-submenu " >
+            <a href="#" class="dropdown-item dropdown-toggle">Import</a>
+            <ul class="dropdown-menu">
+              <li ><a class=" dropdown-item"   routerLink="management/race">Race Import</a></li>
+              <li  ><a class="dropdown-item" routerLink="management/sports" >Sport Import</a></li>
             </ul>
           </li>
-          <li class="dropdown-item sub-import" routerLink="management/mmc">
-            <a href="#">Messages</a>
+
+          <li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle">Messages</a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="messages/ticker">Ticker</a></li>
+              <li><a class="dropdown-item" routerLink="stakesettings">Stack Setting</a></li>
+              </ul>
+              </li>
+          <!-- <li class="dropdown-item sub-import" routerLink="management/mmc">
+            <a href="#"></a>
             <ul class="sub-options">
               <li class="sub-style"  style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#">Ticker</a></li>
               <li class="sub-style" style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#" >Stack Setting</a></li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </li>
-      
-      
+
+
       <li class="nav-item dropdown list-dropdown">
         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -107,7 +125,7 @@
         </div>
       </li>
     </ul>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row search-group">
       <div class="dropdown mr-2">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">

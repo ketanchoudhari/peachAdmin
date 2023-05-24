@@ -49,7 +49,7 @@ export class AuthService {
     
     commonService.apis$.subscribe((res) => {
 
-      console.log(res,"resp");
+      // console.log(res,"resp");
       
       if (!environment.isProduction) {
         // console.log(this.router.url,'this url');

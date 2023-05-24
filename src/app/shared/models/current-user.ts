@@ -5,6 +5,8 @@ export class CurrentUser  {
   cricketFancySharing!: number;
   cricketSharing!: number;
   currencyCode!: string;
+  lcbd:boolean;
+  lcbd1:boolean;
   dogRaceSharing!: number;
   domainAllocation!: boolean;
   allowDomainAllocation!: boolean;

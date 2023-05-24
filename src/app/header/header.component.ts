@@ -90,7 +90,7 @@ export class HeaderComponent {
   // }
   logout(){
     this.token.delete();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 }
 

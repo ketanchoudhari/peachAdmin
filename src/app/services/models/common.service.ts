@@ -10,7 +10,6 @@ import { fullHierarchy } from 'src/app/users/models/user-list';
 export const HIERARCY_LIST = 'hierarcy_list';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +38,7 @@ export class CommonService {
   apis$ = new ReplaySubject<IApis>(1);
   private apisUrl = (environment.siteName == 'lc247') ? environment.BDapisUrl : environment.apisUrl;
   private isPremiumSite = environment.isPremiumSite;
-  hierarchy;
+  hierarchy:any;
   private isBdlevel = environment.isBdlevel;
   private isRental = environment.isRental;
 
@@ -109,7 +108,7 @@ export class CommonService {
     this.http
       .get(`${this.baseUrl}/balance`)
       .subscribe((res: any)=> {
-        console.log(res,"respocom");
+        // console.log(res,"respocom");
         if (res && res.errorCode === 0) {
           this._balanceSub.next(res.result[0].balance);
         }
@@ -167,6 +166,7 @@ export class CommonService {
   get hierarchyMap(): Map<number, Hierarchy> {
     return this.hierarchy;
   }
+
   listAllHierarchy() {
     this.http
       .get(`${this.baseUrl}/listAllHierarchy`)
@@ -200,21 +200,21 @@ export class CommonService {
               return v.name === 'senior sub admin';
             })[0];
 
-            // this.superMasterUserType = heirarchyList.find(([k, v]) => {
-            //   return v.name === 'sub admin';
-            // })[0];
+            this.superMasterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'sub admin';
+            })[0];
 
-            // this.masterUserType = heirarchyList.find(([k, v]) => {
-            //   return v.name === 'super';
-            // })[0];
+            this.masterUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'super';
+            })[0];
 
-            // this.agentUserType = heirarchyList.find(([k, v]) => {
-            //   return v.name === 'master';
-            // })[0];
+            this.agentUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'master';
+            })[0];
 
-            // this.clientUserType = heirarchyList.find(([k, v]) => {
-            //   return v.name === 'user';
-            // })[0];
+            this.clientUserType = heirarchyList.find(([k, v]) => {
+              return v.name === 'user';
+            })[0];
 
             this.hierarchy = hierarchyMap;
             // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
@@ -403,16 +403,5 @@ export class CommonService {
         }
       });
   }
-  fanybooklist() {
-    let url = `http://103.228.114.32:52135/fanybooklist`;
-    return this.http.get(url)
-
-  }
-  bookmaking() {
-    let url = `http://103.228.114.32:52134/bookmaking`;
-    return this.http.get(url)
-
-  }
-  
   
 }

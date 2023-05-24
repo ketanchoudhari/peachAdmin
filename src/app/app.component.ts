@@ -64,7 +64,7 @@ export class AppComponent {
     this.commonService.getApis();
     if (this.auth.checkIsLoggedIn()) {
       this.commonService.apis$.subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         this.commonService.loadfullHierarchy();
         this.commonService.listHierarchy();
         this.commonService.listAllHierarchy();
