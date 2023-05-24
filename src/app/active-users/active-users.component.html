@@ -6,7 +6,7 @@
             <div class="float-right m-b-10">
                 <p class="text-right">
                     <a href=""
-                        class="btn btn-diamond" routerLink="/add-account">Add Account </a>
+                        class="btn btn-diamond" routerLink="/add-account" >Add Account </a>
                 </p>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <tbody>
                     <tr role="row">
                         <td></td>
-                        <td class="text-right"><b>43</b></td>
+                        <td class="text-right"><b></b></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -44,11 +44,12 @@
                         </td>
                         <td></td>
                     </tr>
-                    <tr role="row">
-                        <td class="uname">
-                            <a href="javascript:void(0)" title="roman">01roman</a>
+                    <tr role="row" *ngFor="let user of userList">
+                        <td class="uname" >
+                            <a href="javascript:void(0)" title="roman">{{user.userName}}</a>
                         </td>
-                        <td class="crf text-right">0</td>
+              
+                        <td class="crf text-right">{{user.creditRef}}</td>
                         <td class="ustatus">
                             <label class="form-check-label">
                                 <input  type="checkbox" disabled="" checked="'checked'">
@@ -61,11 +62,11 @@
                                 <span class="checkmark"></span>
                             </label>
                         </td>
-                        <td class="exlimit text-right">0</td>
+                        <td class="exlimit text-right">{{user.exposure}}</td>
                         <td class="comm">
                             <p>0</p>
                         </td>
-                        <td class="atype">User</td>
+                        <td class="atype lv_{{user.userType}}" ></td>
                         <td class="text-right">
                             0.00
                         </td>

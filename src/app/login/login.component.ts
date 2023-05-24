@@ -13,6 +13,7 @@ import { DomSanitizer, Meta, SafeResourceUrl } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { CommonService } from '../services/models/common.service';
 import { DataShareService } from '../services/data-share.service';
+import { UsersService } from '../users/users.service';
 
 
 @Component({
@@ -47,8 +48,8 @@ export class LoginComponent implements OnInit {
     private sanitization: DomSanitizer,
     private meta:Meta,
     private commonService: CommonService,
-    private dataShareing : DataShareService
-
+    private dataShareing : DataShareService,
+    private usersService:UsersService
 
 
 
@@ -122,9 +123,9 @@ export class LoginComponent implements OnInit {
                 soccerSharing: res.result[0].soccerSharing,
                 tennisSharing: res.result[0].tennisSharing,
               };
-              // this.usersService.setSharing(sharing);
+              this.usersService.setSharing(sharing);
               this.commonService.listHierarchy();
-              this.commonService.loadfullHierarchy(this.userdata);
+              this.commonService.loadfullHierarchy(this.userId);
               this.commonService.listAllHierarchy();
               this.commonService.updateBalance();
               setTimeout(() => {

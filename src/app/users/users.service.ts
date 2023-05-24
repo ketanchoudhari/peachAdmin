@@ -70,6 +70,11 @@ export class UsersService {
         return this.httpClient.get(`${this.baseUrl}/listUsers/${selctedUid}?active=${userStatus}`);
       }
     }
+    listsUsers(selctedUid: number){
+      return this.httpClient.get(
+        `${this.baseUrl}/listUsers/${selctedUid}`
+      );
+    }
 
     fullHierarchy(){
       return this.httpClient.get(`${this.baseUrl}/fullHierarchy`);

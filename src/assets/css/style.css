@@ -6602,3 +6602,52 @@ img.rrotate {
         /* Change to a single column for even smaller screens */
     }
 }
+
+.lv_1:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Vrnladmin";
+}
+.lv_2:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Whitelabel";
+}
+.lv_3:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Admin";
+}
+.lv_4:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Subadmin";
+}
+.lv_5:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Supermaster";
+}
+.lv_6:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Master";
+}
+.lv_7:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Agent";
+}
+.lv_8:after{
+    /* font-weight: bold; */
+    text-align: center;
+    padding-left: 10px;
+    content: "Client";
+}
