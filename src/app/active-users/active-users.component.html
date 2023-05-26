@@ -20,15 +20,17 @@
                 style="width:100%">
                 <thead>
                     <tr>
-                        <th width="15%">User Name</th>
+                        <th width="10%">User Name</th>
                         <th width="10%">Credit Referance</th>
-                        <th class="noExport">U St</th>
-                        <th class="noExport">B St</th>
-                        <th>Exposure Limit</th>
-                        <th>Default %</th>
-                        <th>Account Type</th>
-                        <th width="15%">Casino Total</th>
-                        <th width="30%" class="noExport">Actions</th>
+                        <th width="7%">Balance</th>
+                        <th  width="8%">Avail. bal.</th>
+                        <th  width="8%">Total bal.</th>
+                        <th width="3%" class="noExport">U St</th>
+                        <th width="3%" class="noExport">B St</th>
+                        <th  width="9%">Exposure Limit</th>
+                        <th  width="8%">Ref.P/L</th>
+                        <th width="8%">Player bal.</th>
+                        <th width="25%" class="noExport">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,16 +42,26 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                      
                         <td style="width: 200px">
                         </td>
                         <td></td>
                     </tr>
                     <tr role="row" *ngFor="let user of userList">
-                        <td class="uname" >
+                        <td class="uname">
                             <a href="javascript:void(0)" title="roman">{{user.userName}}</a>
+                            <p ></p>
                         </td>
               
                         <td class="crf text-right">{{user.creditRef}}</td>
+                        <td class="crf text-right">{{user.balance}}</td>
+                        <td class="exlimit text-right">{{user.availableBalance}}</td>
+                        <td class="comm">
+                            <p>{{user.totalBalance}}</p>
+                        </td>
                         <td class="ustatus">
                             <label class="form-check-label">
                                 <input  type="checkbox" disabled="" checked="'checked'">
@@ -63,12 +75,10 @@
                             </label>
                         </td>
                         <td class="exlimit text-right">{{user.exposure}}</td>
-                        <td class="comm">
-                            <p>0</p>
-                        </td>
-                        <td class="atype lv_{{user.userType}}" ></td>
+                        <td class="exlimit text-right">{{user.refPL}}</td>
+                        <!-- <td class="atype lv_{{user.userType}}" ></td> -->
                         <td class="text-right">
-                            0.00
+                            {{user.playerBalance}}
                         </td>
                         <td class="actions text-left">
                             
@@ -79,7 +89,7 @@
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#ex-limit" data-bs-whatever="@getbootstrap">L</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#credit" data-bs-whatever="@getbootstrap">C</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@getbootstrap">P</button>
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#status" data-bs-whatever="@getbootstrap">S</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#status" data-bs-whatever="@getbootstrap"  (click)="openChangeStatusModal(user)">S</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#Casinodetails" data-bs-whatever="@getbootstrap">MORE</button>
                             
                             
@@ -172,8 +182,8 @@
                     <div class="modal-footer">
                         <input type="hidden" name="uid" id="uid">
                         <button type="button" class="btn btn-back" data-dismiss="modal"><i
-                                class="fas fa-undo"></i>Back</button>
-                        <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                                class="fas fa-undo" style="background-color: #00a358;"></i>Back</button>
+                        <button type="submit" class="btn btn-submit" >submit<i class="fas fa-sign-in-alt"></i></button>
                     </div>
                 </form>
             </div>
@@ -350,8 +360,8 @@
                     <div class="modal-footer">
                         <input type="hidden" id="credit-uid">
                         <button type="button" class="btn btn-back" data-dismiss="modal"><i
-                                class="fas fa-undo"></i>Back</button>
-                        <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                                class="fas fa-undo" style="background-color: #00A358; color: white;"></i>Back</button>
+                        <button type="submit" class="btn btn-submit" style="background-color: #1E2040; color: white;">submit<i class="fas fa-sign-in-alt"></i></button>
                     </div>
                 </form>
             </div>
@@ -405,8 +415,8 @@
                 <div class="modal-footer">
                     <input type="hidden" id="password-uid">
                     <button type="button" class="btn btn-back" data-dismiss="modal"><i
-                            class="fas fa-undo"></i>Back</button>
-                    <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                            class="fas fa-undo" style="background-color: #00A358; color: white;"></i>Back</button>
+                    <button type="submit" class="btn btn-submit" style="background-color: #1E2040; color: white;">submit<i class="fas fa-sign-in-alt"></i></button>
                 </div>
 
             </div>
@@ -416,7 +426,7 @@
 
     <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" *ngIf="userList">
 
                 <div class="modal-header">
                     <h4 class="modal-title">Change Status</h4>
@@ -425,11 +435,14 @@
                 <div class="m-t-20">
                     <div class="col-md-12">
                         <div class="user-name">
-                            <p id="status-username">Loading...</p>
+                            <p id="status-username">
+                                <span></span
+                                    >{{ statusUser?.userName }}
+                            </p>
                         </div>
                         <div class="float-right user-status">
-                            <p class="text-success" id="user-active-diff-s" style="display: none">Active</p>
-                            <p class="text-danger" id="user-active-diff-f" style="display: none">Inactive</p>
+                            <p class="text-success" id="user-active-diff-s" *ngIf="statusUser?.userStatus==1">Active</p>
+                            <p class="text-danger" id="user-active-diff-f" *ngIf="statusUser?.userStatus==0">Inactive</p>
                         </div>
                     </div>
                 </div>
@@ -438,7 +451,11 @@
                         <li class="col-md-6">
                             <h4>User Active</h4>
                             <label class="switch">
-                                <input name="useractive" id="status-user-active-s" type="checkbox">
+                                <input class="but_locked" [ngClass]="{
+                                    disable: statusUser?.userStatus === 2,
+                                    open: selectedStatus === 2
+                                  }"  [attr.disabled]="statusUser?.userStatus === 2"
+                                  (click)="selectStatus($event, 1)" name="useractive" id="status-user-active-s" type="checkbox">
                                 <div id="s_usr" class="slider">
                                     <span>On</span>
                                     <span>Off</span>
@@ -478,8 +495,8 @@
 
                 <div class="modal-footer">
                     <input type="hidden" id="status-uid">
-                    <button type="button" class="btn btn-back"><i class="fas fa-undo"></i>Back</button>
-                    <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                    <button type="button" class="btn btn-back" style="background-color: #00A358; color: white;"><i class="fas fa-undo" ></i>Back</button>
+                    <button type="submit" class="btn btn-submit"style="background-color: #1E2040; color: white;">submit<i class="fas fa-sign-in-alt"></i></button>
                 </div>
 
             </div>

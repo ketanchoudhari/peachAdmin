@@ -18,6 +18,7 @@ import { IUserList } from '../users/models/user-list';
 import { Subscription, finalize } from 'rxjs';
 import { CurrentUser } from '../services/types/current-user';
 import { AuthService } from '../services/auth.service';
+import { User } from '../users/models/user.model';
 
 
 
@@ -31,10 +32,15 @@ export class ActiveUsersComponent implements OnInit {
   isInTransit: boolean;
   subSink = new Subscription();
   showTotalBox: boolean = false;
-  userList:any;
+  totalBalance:number;
+  userList:any=[];
   modalRef!: BsModalRef;
   userid: number;
   result: any;
+  user:User;
+  statusUser?: User;
+  changeStatusOpen: boolean = false;
+  selectedStatus: 0 | 1 | 2;
   @ViewChild('modalDeposit') modalDeposit!: ElementRef;
   depositShow: boolean = false;
   withdrawShow: boolean = false;
@@ -60,7 +66,10 @@ export class ActiveUsersComponent implements OnInit {
       } else {
         this.baseUrl = res.adminReport;
       }
-      this.userlist(this.userid);
+      setTimeout(() => {
+        this.userlist(this.userid);
+      }, 1000);
+   
     });
 
     this.userid = this.auth.currentUser.userId;
@@ -106,20 +115,62 @@ export class ActiveUsersComponent implements OnInit {
   //       }
   //     });
   // }
-  userlist(userid){
+  userlist(userid: number){
 
     this.userService.listsUsers(userid).subscribe((res:any)=>{
       console.log("real list user",res.result[0])
       this.userList = res.result[0].users;
-      // this.userList = this.usersData.users
-      console.log("new userlist",this.userList)
+      // for(let i =0;i<=this.userList.length;i++){
+      //   this.userList[i]['totalBalance']=this.userList[i].availableBalance+ this.userList[i].downlineBalance;
+      // }
+      this.userList.forEach((element) => {
+        element.totalBalance= parseFloat(element.availableBalance + element.downlineBalance).toFixed(2);
+      });
+      this.userList.forEach((element) => {
+        element.refPL= (element.creditRef - element.availableBalance-element.exposure-element.downlineBalance).toFixed(2);
+        if(element.refPL !== 0){
+          element.refPL = (element.refPL * -1)
+        }
+      });
+      console.log("new userlist",this.userList.length)
+
     })
   }
+  
+  openChangeStatusModal(user: User) {
+    this.statusUser = user;
+    console.log(this.statusUser)
+    console.log(this.statusUser.userId);
+
+    this.changeStatusOpen = true;
+  }
+  selectStatus(event: Event, status: 0 | 1) {
+    const checkbox = event.target as HTMLInputElement;
+
+    if (this.statusUser.userStatus !== status) {
+      checkbox.classList.toggle('open');
+      this.selectedStatus = checkbox.checked ? status : 0;
+      console.log(this.selectedStatus);
+    }
+  }
+  
   // listUsers() {
   //   return this.httpClient.get(`${this.baseUrl}/banking`);
   // }
   toggelDeposit() {
     this.depositShow = !this.depositShow;
+  }
+  toggleStatus(event: any) {
+    const isChecked = event.target.checked;
+    const newStatus = isChecked ? 2 : 0;
+
+    // Call any necessary API or perform logic based on the new status value
+
+    // You can also update selectedStatus or perform any other required actions
+
+    // For example:
+    this.selectedStatus = newStatus;
+    console.log(this.selectedStatus,"selected status")
   }
   //  openModal() {
   //   const modal = this.modalDeposit.nativeElement;
