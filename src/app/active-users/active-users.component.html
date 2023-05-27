@@ -107,7 +107,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">User Details</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <button type="button" class="close" #closebutton data-dismiss="modal">×</button>
                 </div>
 
                 <div class="modal-body" id="user-details">
@@ -124,7 +124,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Deposit</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
                     <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
                 </div>
                 <form id="DepositForm" method="post" autocomplete="off"
@@ -199,7 +199,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Withdraw</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
                 </div>
                 <form action="" id="WithdrawForm" method="post" autocomplete="off"
                     onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
@@ -273,7 +273,7 @@
         
         <div class="modal-header">
         <h4 class="modal-title">Exposure Limit</h4>
-        <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+        <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
         </div>
         <form action="" id="LimitForm" method="post" autocomplete="off" onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
         
@@ -322,7 +322,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Credit</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
                 </div>
                 <form action="" id="CreditForm" method="post" autocomplete="off"
                     onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
@@ -375,7 +375,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Password</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
                 </div>
 
                 <div class="modal-body">
@@ -430,7 +430,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Change Status</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
                 </div>
                 <div class="m-t-20">
                     <div class="col-md-12">
@@ -446,59 +446,96 @@
                         </div>
                     </div>
                 </div>
-                <ul class="status col-md-12 text-center m-t-20">
-                    <div class="row">
-                        <li class="col-md-6">
-                            <h4>User Active</h4>
-                            <label class="switch">
-                                <input class="but_locked" [ngClass]="{
-                                    disable: statusUser?.userStatus === 2,
-                                    open: selectedStatus === 2
-                                  }"  [attr.disabled]="statusUser?.userStatus === 2"
-                                  (click)="selectStatus($event, 1)" name="useractive" id="status-user-active-s" type="checkbox">
-                                <div id="s_usr" class="slider">
-                                    <span>On</span>
-                                    <span>Off</span>
-                                </div>
-                            </label>
-                        </li>
-                        <li class="col-md-6">
-                            <h4>Bet Active</h4>
-                            <label class="switch">
-                                <input name="useractive" id="status-bet-active-s" type="checkbox">
-                                <div id="s_bet" class="slider">
-                                    <span>On</span>
-                                    <span>Off</span>
-                                </div>
-                            </label>
-                        </li>
-                    </div>
-                </ul>
+                <div class="white-wrap">
+                    <ul id="statusBtn" class="status_but">
+                      <li>
+                        <a
+                          id="activeBtn"
+                          class="but_active"
+                          [ngClass]="{
+                            disable: statusUser?.userStatus === 0,
+                            open: selectedStatus === 0
+                          }"
+                          [attr.disabled]="statusUser?.userStatus === 0"
+                          (click)="selectStatus($event, 0)"
+                        >
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                          Active
+                        </a>
+                      </li>
+                      <!-- <li>
+                        <a
+                          id="suspendBtn"
+                          class="but_suspend"
+                          [ngClass]="{
+                            disable: statusUser?.userStatus === 1,
+                            open: selectedStatus === 1
+                          }"
+                          [attr.disabled]="statusUser?.userStatus === 1"
+                          (click)="selectStatus($event, 1)"
+                        >
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                          Suspend
+                        </a>
+                      </li> -->
+                      <li>
+                        <a
+                          id="suspendBtn"
+                          class="but_suspend"
+                          [ngClass]="{
+                            disable: statusUser?.userStatus === 1,
+                            open: selectedStatus === 1
+                          }"
+                          [attr.disabled]="statusUser?.userStatus === 1"
+                          (click)="selectStatus($event, 1)"
+                        >
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                          Suspend
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          id="lockedBtn"
+                          class="but_locked"
+                          [ngClass]="{
+                            disable: statusUser?.userStatus === 2,
+                            open: selectedStatus === 2
+                          }"
+                          [attr.disabled]="statusUser?.userStatus === 2"
+                          (click)="selectStatus($event, 2)"
+                        >
+                          <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                          Locked
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  
 
                 <div class="modal-body m-t-20">
-                    <form action="" id="StatusForm" method="post" autocomplete="off"
-                        onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
-                        <div class="container-fluid">
-                            <input name="useractive" id="status-bet-active" value="on" type="hidden">
-                            <input name="useractive" id="status-user-active" value="on" type="hidden">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Transaction Password</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="Password" name="" id="status-mpassword" required="">
-                                </div>
-                            </div>
+                    <form id="StatusForm" [formGroup]="statusForm" (ngSubmit)="changeStatus()" >
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label for="status-mpassword">Transaction Password</label>
+                          </div>
+                          <div class="col-md-8">
+                            <input type="password" placeholder="password" name="password" id="status-mpassword" formControlName="password" required>
+                          </div>
                         </div>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="hidden" id="status-uid">
+                        <button type="button" class="btn btn-back" style="background-color: #00A358; color: white;" >
+                          <i class="fas fa-undo"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-submit" style="background-color: #1E2040; color: white;">
+                          Submit <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                      </div>
                     </form>
-                </div>
-
-                <div class="modal-footer">
-                    <input type="hidden" id="status-uid">
-                    <button type="button" class="btn btn-back" style="background-color: #00A358; color: white;"><i class="fas fa-undo" ></i>Back</button>
-                    <button type="submit" class="btn btn-submit"style="background-color: #1E2040; color: white;">submit<i class="fas fa-sign-in-alt"></i></button>
-                </div>
-
+                  </div>
             </div>
         </div>
     </div>

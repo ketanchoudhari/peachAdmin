@@ -163,11 +163,11 @@ a:hover {
     color: #0056b3;
     text-decoration: underline
 }
-
-a:not([href]):not([tabindex]) {
+/* this line is commented because change status button text not taking color form list of clinet */
+/* a:not([href]):not([tabindex]) {
     color: white;
     text-decoration: none
-}
+} */
 
 a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover {
     /* color: white; */
