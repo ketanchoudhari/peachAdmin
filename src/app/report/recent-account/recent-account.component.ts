@@ -1,15 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { INewAccount } from '../types/new-accounts';
+import { ExportService } from 'src/app/services/export-as.service';
+import { ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-recent-account',
   templateUrl: './recent-account.component.html',
   styleUrls: ['./recent-account.component.css']
 })
-export class RecentAccountComponent {
+export class RecentAccountComponent implements OnInit {
+  exportPdfConfig: ExportAsConfig = {
+    type: 'pdf',
+    elementIdOrContent: 'table_DL',
+  };
+  exportXlsConfig: ExportAsConfig = {
+    type: 'xls',
+    elementIdOrContent: 'table_DL',
+  };
+  exportCsvConfig: ExportAsConfig = {
+    type: 'csv',
+    elementIdOrContent: 'table_DL',
+  };
   selecttodate: Date;
+  accountsList: INewAccount[];
+  p: number = 1;
   selectfromtime: Date;
   selecttotime: Date;
-  constructor(){
+  constructor(
+    
+    private exportService: ExportService,
+  ){
     this.selectfromdate = new Date(
       new Date(new Date().setDate(new Date().getDate() - 30)).setHours(9, 0, 0)
     );
@@ -47,4 +67,37 @@ export class RecentAccountComponent {
     maxYear: 2099,
     firstDayOfWeek: 'su'
   };
+  udt;
+  edata = [];
+  exportExcel() {
+    this.udt = {
+      data: [
+        { A: 'User Data' }, // title
+        {
+          A: 'Id',
+          B: 'userType',
+          C: 'userName',
+          D: 'creationDate',
+        }, // table header
+      ],
+      skipHeader: true,
+    };
+    this.accountsList.forEach((x) => {
+      this.udt.data.push({
+        A: x.userId,
+        B: String(x.userType),
+        D: String(x.userName),
+        E: String(x.creationDate),
+      });
+    });
+    this.edata.push(this.udt);
+  //  console.log(this.edata, 'edata after changes');
+
+    let name =
+      'New Accounts' +
+      String(this.fromDate).replace('-', '').replace('-', '') +
+      ' - ' +
+      String(this.toDate).replace('-', '').replace('-', '');
+    this.exportService.exportJsonToExcel(this.edata.slice(-1), name);
+  }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MessagesService } from '../messages.service';
 import { GenericResponse, MessagesRules } from '../models/rules.model';
+import { CommonService } from 'src/app/services/models/common.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -20,10 +22,12 @@ export class RulesComponent {
 
   constructor(
     private MessagesService: MessagesService,
-    // private loadingService: LoadingService,
-    // private commonService: CommonService
-  ) {
-   
+    private loadingService: LoadingService,
+    private commonService: CommonService
+  ){
+    commonService.apis$.subscribe((res) => {
+      this.listRules();
+    });
   }
   listRules(): void {
     // this.loadingService.setLoading(true);

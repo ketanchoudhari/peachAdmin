@@ -21,6 +21,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbAlertModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from "../pipes/pipes.module";
+import { DirectivesModule } from '../directives/directives.module';
 
 
 const routes: Routes = [
@@ -100,6 +101,7 @@ const routes: Routes = [
         NgbAlertModule,
         NgbTimepickerModule,
         NgxPaginationModule,
+        DirectivesModule,
         PipesModule
     ]
 })
