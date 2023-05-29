@@ -6607,47 +6607,62 @@ img.rrotate {
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Vrnladmin";
+    /* content: "Vrnladmin"; */
+    content: "VA";
 }
 .lv_2:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Whitelabel";
+    /* content: "Whitelabel"; */
+    content: "Wl";
 }
 .lv_3:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Admin";
+    /* content: "Admin"; */
+    content: "Ad";
 }
 .lv_4:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Subadmin";
+    /* content: "Subadmin"; */
+    content: "Sa";
 }
 .lv_5:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Supermaster";
+    /* content: "Supermaster"; */
+    content: "Sm";
 }
 .lv_6:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Master";
+    /* content: "Master"; */
+    content: "Ms";
 }
 .lv_7:after{
     /* font-weight: bold; */
     text-align: center;
-    padding-left: 10px;
-    content: "Agent";
+    /* content: "Agent"; */
+    content: "Ag";
+    font-size: 6px;
+    background-color: #444444;
+    color: white;
+    border-radius: 2px;
+    width: 10px !important;
+    padding: 5px !important;
+    margin: 0 !important;
+    height: 30px !important;
+    
 }
 .lv_8:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
-    content: "Client";
+    content: "Cl";
 }

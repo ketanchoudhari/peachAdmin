@@ -13,6 +13,10 @@ table#clientListTable {
 /* .table-bordered td, .table-bordered th {
     border: 1px solid #dee2e6 !important;
 } */
+p{
+    margin-bottom: 0rem !important;
+    text-align: right;
+}
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -29,4 +33,80 @@ table#clientListTable {
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: #444444 !important;
+    border-color: #444444 !important;
+    box-shadow:none !important;
+}
+.but_active.but_suspend.but_locked{
+    
+color:black !important;
+}
+.status_but {
+    width: 351px;
+    margin: 8px auto;
+    display: flex;
+}
+.disable.but_active,
+.disable.but_suspend,
+.disable.but_locked {
+  background: #fff;
+  color: #b0b0b0;
+  border: #ddd 1px solid;
+  cursor: not-allowed;
+}
+
+.but_active{
+    text-decoration: none;
+    width: 90px;
+    height: 50px;
+    display: flex;
+    flex-flow: column;
+    font-size: 15px;
+    line-height: 15px;
+    background-image: linear-gradient(-180deg, #fefefe, #e0e0e0);
+    border: 1px solid #9d9d9d;
+    border-radius: 8px;
+    margin: 0 5px;
+    padding: 8px 0;
+    color: #508d0e;
+    cursor: pointer;
+    text-align: center;
+}
+
+.but_suspend {
+    text-decoration: none;
+    width: 90px;
+    height: 50px;
+    display: flex;
+    flex-flow: column;
+    font-size: 15px;
+    line-height: 15px;
+    background-image: linear-gradient(-180deg, #fefefe, #e0e0e0);
+    border: 1px solid #9d9d9d;
+    border-radius: 8px;
+    margin: 0 5px;
+    padding: 8px 0;
+    color: #508d0e;
+    cursor: pointer;
+    text-align: center;
+}
+.but_locked {
+    text-decoration: none;
+    width: 90px;
+    height: 50px;
+    display: flex;
+    flex-flow: column;
+    font-size: 15px;
+    line-height: 15px;
+    background-image: linear-gradient(-180deg, #fefefe, #e0e0e0);
+    border: 1px solid #9d9d9d;
+    border-radius: 8px;
+    margin: 0 5px;
+    padding: 8px 0;
+    color: #508d0e;
+    cursor: pointer;
+    text-align: center;
 }
