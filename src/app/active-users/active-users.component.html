@@ -84,8 +84,8 @@
 
 
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 1,user.userId)">D</button>
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 2,user.userId)">W</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId,user.availableBalance,1);selectTxType(user, 1,user.userId)">D</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId,user.availableBalance,2);selectTxType(user, 2,user.userId)">W</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#ex-limit" data-bs-whatever="@getbootstrap" (click)="getuserid(user.userId)">L</button>
                             <!-- <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#credit" data-bs-whatever="@getbootstrap">C</button> -->
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@getbootstrap" (click)="getuserid(user.userId)">P</button>
@@ -124,10 +124,10 @@
 
                <div class="modal-header">
                    <h4 class="modal-title">{{titletext}}</h4>
-                   <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
+                   <button type="button" class="close" #closebutton data-bs-dismiss="modal" (click)="resetForm()" >×</button>
                    <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
                </div>
-               <form id="DepositForm" [formGroup]="transferForm" (ngSubmit)="transfer()" >
+               <form id="DepositForm" [formGroup]="transferForm" (ngSubmit)="transfer()"  #statusFormRef>
 
                    <div class="modal-body">
                        <div class="container-fluid">
@@ -136,8 +136,8 @@
                                    <label class="deposite-user-first">{{userName}}</label>
                                </div>
                                <div class="col-md-8" style="display: flex;">
-                                   <span class="popup-box" id="deposite-second">0.0</span>
-                                   <span class="popup-box" id="deposite-second-diff">{{-amountInput}}</span>
+                                   <span class="popup-box" id="deposite-second">{{userBalance}}</span>
+                                   <span class="popup-box"  formControlName="Transamount" id="deposite-second-diff">{{debitBalance}}</span>
                                    <!-- <input [value]="-amountInput" class="popup-box" id="deposite-first"/> -->
                                </div>
                            </div>
@@ -146,8 +146,8 @@
                                    <label class="deposite-user-second">{{subUserName}}</label>
                                </div>
                                <div class="col-md-8">
-                                   <span class="popup-box" id="deposite-second">0.0</span>
-                                   <span class="popup-box" id="deposite-second-diff">{{amountInput}}</span>
+                                   <span class="popup-box"  id="deposite-second">{{subUserAvbBalance}}</span>
+                                   <span class="popup-box"  formControlName="Transamount" id="deposite-second-diff">{{amountInput}}</span>
                                </div>
                            </div>
                            <div class="row m-b-20">
@@ -482,7 +482,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Change Status</h4>
-                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
+                    <button type="button" class="close" #closebutton data-bs-dismiss="modal"  >×</button>
                 </div>
                 <div class="m-t-20">
                     <div class="col-md-12">

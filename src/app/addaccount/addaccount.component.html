@@ -142,16 +142,21 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="account_type">Acount Type:</label>
-                  <select
-                    name="accounttype"
-                    id="accounttype"
-                    class="form-control"
-                    required=""
-                  >
-                    <option value="">- Select Your A/c. Type -</option>
-                    <option value="Agent">{{member.name}}</option>
-                    <option value="User">User</option>
-                  </select>
+                  <!-- <ng-select [items]="SubmemberMap.slice(0, 2)" bindLabel="name" [(ngModel)]="selectedOption" (ngModelChange)="onSelectOption($event)">
+                    <ng-template ng-option-tmp let-item="item">
+                      {{ item.name }}
+                    </ng-template>
+                  </ng-select> -->
+                  
+                  <ng-select [items]="SubmemberMap" bindLabel="name"  formControlName="accountType" (change)="onSelectOption($event)">
+                    <ng-template ng-option-tmp let-item="item">
+                      {{ item.name }}
+                    </ng-template>
+                  </ng-select>
+                  
+                  
+                  
+                  
                   <span id="accounttype-error" class="error"></span>
                 </div>
               </div>
@@ -188,6 +193,7 @@
                   <span id="exposerlimit-error" class="error"></span>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

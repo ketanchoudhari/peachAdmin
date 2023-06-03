@@ -59,9 +59,13 @@ text-decoration: none;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .search-group{
-  margin-left: 2em;
+  margin-left: 25em !important;
 }
-
+@media (max-width:570px) {
+    .search-group{
+        margin-left:-1em !important;
+    }
+}
 /* .navbar-nav .mr-auto{
   padding-left: 0em !important;
 } */
@@ -698,7 +702,7 @@ text-decoration: none;
   display: block !important;    }
   }
   .side-menu-button {
-  left:340px !important;
+  left:325px !important;
   display: none;
   }
   

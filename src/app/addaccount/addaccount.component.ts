@@ -24,6 +24,7 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { share } from 'rxjs/internal/operators/share';
 import { PasswordStrengthValidator } from '../users/user-list/sub/password-strength.validator';
 import { combineLatest } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 // import { Hierarchy } from '../services/types/hierarchy';
 // import { OnInit } from '@angular/core';
 
@@ -67,7 +68,9 @@ export class AddaccountComponent  {
   p: number = 1;
 
   memberMap: Map<number, Hierarchy>;
-
+  SubmemberMap:Hierarchy[];
+  // selectedLevel:any;
+  selectedOption: Hierarchy;
   currencyMap = [
     { id: 0, name: 'INR' },
     { id: 1, name: 'USD' },
@@ -94,7 +97,8 @@ export class AddaccountComponent  {
   totalRow: any;
   showCurrency = environment?.showCurrency;
   isRollingCommChecked: any;
-  
+  heirarchyList?: Hierarchy[];
+
   constructor(
     private route: ActivatedRoute,
     private authService:AuthService,
@@ -104,6 +108,7 @@ export class AddaccountComponent  {
     private usersService: UsersService,
     private userSearch: UserSearchService,
     private formBuilder: FormBuilder,
+    private toastr: ToastrService,
   ){
 
   }
@@ -111,7 +116,7 @@ export class AddaccountComponent  {
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
-    // console.log(this.currentUser);
+   
     
     this.selectedUid = 0;
     this.userType = 0;
@@ -132,7 +137,9 @@ export class AddaccountComponent  {
       password: [, Validators.required],
     });
 
-
+    this.commonService.hierarchyList$.subscribe((list)=>{
+      this.SubmemberMap=list.slice(0, 3);
+    })
 
 
     this.creditRefForm = this.formBuilder.group({
@@ -249,8 +256,10 @@ export class AddaccountComponent  {
     });
 
     this.commonService.hierarchyMap$.subscribe((list) => {
+      console.log(list,"list from api call")
       if (!!list) {
         this.memberMap = list;
+        console.log("hheirarchyList",this.memberMap);
         this.member = this.memberMap.get(this.userType);
 
         this.clientUserType = this.commonService.clientUserType;
@@ -278,6 +287,8 @@ export class AddaccountComponent  {
       }
     });
 
+    
+    // console.log("heirarchyList",this.memberMap);
     this.userSearch.searchTerm$.subscribe((term) => {
       if (this.userOriginList) {
         if (term !== '') {
@@ -309,11 +320,26 @@ export class AddaccountComponent  {
 
     // this.activeTheme = this.themeService.getActiveTheme();
   }
+  onSelectOption(event: any) {
+    const selectedName = event.name;
+    const selectedId = this.SubmemberMap.find(item => item.name === selectedName)?.id;
+    console.log('Selected ID:', selectedId);
+  }
+  // getMemberArray(): Hierarchy[] {
+  //   // console.log("ng-select value",this.SubmemberMap.values())
+  //   // return Array.from(this.SubmemberMap.values());
+  //   const memberArray: Hierarchy[] = Array.from(this.SubmemberMap.values());
+  // return memberArray.slice(0, 2);
+
+  // }
+  // onLevelChange(event: any) {
+  //   console.log(this.selectedLevel, "selected Level");
+  // }
   register() {
     console.log("add account");
     if (this.userRegForm.valid) {
       let user = <CreateUser>this.userRegForm.value;
-      user.userType = this.userType;
+      user.userType = this.selectedUid;
       if(this.userRegForm.value.currency !== ""){
         user.currencyCode = this.userRegForm.value.currency.name;
         user.currencyId = this.userRegForm.value.currency.id;
@@ -402,18 +428,18 @@ export class AddaccountComponent  {
           .subscribe((res: GenericResponse<any>) => {
             if (res && res.errorCode === 0) {
               this.addMemberModalOpen = false;
-              // this.toastr.success('User Created');
+              this.toastr.success('User Created');
               this.listUsers(this.selectedUid, this.userType);
               this.commonService.updateBalance();
               this.userRegForm.reset(this.userRegDefaultValues);
             } else {
               this.addMemberModalOpen = false;
-              // this.toastr.error(res.errorDescription);
+              this.toastr.error(res.errorDescription);
             }
           });
       }
     } else {
-      // this.toastr.error('Invalid Input');
+      this.toastr.error('Invalid Input');
     }
   }
 

@@ -28,6 +28,7 @@ import { GlobalErrorHandler } from './GlobalErrorHandler/GlobalErrorHandler';
 import { EnvService } from './env.service';
 import { DirectivesModule } from './directives/directives.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -62,6 +63,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    NgSelectModule
 
   ],
   

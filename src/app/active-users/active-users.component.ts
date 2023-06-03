@@ -105,6 +105,10 @@ export class ActiveUsersComponent implements OnInit {
   totalDepositUpline : any = 0;
   totalWithdrawUpline : any = 0;
   totalWithdrawDownline : any = 0;
+  userBalance:any;
+  subUserAvbBalance:any;
+  debitBalance:any;
+  transactionNum:any;
 
   // userPassword: any;
   constructor(
@@ -170,6 +174,7 @@ export class ActiveUsersComponent implements OnInit {
 
     this.userid = this.auth.currentUser.userId;
     this.userName = this.auth.currentUser.userName;
+    this.userBalance =this.auth.currentUser.balance;
     this.commonServices.listAllHierarchy();
 
     this.statusForm = this.formBuilder.group({
@@ -212,6 +217,7 @@ export class ActiveUsersComponent implements OnInit {
       key: [],
       mainUserId: [this.currentUser.userId],
       remark: []
+
     });
 
 
@@ -240,8 +246,26 @@ export class ActiveUsersComponent implements OnInit {
 
   }
 // to show amount in other span
+userDipo(userName,userId,balance,num){
+  this.subUserName=userName;
+  this.subUserId=userId;
+  this.subUserAvbBalance=balance;
+  this.transactionNum=num;
+}
+
   onInputChange(event: any) {
-    this.amountInput = event.target.value;
+    if(this.transactionNum==1){
+    let balance = parseFloat(this.subUserAvbBalance) + parseFloat(event.target.value);
+    this.amountInput =balance;
+    let debbalance =parseFloat(event.target.value)-parseFloat(this.userBalance);
+    this.debitBalance=debbalance;
+    }
+    else if(this.transactionNum==2){
+      let balance = parseFloat(this.subUserAvbBalance) - parseFloat(event.target.value);
+      this.amountInput =balance;
+      let debbalance =parseFloat(event.target.value)+parseFloat(this.userBalance);
+      this.debitBalance=debbalance;
+    }
   }
   public onSave() {
     this.closebutton.nativeElement.click();
@@ -252,11 +276,7 @@ export class ActiveUsersComponent implements OnInit {
     // console.log("", this.subUserId)
 
   }
-  userDipo(userName,userId){
-    this.subUserName=userName;
-    this.subUserId=userId
-  }
-
+ 
 
 
   userlist(userid: number) {
@@ -572,5 +592,11 @@ export class ActiveUsersComponent implements OnInit {
     });
     this.edata.push(this.udt);
     this.exportService.exportJsonToExcel(this.edata.slice(-1), 'Activity Statement_'+new Date().toDateString());
+  }
+
+  resetForm(): void {
+    this.transferForm.reset();
+    this.debitBalance=null;
+    this.amountInput=null;
   }
 }
