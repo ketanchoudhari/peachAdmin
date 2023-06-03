@@ -1,0 +1,6 @@
+.sort_asc:after {
+    content: "⇅";
+}
+.sort_desc:after {
+    content: "⇵";
+}

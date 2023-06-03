@@ -62,3 +62,12 @@ a#getPL {
     border-radius: 10px;
 
 }
+.sort_asc:after {
+    content: "⇅";
+}
+.sort_desc:after {
+    content: "⇵";
+}
+td#loginMessage{
+    color: green;
+}

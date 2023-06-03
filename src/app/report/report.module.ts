@@ -16,11 +16,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReportComponent } from './report.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbAlertModule, NgbNavModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from "../pipes/pipes.module";
+import { ExportAsModule } from 'ngx-export-as';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 const routes: Routes = [
@@ -96,11 +98,14 @@ const routes: Routes = [
         BsDatepickerModule.forRoot(),
         RouterModule.forChild(routes),
         NgSelectModule,
-        NgbNavModule,
+         NgbNavModule,
         NgbAlertModule,
         NgbTimepickerModule,
         NgxPaginationModule,
-        PipesModule
+        PipesModule,
+        ExportAsModule,
+        DirectivesModule,
+        ReactiveFormsModule
     ]
 })
 export class ReportModule { }

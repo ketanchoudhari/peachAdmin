@@ -7,8 +7,8 @@ import { NumberRangeDirective } from './number-range.directive';
 import { SortDirective } from './sort.directive';
 
 @NgModule({
-  declarations: [NumberRangeDirective, ExportDataDirective, NumberRangeDirective, ],
+  declarations: [NumberRangeDirective, ExportDataDirective, NumberRangeDirective,SortDirective ],
   imports: [CommonModule],
-  exports: [NumberRangeDirective, ExportDataDirective, NumberRangeDirective],
+  exports: [NumberRangeDirective, ExportDataDirective, NumberRangeDirective,SortDirective],
 })
 export class DirectivesModule {}

@@ -137,11 +137,11 @@
                     <table class="custom-table table table-striped" style="width: 100%; text-align: center;">
                         <thead>
                             <tr>
-                                <th>Login Date &amp; Time</th>
-                                <th>Login Status</th>
-                                <th>IP Address</th>
-                                <th>ISP</th>
-                                <th>City/State/Country</th>
+                                <th class="align-L sort_asc"  [appSort]="logList" data-order="asc" data-name="loginTime">Login Date &amp; Time</th>
+                                <th class="align-L sort_asc"  [appSort]="logList" data-order="asc" data-name="loginStatus"> Login Status</th>
+                                <th class="align-L sort_asc"  [appSort]="logList" data-order="asc" data-name="loginIp">IP Address</th>
+                                <th class="align-L sort_asc"  [appSort]="logList" data-order="asc" data-name="ISP">ISP</th>
+                                <th class="align-L sort_asc"  [appSort]="logList" data-order="asc" data-name="origin">City/State/Country</th>
                             </tr>
                         </thead>
                         <tbody id="content">
@@ -150,7 +150,7 @@
                                 <!-- <tr id="tempTr" class="odd ng-star-inserted"> -->
                                 <td id="loginDate"> {{ log.loginTime | date: "yyyy-MM-dd HH:mm:ss":timeFormat }} </td>
                                 <td class="align-L" [ngClass]="{
-                                  success: log.loginStatus === 1
+                                  success: log.loginStatus === 1,
                                 }" id="loginMessage">
                                     Login Success
                                 </td>

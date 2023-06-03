@@ -30,21 +30,21 @@
                         style="width:100%; text-align:  center;" role="grid" aria-describedby="example_info">
                         <thead >
                             <tr role="row">
-                                <th role="row" width="12%"   class="align-L sort_asc"     data-order="asc" data-name="dateTime"
+                                <th role="row" width="12%"   class="align-L sort_asc" [appSort]="userLogs" data-order="asc" data-name="dateTime"
                                     >Date/Time </th>
-                                <th role="row"  width="13%"  data-order="asc" data-name="amount" class="sort_asc">Deposit
+                                <th role="row"  width="13%"  data-order="asc" [appSort]="userLogs"  data-name="amount" class="sort_asc">Deposit
                                     by Upline</th>
-                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Deposit
+                                <th role="row" width="13%"   data-order="asc" [appSort]="userLogs"  data-name="amount" class="sort_asc">Deposit
                                     to Downline </th>
-                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Withdraw
+                                <th role="row" width="13%"   data-order="asc" [appSort]="userLogs"  data-name="amount" class="sort_asc">Withdraw
                                     by Upline </th>
-                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Withdraw
+                                <th role="row" width="15%"   data-order="asc" [appSort]="userLogs"  data-name="amount" class="sort_asc">Withdraw
                                     from Downline </th>
-                                <th role="row" width="13%"   data-order="asc" data-name="balance" class="sort_asc">Balance
+                                <th role="row" width="13%"   data-order="asc" [appSort]="userLogs"  data-name="balance" class="sort_asc">Balance
                                 </th>
-                                <th role="row" width="13%"   data-order="asc" data-name="description" class="sort_asc">
+                                <th role="row" width="13%"   data-order="asc" [appSort]="userLogs"  data-name="description" class="sort_asc">
                                     Remark</th>
-                                <th role="row" width=""   data-order="asc" data-name="from" class="sort_asc">
+                                <th role="row" width=""   data-order="asc" [appSort]="userLogs"  data-name="from" class="sort_asc">
                                     From/To</th>
                             </tr>
                         </thead>

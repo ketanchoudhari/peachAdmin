@@ -40,8 +40,8 @@
 
                                         <div class="download-reports push" id="example_filter"
                                             class="dataTables_filter">
-                                            <a class="btn buttons-pdf " title="Export Pdf">PDF</a>
-                                            <a class="btn buttons-excel" title="Export Excel">Excel</a>
+                                            <a class="btn buttons-pdf "  [appExportData]="'pdf'"  title="Export Pdf">PDF</a>
+                                            <a class="btn buttons-excel" [appExportData]="'xls'" title="Export Excel">Excel</a>
                                             <!-- <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
                                                     aria-controls="example"></label> -->
                                         </div>
@@ -177,8 +177,8 @@
                                         </div>
                                         <div class="download-reports push" id="example_filter"
                                             class="dataTables_filter">
-                                            <a class="btn buttons-pdf " title="Export Pdf">PDF</a>
-                                            <a class="btn buttons-excel" title="Export Excel">Excel</a>
+                                            <a class="btn buttons-pdf "  [appExportData]="'pdf'"  title="Export Pdf">PDF</a>
+                                            <a class="btn buttons-excel" [appExportData]="'xls'" title="Export Excel">Excel</a>
 
                                         </div>
                                         <div id="example_filter" class="dataTables_filter">
@@ -319,8 +319,8 @@
                                             </div>
                                             <div class="download-reports push" id="example_filter"
                                                 class="dataTables_filter">
-                                                <a class="btn buttons-pdf " title="Export Pdf">PDF</a>
-                                                <a class="btn buttons-excel" title="Export Excel">Excel</a>
+                                                <a class="btn buttons-pdf "  [appExportData]="'pdf'"  title="Export Pdf">PDF</a>
+                                                <a class="btn buttons-excel" [appExportData]="'xls'" title="Export Excel">Excel</a>
 
                                             </div>
                                             <div id="example_filter" class="dataTables_filter">
@@ -338,7 +338,7 @@
                                                 aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th width="8%" class="sorting_disabled" rowspan="1" colspan="1"
+                                                        <th width="8%"  class="sorting_disabled" rowspan="1" colspan="1"
                                                             aria-label="Fromto">User Name</th>
                                                         <th width="15%" class="sorting_disabled" rowspan="1" colspan="1"
                                                             aria-label="Fromto">Login Date & Time</th>

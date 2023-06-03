@@ -18,13 +18,13 @@
                         <div class="row" data-select2-id="4">
                            
 
-                            <div class="col-md-2" data-select2-id="3">
+                            <!-- <div class="col-md-2" data-select2-id="3">
                                 <div class="form-group">
                                     <label for="list-ac">Search By Client Name</label>
                                     <ng-select class="custom-ng-select" [items]="myItems" bindLabel="label" bindValue="id" placeholder="Select an option" [searchable]="true" typeToSearchText="Type to search"
                         class="custom-ng-select"></ng-select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="fromdate">From</label>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="download-reports push" id="example_filter"
                     class="dataTables_filter" style="float: left; margin-bottom: 10px;">
-                    <a class="btn buttons-pdf "   title="Export Pdf">PDF</a>
+                    <a class="btn buttons-pdf " [appExportData]="'pdf'"  title="Export Pdf">PDF</a>
                     <a class="btn buttons-excel" (click)="exportExcel()" title="Export Excel">Excel</a>
                     <!-- <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
                             aria-controls="example"></label> -->
@@ -104,13 +104,13 @@
                         style="width: 100%; text-align: center; white-space: nowrap" role="grid" aria-describedby="example_info">
                         <thead>
                             <tr role="row">
-                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                <th width="25%"  class="sort_asc"  [appSort]="accountsList" data-order="asc" rowspan="1" colspan="1" aria-label="Fromto"
                                     style="width: 400px;" data-name="userId">Id</th>
-                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                <th width="25%"  class="sort_asc" [appSort]="accountsList" rowspan="1" colspan="1" data-order="asc" aria-label="Fromto"
                                     style="width: 400px;" data-name="userType">User Type</th>
-                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Debit"
+                                <th width="10%"  class="sort_asc" rowspan="1" [appSort]="accountsList" colspan="1" data-order="asc" aria-label="Debit"
                                     style="width: 292px;" data-name="userName">User Name</th>
-                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Closing"
+                                <th width="10%"  class="sort_asc" rowspan="1" [appSort]="accountsList" colspan="1"  data-order="asc" aria-label="Closing"
                                     style="width: 295px;" data-name="creationDate">Account Creation Date</th>
 
                             </tr>

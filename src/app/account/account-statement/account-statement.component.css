@@ -86,3 +86,9 @@ a#getPL{
     background-image: url(https://www.svgrepo.com/svg/335312/arrow-expand-small);
     background-repeat: no-repeat;
 }
+.sort_asc:after {
+    content: "⇅";
+}
+.sort_desc:after {
+    content: "⇵";
+}
