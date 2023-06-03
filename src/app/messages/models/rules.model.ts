@@ -6,3 +6,6 @@ export interface MessagesRules {
     result: T;
   }
   
+export interface CreateRulesResponse {
+  rules: string;
+}

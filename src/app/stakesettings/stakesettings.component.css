@@ -49,8 +49,8 @@ input, textarea, .member_select a {
     font-size: 12px;
     border: 0px #aaa solid;
     background: #fff;
-    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
+    box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 4px !important;
     padding: 5px;
     margin: 0 5px 5px 0;
     box-sizing: border-box;
@@ -67,8 +67,8 @@ input, textarea, .member_select a {
 }
 .container {
     width: 100%;
-    padding-right: 0px;
-    padding-left: 1px;
+    padding-right: -1px;
+    padding-left: 35px;
     border-radius: 12px;
 
 }
@@ -80,7 +80,9 @@ input, textarea, .member_select a {
 
 .settings-container > div {
     flex: 1;
-    padding: 8px 16px;
+    padding: 8px 16px 50px;
+    background: gainsboro ;
+
 
     /* border: 1px solid rgba(0, 0, 0, 0.1); */
 }
@@ -107,3 +109,12 @@ h2.editstake {
 input#input {
     border-radius: 6px;
 }
+button.btn-send{
+    border-radius: 9px;
+    padding: 6px; 
+    background-color: #1e2040;
+    color: white;  
+}
+/* input.ng-untouched.ng-pristine.ng-valid{
+    border-radius: 10px;
+} */

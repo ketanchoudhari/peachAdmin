@@ -8,7 +8,7 @@
   <div *ngIf="!loading && isNewRulesVisible">
     <!-- <ckeditor [editor]="Editor" [(ngModel)]="messageRules"></ckeditor> -->
     <div class="btn_box" style="margin-top: 16px;">
-      <button class="btn-send" >Save</button>
+      <button class="btn-send" (click)="addRules()" >Save</button>
       &nbsp;&nbsp;
       <button class="btn-send" (click)="isNewRulesVisible = !isNewRulesVisible">Cancel</button>
     </div>

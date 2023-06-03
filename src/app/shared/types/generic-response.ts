@@ -1,6 +1,6 @@
 export interface GenericResponse<T> {
   errorCode: number;
-  errorDescription: string|undefined;
+  errorDescription;
   result: T;
 }
   

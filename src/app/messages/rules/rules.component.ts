@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MessagesService } from '../messages.service';
-import { GenericResponse, MessagesRules } from '../models/rules.model';
+import { CreateRulesResponse, MessagesRules } from '../models/rules.model';
+import { GenericResponse } from 'src/app/shared/types/generic-response';
 
 
 @Component({
@@ -43,6 +44,21 @@ export class RulesComponent {
           this.isNewRulesVisible = true;
           this.loading = false;
           // this.loadingService.setLoading(false);
+        }
+      });
+  }
+  addRules(): void {
+    const rules: MessagesRules = {
+      rules: btoa(this.messageRules),
+    };
+    this.MessagesService
+      .changeRules(rules)
+      .subscribe((res: GenericResponse<CreateRulesResponse>) => {
+        if (res.errorCode === 0) {
+          this.rules = this.messageRules;
+          this.isNewRulesVisible = false;
+        } else {
+          alert(res.errorDescription);
         }
       });
   }

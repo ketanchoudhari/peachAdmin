@@ -40,6 +40,8 @@ button.btn {
 .modal-content input {
     width: 6% !important;
     height: 15px !important;
+    margin-top: 6px;
+
 }
 label{
     display: flex;
@@ -47,4 +49,10 @@ label{
 #icon{
     color: blue;
     cursor: pointer;
+}
+#editbtn{
+    text-align: center;
+}
+.align-L{
+    text-align: center;
 }
