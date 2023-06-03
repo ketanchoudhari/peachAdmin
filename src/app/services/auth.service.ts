@@ -60,7 +60,7 @@ export class AuthService {
     });
     if (cookieService.check(CURRENT_USER)) {
       this.currentUser = JSON.parse(this.cookieService.get(CURRENT_USER));
-      // this.currentUser = JSON.parse(this.cookieService.get(CURRENT_USER)!);
+      this.currentUser = JSON.parse(this.cookieService.get(CURRENT_USER)!);
       this.currentUser$.next(this.currentUser);
     }
     

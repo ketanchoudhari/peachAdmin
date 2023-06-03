@@ -29,7 +29,7 @@ export class BankingService {
     });
   }
 
-  transfer(data: ITransfer) {
+  transfer(data) {
     return this.httpClient.post(`${this.baseUrl}/transfert`, data);
   }
 

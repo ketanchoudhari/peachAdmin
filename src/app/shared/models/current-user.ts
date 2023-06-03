@@ -29,6 +29,7 @@ export class CurrentUser  {
   userType: number;
   prepaid:boolean;
   captcha:boolean;
+  newUser:number;
   rollingCommission?: {
     fancy: number;
     casino: number;

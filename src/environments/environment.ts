@@ -57,7 +57,6 @@ export const environment = {
   isPremiumSite:true, //for Premium sites with Risk management and LC hierarchy also used this flag with BD hierarchy and Normal old Hirarchy
   isBdlevel:false, // for BD levels Hierarchy with premium flag and without premium flag
   isRental:false, // for Normal Vrnl old Hierarchy with premium flag and without premium flag
-  toTimeinput:true,
 
   domainMap:[
     { id: 0, name: 'cricbuzzer.io' },

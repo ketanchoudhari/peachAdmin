@@ -1,13 +1,13 @@
 export interface ITransfer {
-    password: string;
-    txntype:any;
+    password: any;
+    // txntype:number;
     users: {
-      userId: number;
+      userId: any;
       txnType: number;
-      amount: number;
-      remark: string;
+      amount: any;
+      remark: any;
       creditRef?: number;
-      key?: boolean | number;
+      key?: number;
     }[];
   }
   

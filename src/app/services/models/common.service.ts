@@ -152,6 +152,7 @@ export class CommonService {
           if (res && res.errorCode === 0) {
             this._allUsersSub.next(res.result);
             this.userlist = res.result;
+            console.log(this.userlist,"loadfullhierarchy")
             this.userid = this.userlist[this.userlist.length - 1];
             this.usermainid = this.userid?.userId
             // console.log(this.usermainid)
@@ -174,234 +175,47 @@ export class CommonService {
       .get(`${this.baseUrl}/listAllHierarchy`)
       .subscribe((res: GenericResponse<Hierarchy[][]>) => {
         if (res && res.errorCode === 0) {
+          let hierarchyMap = new Map<number, Hierarchy>(
+            res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
+          );
 
-          if (this.isPremiumSite && !this.isBdlevel && !this.isRental) {
-            res.result[0].forEach(level => {
-              level.name = this.BdbetHierarchy[level.name]
-            })
+          let heirarchyList = Array.from(hierarchyMap);
 
-            let hierarchyMap = new Map<number, Hierarchy>(
-              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
-            );
-            // console.log(hierarchyMap);
-            let heirarchyList = Array.from(hierarchyMap);
-            // console.log(heirarchyList);
-            this.vrnlUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'vrnladmin';
-            })[0];
+          this.vrnlUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'vrnladmin';
+          })[0];
 
-            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'whitelabel';
-            })[0];
+          this.whitelabelUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'whitelabel';
+          })[0];
 
-            this.adminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'admin';
-            })[0];
+          this.adminUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'admin';
+          })[0];
 
-            this.subAdminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'senior sub admin';
-            })[0];
+          this.subAdminUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'subadmin';
+          })[0];
 
-            this.superMasterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'sub admin';
-            })[0];
+          this.superMasterUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'supermaster';
+          })[0];
 
-            this.masterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'super';
-            })[0];
+          this.masterUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'master';
+          })[0];
 
-            this.agentUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'master';
-            })[0];
+          this.agentUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'agent';
+          })[0];
 
-            this.clientUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'user';
-            })[0];
+          this.clientUserType = heirarchyList.find(([k, v]) => {
+            return v.name === 'client';
+          })[0];
 
-            this.hierarchy = hierarchyMap;
-            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
-            this._hierarchyMapSub.next(hierarchyMap);
-          } else if (this.isPremiumSite && this.isBdlevel) {
-            res.result[0].forEach(level => {
-              level.name = this.sharingHierarchy[level.name]
-            })
-
-            let hierarchyMap = new Map<number, Hierarchy>(
-              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
-            );
-            // console.log(hierarchyMap);
-            let heirarchyList = Array.from(hierarchyMap);
-            // console.log(heirarchyList);
-            this.vrnlUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'vrnladmin';
-            })[0];
-
-            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'mother panel';
-            })[0];
-
-            this.adminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'whitelabel';
-            })[0];
-
-            this.subAdminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'admin';
-            })[0];
-
-            this.superMasterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'sub admin';
-            })[0];
-
-            this.masterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'super master';
-            })[0];
-
-            this.agentUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'master';
-            })[0];
-
-            this.clientUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'user';
-            })[0];
-
-            this.hierarchy = hierarchyMap;
-            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
-            this._hierarchyMapSub.next(hierarchyMap);
-          } else if (!this.isPremiumSite && this.isBdlevel) {
-            res.result[0].forEach(level => {
-              level.name = this.sharingHierarchy[level.name]
-            })
-
-            let hierarchyMap = new Map<number, Hierarchy>(
-              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
-            );
-            // console.log(hierarchyMap);
-            let heirarchyList = Array.from(hierarchyMap);
-            // console.log(heirarchyList);
-            this.vrnlUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'vrnladmin';
-            })[0];
-
-            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'mother panel';
-            })[0];
-
-            this.adminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'whitelabel';
-            })[0];
-
-            this.subAdminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'admin';
-            })[0];
-
-            this.superMasterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'sub admin';
-            })[0];
-
-            this.masterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'super master';
-            })[0];
-
-            this.agentUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'master';
-            })[0];
-
-            this.clientUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'user';
-            })[0];
-
-            this.hierarchy = hierarchyMap;
-            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
-            this._hierarchyMapSub.next(hierarchyMap);
-          } else if (this.isPremiumSite && this.isRental) {
-            res.result[0].forEach(level => {
-              level.name = this.defaultHierarchy[level.name]
-            })
-            let hierarchyMap = new Map<number, Hierarchy>(
-              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
-            );
-            // console.log(hierarchyMap);
-            let heirarchyList = Array.from(hierarchyMap);
-            // console.log(heirarchyList);
-            this.vrnlUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'vrnladmin';
-            })[0];
-
-            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'whitelabel';
-            })[0];
-
-            this.adminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'admin';
-            })[0];
-
-            this.subAdminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'subadmin';
-            })[0];
-
-            this.superMasterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'supermaster';
-            })[0];
-
-            this.masterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'master';
-            })[0];
-
-            this.agentUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'agent';
-            })[0];
-
-            this.clientUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'client';
-            })[0];
-
-            this.hierarchy = hierarchyMap;
-            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
-            this._hierarchyMapSub.next(hierarchyMap);
-          } else {
-            let hierarchyMap = new Map<number, Hierarchy>(
-              res.result[0].map((x) => [x.id, x] as [number, Hierarchy])
-            );
-            // console.log(hierarchyMap);
-            let heirarchyList = Array.from(hierarchyMap);
-            // console.log(heirarchyList);
-            this.vrnlUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'vrnladmin';
-            })[0];
-
-            this.whitelabelUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'whitelabel';
-            })[0];
-
-            this.adminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'admin';
-            })[0];
-
-            this.subAdminUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'subadmin';
-            })[0];
-
-            this.superMasterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'supermaster';
-            })[0];
-
-            this.masterUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'master';
-            })[0];
-
-            this.agentUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'agent';
-            })[0];
-
-            this.clientUserType = heirarchyList.find(([k, v]) => {
-              return v.name === 'client';
-            })[0];
-
-            this.hierarchy = hierarchyMap;
-            // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
-            this._hierarchyMapSub.next(hierarchyMap);
-          }
-          // console.log(res.result[0]);
+          this.hierarchy = hierarchyMap;
+          // this.cookieService.set(HIERARCY_LIST, JSON.stringify(hierarchyMap));
+          this._hierarchyMapSub.next(hierarchyMap);
         }
       });
   }

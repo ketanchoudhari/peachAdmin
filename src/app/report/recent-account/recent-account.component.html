@@ -1,22 +1,29 @@
-<!-- <a class="btn buttons-excel" (click)="exportExcel()" [appExportData]="'pdf'"  title="Export Excel">Excel</a> -->
-<div class="sec-hedding">
-    <div class="headdings">
-<h2 style="font-size: 23px; padding: 20px;">Recent Created Accounts</h2>
-</div>
-
-</div>
-
 <div class="col-md-12 main-container" data-select2-id="10">
     <div data-select2-id="9">
         <div class="listing-grid" data-select2-id="8">
             <div class="detail-row" data-select2-id="7">
-               
+                <div class="sec-hedding">
+                    <div class="headdings">
+                <h2 style="font-size: 23px; padding: 20px;">Recent Created Accounts</h2>
+            </div>
+            <!-- <div class="headding-btn" style="float: right;">
+                <button class="btn-report">Show Default</button> 
+            </div> -->
+            </div>
                 <form method="post"
                   
                     class="ajaxFormSubmit" data-select2-id="6">
                     <div class="m-t-20" data-select2-id="5">
                         <div class="row" data-select2-id="4">
-                           
+                            <!-- <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="type">Account Type</label>
+                                    <select name="type" id="accounttype" class="form-control">
+                                        <option value="all">All</option>
+                                     
+                                    </select>
+                                </div>
+                            </div> -->
 
                             <div class="col-md-2" data-select2-id="3">
                                 <div class="form-group">
@@ -71,47 +78,36 @@
             <div class="table-responsive data-table" id="tbldata">
                 <div id="example_wrapper" class="dataTables_wrapper no-footer">
                     
-                    <div class="dt-buttons">
-                        <!-- <div class="dataTables_length" id="example_length" *ngIf="tableLength">
-                            <label>Show <select name="example_length" aria-controls="example"
-                                    class="" (change)="selectNoRows($event.target)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </label>
-                            <a id="getPL" class="btn-report" (click)="getAccountList()"
-                                style="color: #FFFFFF; " class="btn btn-diamond">ShowDefault</a>
-                        </div> -->
-                    </div>
-                    <div class="download-reports push" id="example_filter"
-                    class="dataTables_filter" style="float: left; margin-bottom: 10px;">
-                    <a class="btn buttons-pdf "   title="Export Pdf">PDF</a>
-                    <a class="btn buttons-excel" (click)="exportExcel()" title="Export Excel">Excel</a>
-                    <!-- <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
-                            aria-controls="example"></label> -->
-                </div>
-                <div id="example_filter" class="dataTables_filter">
-                    <span class="total-users">
-                        Total Records: {{ accountsList?.length }}
-                    </span>
-                </div>
+                    <div  class="dt-buttons"> 
+                        <div class="dataTables_length" id="example_length" *ngIf="tableLength"><label>Show <select
+                            name="example_length" aria-controls="example" class="">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> entries</label></div>
+                        <button *ngIf="docButton" class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                            aria-controls="example" type="button"><span>PDF</span></button> 
+                        <button *ngIf="docButton"
+                            class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example"
+                            type="button"><span>Excel</span></button> </div>
+
                             
-                    
-                    <table   id="table_DL"
-                    class=" table01 table table-striped table-bordered datatable dataTable no-footer"
-                        style="width: 100%; text-align: center; white-space: nowrap" role="grid" aria-describedby="example_info">
+                    <div id="example_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                class="form-control datatable-search" placeholder="" aria-controls="example"></label>
+                    </div>
+                    <table id="example" class="table table-striped table-bordered datatable dataTable no-footer"
+                        style="width: 100%;" role="grid" aria-describedby="example_info">
                         <thead>
                             <tr role="row">
                                 <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
-                                    style="width: 400px;" data-name="userId">Id</th>
+                                    style="width: 400px;">Id</th>
                                 <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
-                                    style="width: 400px;" data-name="userType">User Type</th>
+                                    style="width: 400px;">User Type</th>
                                 <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Debit"
-                                    style="width: 292px;" data-name="userName">User Name</th>
+                                    style="width: 292px;">User Name</th>
                                 <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Closing"
-                                    style="width: 295px;" data-name="creationDate">Account Creation Date</th>
+                                    style="width: 295px;">Account Creation Date</th>
 
                             </tr>
                         </thead>
@@ -119,73 +115,123 @@
 
 
 
-                            <tr role="row" class="odd"
-                        
-                            *ngFor="
-                              let acc of accountsList
-                                | paginate: { itemsPerPage: 10, currentPage: p }
-                            "
-                          >
-
-                             <td class="sorting_1"  title="'id'">
-{{ acc.userId }}                                </td>
-                                <td title="'UserType'">{{ acc.userType | titlecase }}</td>
-                                <td title="'UserName'">{{ acc.userName }}</td>
-                                <td title="'AccountcreatedDate'">
-                                    {{ acc.creationDate | date: "YYYY-MM-dd HH:mm:ss" }}</td>
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">
+                                    2023-05-03
+                                </td>
+                                <td >0.0</td>
+                                <td >0.0</td>
+                                <td > 0.00</td>
                                 
                             </tr>
                         </tbody>
                     </table>
-                  
-                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                        <pagination-template
-                        *ngIf="accountsList && accountsList.length > 10"
-                        #pagination="paginationApi"
-                        (pageChange)="p = $event"
-                      >
-                        <ul id="pageNumberContent" class="pages">
-                          <li id="prev">
-                            <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable"
-                              >Prev</a
-                            >
-                            <ng-template #prevTemp>
-                              <a (click)="pagination.previous()">Prev</a>
-                            </ng-template>
-                          </li>
-                          <ng-container *ngFor="let page of pagination.pages">
-                            <li id="pageNumber">
-                              <a
-                                (click)="pagination.setCurrent(page.value)"
-                                *ngIf="pagination.getCurrent() != page.value"
-                                class="btn"
-                                >{{ page.value }}
-                              </a>
-                              <a
-                                *ngIf="pagination.getCurrent() == page.value"
-                                class="select"
-                                style="pointer-events: none"
-                                >{{ page.value }}
-                              </a>
-                            </li>
-                          </ng-container>
-                      
-                          <!-- <li id="pageNumber"><a href="javascript:void(0);">2</a></li> -->
-                          <li id="next">
-                            <a *ngIf="pagination.isLastPage(); else nextTemp" class="disable">Next</a>
-                            <ng-template #nextTemp>
-                              <a (click)="pagination.next()">Next</a>
-                            </ng-template>
-                          </li>
-                        </ul>
-                      </pagination-template>
-                       </div>
+                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1
+                        entries</div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                            class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                            aria-controls="example" data-dt-idx="0" tabindex="0"
+                            id="example_previous">Previous</a><span><a
+                                class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                                aria-controls="example" data-dt-idx="1" tabindex="0">1</a></span><a
+                            class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                            aria-controls="example" data-dt-idx="2" tabindex="0" id="example_next">Next</a></div>
                 </div>
 
-             
+                <script type="text/javascript">
+
+                    function loaddetail(marketid, tab, dserver) {
+                        if (marketid == 1) {
+                            alert("You can view casino report from Casino Report Panel.");
+                            return false;
+                        }
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("div#divLoading").addClass('show');
+                        $("#marketidgamereport").val(marketid);
+                        if (tab == "all") {
+
+                            $("input[name='cnt-lgr'][value='all']").prop("checked", true);
+                        }
+                        var types = $("input[name='cnt-lgr']:checked").val();
+                        // alert(type);
+
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("#ReportMatchbettable").html('');
+                        $("#ttl_w").text("");
+                        $("#ttl_count").text("");
+                        $("#ttl_soda").text("");
+                        $.ajax({
+                            type: 'POST',
+                            url: "https://bmwexch.com/admin/report_match_bet/0b012f5ac14b6b92a36165b01c0ed2ca2cba4a9a",
+                            data: {
+                                "marketid": marketid,
+                                "type": types,
+                                "uid": '00000000-0000-0000-0000-000000000000',
+                                "dserver": dserver
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success == true) {
+                                    $("#ReportMatchbettable").html(response.html);
+                                    $("#ReportMatchbetHeading").html(response.heading);
+                                    $("#ReportMatchbetModal").modal("show");
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                }
+                                // var arr =  response.split("^^") 
+                                // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                                // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                                //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                                //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+
+                            },
+                            complete: function () {
+
+                                $("div#divLoading").removeClass('show');
+
+                            }
+                        }, 'Json');
+                    }
+                </script>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="ReportMatchbetModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
 
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ReportMatchbetHeading">Client Ledger</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <form>
+                                    <input type="hidden" value="" id="marketidgamereport">
+                                    <div class="account-radio">
+                                        <input type="radio" value="all" name="cnt-lgr" id="cnt-lgr1"
+                                            class="clientledger" checked=""><label for="cnt-lgr1">All</label>
+                                        <input type="radio" value="matched" name="cnt-lgr" id="cnt-lgr2"
+                                            class="clientledger"><label for="cnt-lgr2">Matched</label>
+                                        <input type="radio" value="deleted" name="cnt-lgr" id="cnt-lgr3"
+                                            class="clientledger"><label for="cnt-lgr3">Deleted</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <table id="ReportMatchbettable" class="table table-bordered" border="0" cellpadding="0"
+                                cellspacing="0">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

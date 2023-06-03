@@ -30,10 +30,10 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     TickerComponent,
     LogsComponent,
-    RulesComponent,
-    
+    RulesComponent
   ],
   imports: [
+    
     CommonModule,
     RouterModule.forChild(routes),
     ModalModule,

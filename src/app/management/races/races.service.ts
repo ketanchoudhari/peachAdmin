@@ -24,7 +24,7 @@ export class RacesService {
     });
   }
 
-  listRaces(selectedUid?: number) {
+   listRaces(selectedUid?: number) {
     if (selectedUid) {
       return this.httpClient.get(`${this.baseUrl}/listRaces/${selectedUid}`);
     } else {
