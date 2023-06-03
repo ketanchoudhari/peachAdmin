@@ -3,5 +3,5 @@ export class Hierarchy {
       public id?: number,
       public name?: string
     ) {}
-  }
+}
   
