@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { INewAccount } from '../types/new-accounts';
 import { ExportService } from 'src/app/services/export-as.service';
-import { ExportAsConfig } from 'ngx-export-as';
+import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { ReportsService } from '../reports.service';
 import { GenericResponse } from 'src/app/shared/types/generic-response';
 import { CommonService } from 'src/app/services/models/common.service';
+import { IDayTimeCalendarConfig } from 'ng2-date-picker';
+import { ITimeSelectConfig } from 'ng2-date-picker/lib/time-select/time-select-config.model';
+import { DatePipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-recent-account',
@@ -12,6 +16,17 @@ import { CommonService } from 'src/app/services/models/common.service';
   styleUrls: ['./recent-account.component.css']
 })
 export class RecentAccountComponent implements OnInit {
+  fromDate;
+  fromTime;
+  toDate;
+  toTime;
+
+  p: number = 1;
+
+  dateConfig: IDayTimeCalendarConfig;
+  timeConfig: ITimeSelectConfig;
+  accountsList: INewAccount[];
+
   exportPdfConfig: ExportAsConfig = {
     type: 'pdf',
     elementIdOrContent: 'table_DL',
@@ -20,61 +35,46 @@ export class RecentAccountComponent implements OnInit {
     type: 'xls',
     elementIdOrContent: 'table_DL',
   };
- 
-  selecttodate: Date;
-  accountsList: INewAccount[];
 
-  p: number = 1;
-  selectfromtime: Date;
-  selecttotime: Date;
+  siteName = environment.siteName;
+  month;
   constructor(
-    private reportsService:ReportsService,
+    private reportsService: ReportsService,
+    private datePipe: DatePipe,
+    private exportAsService: ExportAsService,
     private exportService: ExportService,
-    private commonService:CommonService,
-  ){
-    this.selectfromdate = new Date(
-      new Date(new Date().setDate(new Date().getDate() - 30)).setHours(9, 0, 0)
+    private commonService: CommonService
+  ) {
+    this.month =   datePipe.transform(new Date().setDate(new Date().getDate() - 90), 'yyyy-MM-dd');
+    this.dateConfig = {
+      format: 'YYYY-MM-DD',
+      min: this.month,
+    };
+
+    this.fromDate = datePipe.transform(
+      new Date().setDate(new Date().getDate() - 1),
+      'yyyy-MM-dd'
     );
-    this.selecttodate = new Date(
-      new Date(new Date().setDate(new Date().getDate())).setHours(8, 59, 59)
-    );
-    this.selectfromtime = new Date(new Date().setHours(0, 0, 0));
-    this.selecttotime = new Date(new Date().setHours(23, 59, 0));
+      this.fromTime = datePipe.transform(
+        new Date().setHours(0, 0, 0),
+        'HH:mm:ss'
+      );
+    
+
+    this.toDate = datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.toTime = datePipe.transform(new Date(), 'HH:mm:ss');
+
+    this.timeConfig = {
+      hours24Format: 'hh',
+      showSeconds: true,
+    };
   }
- 
-  tableLength:boolean=true;
-  docButton:boolean=false;
-  fromDate;
-  toDate;
-  fromTime;
-  toTime;
-  selectfromdate;
-  // myItems = [
-  //   {id: 1, label: 'Option 1'},
-  //   {id: 2, label: 'Option 2'},
-  //   {id: 3, label: 'Option 3'},
-  //   {id: 4, label: 'Option 4'},
-  //   {id: 5, label: 'Option 5'}
-  // ];
-  
-  fromDateOptions = {
-    dateFormat: 'mm/dd/yyyy',
-    minYear: 1900,
-    maxYear: 2099,
-    firstDayOfWeek: 'su'
-  };
-  toDateOptions = {
-    dateFormat: 'mm/dd/yyyy',
-    minYear: 1900,
-    maxYear: 2099,
-    firstDayOfWeek: 'su'
-  };
+
   ngOnInit(): void {
     this.commonService.apis$.subscribe(res => {
       this.getAccountList();
     })
   }
-
 
   getAccountList() {
     this.reportsService
@@ -86,10 +86,31 @@ export class RecentAccountComponent implements OnInit {
       //  console.log(res);
         if (res.errorCode === 0) {
           this.accountsList = res.result;
-        //  console.log(this.accountsList, 'accountList');
+         console.log(this.accountsList, 'accountList');
         }
       });
   }
+
+  getReportDate(value) {
+    if (value === 'today') {
+      this.fromDate = this.datePipe.transform(
+        new Date().setDate(new Date().getDate()),
+        'yyyy-MM-dd'
+      );
+        this.fromTime = this.datePipe.transform(
+          new Date().setHours(0, 0, 0),
+          'HH:mm:ss'
+        );
+      
+
+      this.toDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      this.toTime = this.datePipe.transform(
+        new Date(),
+        'HH:mm:ss'
+      );
+    }
+  }
+
   udt;
   edata = [];
   exportExcel() {

@@ -60,6 +60,7 @@ a#getPL {
     background-color: #1e2040;
     color: white;
     border-radius: 10px;
+    
 
 }
 .sort_asc:after {
@@ -70,4 +71,7 @@ a#getPL {
 }
 td#loginMessage{
     color: green;
+}
+a {
+    text-decoration: none !important;
 }

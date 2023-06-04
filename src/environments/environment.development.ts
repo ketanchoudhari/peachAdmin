@@ -5,7 +5,7 @@ export const environment = {
     // baseUrl: 'http://136.244.79.114:81', // prod
     // apisUrl: 'https://access.streamingtv.fun:3445/api/all_apis',
     production: true,
-    siteName: 'jio365',
+    siteName: 'cricBuzzer',
     // baseUrl: 'http://51.195.220.62:81', // Test
     baseUrl: 'http://136.244.79.114:81', // prod
     apisUrl: 'https://access.streamingtv.fun:3445/api/all_apis',

@@ -4,3 +4,27 @@
 .sort_desc:after {
     content: "⇵";
 }
+.cal-input {
+    width: 110px;
+    cursor: pointer;
+    background-position: 100% -23px;
+}
+@media (min-width: 768px){
+.col-md-2 {
+    flex: 0 0 auto;
+    width: 24.666667%;
+}
+}
+
+input#startDate {
+    margin: 0px 15px;
+}
+input#endDate {
+    margin: 0px 15px;
+}
+/* .cdk-overlay-container{
+    position: absolute !important;
+    visibility: visible !important;
+    top: 197.5556px !important;
+    left: 67px !important;
+} */

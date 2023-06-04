@@ -81,7 +81,6 @@ export class ReportsService {
       `${this.baseUrl}/pokerLog?from=${datefrom}&to=${dateto}`
     );
   }
-
   newAccounts(datefrom: string, dateto: string) {
     return this.httpClient.get(
       `${this.baseUrl}/newAccounts?from=${datefrom}&to=${dateto}`

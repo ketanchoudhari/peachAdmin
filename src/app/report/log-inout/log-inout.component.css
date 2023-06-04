@@ -52,3 +52,6 @@ a#getPL{
     margin-bottom: 8px;
     margin-left: 21px;
 }
+a {
+    text-decoration: none !important;
+}

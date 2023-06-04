@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DownlineComponent } from './downline/downline.component';
 import { MarketComponent } from './market/market.component';
 import { AllCasinoComponent } from './all-casino/all-casino.component';
@@ -105,7 +105,10 @@ const routes: Routes = [
         PipesModule,
         ExportAsModule,
         DirectivesModule,
-        ReactiveFormsModule
-    ]
+        ReactiveFormsModule,
+        DpDatePickerModule
+    ],
+    providers: [DatePipe],
+
 })
 export class ReportModule { }
