@@ -6658,11 +6658,14 @@ img.rrotate {
     padding: 5px !important;
     margin: 0 !important;
     height: 30px !important;
-    
+
 }
 .lv_8:after{
     /* font-weight: bold; */
     text-align: center;
     padding-left: 10px;
     content: "Cl";
+}
+.main-container{
+  margin-top: 1em;
 }

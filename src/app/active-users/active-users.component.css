@@ -41,7 +41,7 @@ btn-primary.focus, .btn-primary:focus {
     box-shadow:none !important;
 }
 .but_active.but_suspend.but_locked{
-    
+
 color:black !important;
 }
 .status_but {
@@ -109,4 +109,8 @@ color:black !important;
     color: #508d0e;
     cursor: pointer;
     text-align: center;
+}
+.main-container
+{
+  margin-top: 1em;
 }

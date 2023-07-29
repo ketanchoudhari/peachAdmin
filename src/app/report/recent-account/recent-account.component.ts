@@ -5,10 +5,12 @@ import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { ReportsService } from '../reports.service';
 import { GenericResponse } from 'src/app/shared/types/generic-response';
 import { CommonService } from 'src/app/services/models/common.service';
-import { IDayTimeCalendarConfig } from 'ng2-date-picker';
-import { ITimeSelectConfig } from 'ng2-date-picker/lib/time-select/time-select-config.model';
+// import { IDayTimeCalendarConfig } from 'ng2-date-picker';
+// import { ITimeSelectConfig } from 'ng2-date-picker/lib/time-select/time-select-config.model';
 import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { IDayTimeCalendarConfig } from 'ng2-date-picker/day-time-calendar/day-time-calendar-config.model';
+import { ITimeSelectConfig } from 'ng2-date-picker/time-select/time-select-config.model';
 
 @Component({
   selector: 'app-recent-account',
@@ -59,7 +61,7 @@ export class RecentAccountComponent implements OnInit {
         new Date().setHours(0, 0, 0),
         'HH:mm:ss'
       );
-    
+
 
     this.toDate = datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.toTime = datePipe.transform(new Date(), 'HH:mm:ss');
@@ -101,7 +103,7 @@ export class RecentAccountComponent implements OnInit {
           new Date().setHours(0, 0, 0),
           'HH:mm:ss'
         );
-      
+
 
       this.toDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
       this.toTime = this.datePipe.transform(
